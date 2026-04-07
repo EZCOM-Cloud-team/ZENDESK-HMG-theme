@@ -1,0 +1,124 @@
+{{! Subheader }}
+<div class="bg-gray-200 mb-4">
+  <div class="container">
+    <div class="row align-items-center pt-4">
+      <div class="col font-size-md">
+        {{breadcrumbs}}
+      </div>
+      {{~#is settings.header_search_style 'none'}}
+        <div class="md:col-4">
+          <div class="search mb-4">
+            <h2 class="sr-only">{{t 'search' }}</h2>
+            {{~#if settings.search_placeholder}}
+              {{#if settings.use_translations}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=(dc settings.search_placeholder)}}
+              {{else}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=settings.search_placeholder}}
+              {{/if}}
+            {{else}}
+              {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false}}
+            {{/if~}}
+            <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <use xlink:href="#icon-search" />
+            </svg>
+          </div>
+        </div>
+      {{/is~}}
+    </div>
+  </div>
+</div>
+
+<div class="container" id="page-container">
+  <div class="row">
+    <div class="lg:col-9">
+
+      {{! Form heading }}
+      <div class="mb-5">
+        <h1>
+          {{t 'what_is_your_post_about'}}
+        </h1>
+      </div>
+
+      {{! New Community post form }}
+      <div class="form">
+        {{#form 'post' class='new_community_post'}}
+          <div class="form-field">
+            {{#required 'title'}}
+              {{label 'title'}}
+            {{else}}
+              {{#label 'title'}}
+                {{t 'title_label'}}<span class="optional">({{t 'optional'}})</span>
+              {{/label}}
+            {{/required}}
+            {{input 'title' autofocus=true}}
+            {{#validate 'title'}}
+              <div class="notification notification-error notification-inline">
+                {{error 'title'}}
+              </div>
+            {{/validate}}
+          </div>
+
+          {{! Post suggestion list }}
+          {{suggestion_list class='suggestion-list'}}
+
+          <div class="form-field">
+            {{#required 'details'}}
+              {{label 'details'}}
+            {{else}}
+              {{#label 'details'}}
+                {{t 'details_label'}}<span class="optional">({{t 'optional'}})</span>
+              {{/label}}
+            {{/required}}
+            {{wysiwyg 'details'}}
+            {{#validate 'details'}}
+              <div class="notification notification-error notification-inline">
+                {{error 'details'}}
+              </div>
+            {{/validate}}
+          </div>
+
+          <div class="form-field">
+            {{#required 'topic'}}
+              {{label 'topic'}}
+            {{else}}
+              {{#label 'topic'}}
+                {{t 'topic_label'}}<span class="optional">({{t 'optional'}})</span>
+              {{/label}}
+            {{/required}}
+            {{select 'topic'}}
+            {{#validate 'topic'}}
+              <div class="notification notification-error notification-inline">
+                {{error 'topic'}}
+              </div>
+            {{/validate}}
+          </div>
+
+          <div class="form-field">
+            {{#required 'content_tags'}}
+              {{label 'content_tags'}}
+            {{else}}
+              {{#label 'content_tags'}}
+                {{t 'content_tags_label'}}<span class="optional">({{t 'optional'}})</span>
+              {{/label}}
+            {{/required}}
+            {{multiselect 'content_tags' aria-describedby='content-tags-error-notification'}}
+            {{#validate 'content_tags'}}
+              <div class="notification notification-error notification-inline" id="content-tags-error-notification">
+                {{error 'content_tags'}}
+              </div>
+            {{/validate}}
+            <p>
+              {{t 'content_tags_description'}}
+            </p>
+          </div>
+
+          <footer>
+            {{input type='submit'}}
+          </footer>
+        {{/form}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">document.documentElement.classList.add('new-community-post-page')</script>

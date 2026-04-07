@@ -1,0 +1,260 @@
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<script type="text/javascript">window.Theme = Object.assign(window.Theme || {}, { assets: {}, locale: "{{help_center.locale}}", signedIn: {{signed_in}} });</script>
+<script type="text/javascript" src="{{asset 'util.min.js'}}"></script>
+
+{{! Extensions }}
+<link rel="stylesheet" href="{{asset 'extension-animations.min.css'}}">
+<link rel="stylesheet" href="{{asset 'extension-transitions.min.css'}}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+{{~#if settings.enable_video_player}}<link rel="stylesheet" href="{{asset 'extension-video.min.css'}}">{{/if~}}
+{{~#if settings.enable_lightboxes}}<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+{{else}}{{~#if settings.promoted_video_ids}}<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">{{/if~}}{{/if~}}
+{{~#if settings.promoted_video_ids}}<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@7.0.9/swiper-bundle.min.css">{{~/if}}
+
+{{! Settings-based styles }}
+<style id="settings-styles">
+  {{#unless settings.note_title}}
+  .note::before { display: none; }
+  {{else}}
+    {{~#if settings.use_translations}}
+    .note::before { content: "{{dc settings.note_title}}"; }
+    {{/if~}}
+  {{/unless}}
+  {{#unless settings.warning_title}}
+  .warning::before { display: none; }
+  {{else}}
+    {{~#if settings.use_translations}}
+    .warning::before { content: "{{dc settings.warning_title}}"; }
+    {{/if~}}
+  {{/unless}}
+  {{~#isnt settings.form_list_style 'standard'}}
+  .request_ticket_form_id { display: none; }
+  {{/isnt~}}
+  {{#isnt settings.hero_element_shape 'none'}}
+    {{#is settings.promoted_article_list_position 'after'}}
+      {{#isnt settings.content_block_style 'none'}}
+      .hero .svg-shape { fill: {{settings.bg_color_content_blocks}}; }
+      {{/isnt}}
+      {{#isnt settings.custom_block_style 'none'}}
+      .hero .svg-shape { fill: {{settings.bg_color_custom_blocks}}; }
+      {{/isnt}}
+      {{~#is settings.notification_location 'home'}}
+        {{~#if settings.notification_content}}
+          .hero .svg-shape { fill: {{settings.bg_color}}; }
+        {{/if~}}
+      {{/is~}}
+    {{/is}}
+  {{/isnt}}
+</style>
+
+{{! Google fonts (body text) }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{~#is settings.text_font "'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Catamaran', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Crimson Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'EB Garamond', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Merriweather', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Noto Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Prata', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'PT Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Slabo 27px', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;500;600;700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{~#is settings.text_font "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+{{#is settings.text_font "'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"}}
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+{{/is}}
+{{~#is settings.text_font "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+{{~/is~}}
+
+{{! Google fonts (headings) }}
+{{#isnt settings.text_font settings.heading_font}}
+  {{~#is settings.heading_font "'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Catamaran', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Crimson Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'EB Garamond', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Faustina', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css?family=Faustina:400,400i,500,600,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Merriweather', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Noto Sans Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Noto Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Prata', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'PT Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{~#is settings.heading_font "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+  {{#is settings.heading_font "'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"}}
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  {{/is}}
+  {{~#is settings.heading_font "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"~}}
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  {{~/is~}}
+{{/isnt}}

@@ -1,0 +1,67 @@
+{{! Subheader }}
+<div class="border-bottom bg-gray-100">
+  <div class="container">
+    <nav class="nav navbar-light nav-line collapsible-nav mb-0 font-size-md">
+      {{link 'contributions' class='nav-link py-4 md:mr-4 is-active' selected='true'}}
+      {{link 'subscriptions' class='nav-link py-4'}}
+    </nav>
+  </div>
+</div>
+
+<div class="container py-5" id="page-container">
+  <header>
+    <h1>
+      {{t 'contributions'}}
+    </h1>
+    <nav class="nav navbar-light nav-line collapsible-nav mb-5 font-size-md border-bottom border-top md:border-top-0">
+      {{#each filters}}
+        {{#if selected}}
+          <a class="nav-link py-4{{#unless @last}} md:mr-4{{/unless}} is-active" aria-selected="true" href="{{url}}">
+            {{name}}
+          </a>
+        {{else}}
+          <a class="nav-link py-4{{#unless @last}} md:mr-4{{/unless}}" aria-selected="false" href="{{url}}">
+            {{name}}
+          </a>
+        {{/if}}
+      {{/each}}
+    </nav>
+  </header>
+
+  {{! Contributions list }}
+  {{#if contributions}}
+    <table class="table table-flush">
+      <thead class="hidden md:table-header-group">
+        <tr>
+          <th>{{t 'title'}}</th>
+          <th>{{t 'type'}}</th>
+          <th>{{t 'vote_sum'}}</th>
+          <th>{{t 'last_activity'}}</th>
+          <th>{{t 'created'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each contributions}}
+          <tr>
+            <td>
+              <a class="block" href="{{url}}" title="{{title}}">
+                {{excerpt title characters=60}}
+              </a>
+            </td>
+            <td class="hidden md:table-cell">{{type}}</td>
+            <td class="hidden md:table-cell">{{vote_sum}}</td>
+            <td class="hidden md:table-cell">{{date last_activity_at}}</td>
+            <td class="hidden md:table-cell">{{date created_at}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{pagination}}
+  {{else}}
+    <p class="text-gray-600 mt-6">
+      {{t 'no_contributions'}}
+    </p>
+  {{/if}}
+</div>
+
+<script type="text/javascript">document.documentElement.classList.add('contributions-page')</script>

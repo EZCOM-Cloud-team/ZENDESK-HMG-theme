@@ -1,0 +1,252 @@
+<div class="container py-5" id="page-container">
+
+  {{! Subheader }}
+  <div class="row align-items-center mt-4">
+    <div class="col font-size-md">
+      {{breadcrumbs}}
+    </div>
+  </div>
+
+  <h1>
+    {{request.subject}}
+    <span class="badge badge-{{request.status}} align-middle font-size-xs ml-1" title="{{request.status_description}}">
+      {{request.status_name}}
+    </span>
+  </h1>
+
+  <div class="row">
+
+    {{! Request comments }}
+    <article class="col">
+      <section id="comments" itemscope itemtype="http://schema.org/UserComments">
+        {{satisfaction}}
+        {{#if comments}}
+          <ul class="list-unstyled">
+            {{#each comments}}
+              <li class="comment py-5 border-bottom" id="{{anchor}}">
+
+                {{! Comment metadata }}
+                <div class="media mb-4">
+                  <div class="avatar">
+                    {{#if author.agent}}
+                      <svg class="svg-icon absolute bottom-0 right-0 text-primary bg-white border border-white circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+                        <use xlink:href="#icon-agent" />
+                      </svg>
+                    {{/if}}
+                    <img class="avatar-img" src="{{author.avatar_url}}" alt="Comment author">
+                  </div>
+                  <div class="media-body">
+                    <span title="{{author.name}}">
+                      {{#link 'user_profile' class='link-implied' id=author.id}}
+                        {{author.name}}
+                      {{/link}}
+                    </span>
+                    <ul class="list-divider">
+                      <li class="text-gray-600">
+                        {{date created_at timeago=true}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {{! Comment body }}
+                <section class="content">
+                  {{body}}
+                  {{#if attachments}}
+                    <ul class="list-unstyled mt-6">
+                      {{#each attachments}}
+                        <li class="list-item">
+                          <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M9.5 4v7.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V3C6.5 1.6 7.6.5 9 .5s2.5 1.1 2.5 2.5v9c0 1.9-1.6 3.5-3.5 3.5S4.5 13.9 4.5 12V4"/>
+                          </svg>
+                          <a class="mr-2" href="{{url}}" target="_blank">{{name}}</a><span class="font-size-md text-gray-600">{{size}}</span>
+                        </li>
+                      {{/each}}
+                    </ul>
+                  {{/if}}
+                </section>
+              </li>
+            {{/each}}
+          </ul>
+
+          {{pagination}}
+
+        {{/if}}
+
+        {{! Comment callout }}
+        <p class="text-gray-600 mt-4">
+          {{comment_callout}}
+        </p>
+
+        {{! Comment form }}
+        {{#form 'comment' class='form text-right'}}
+          <div class="flex flex-1 align-items-start mt-5">
+            <div class="avatar">
+              {{user_avatar class='avatar-img'}}
+            </div>
+            <div class="flex-1 form-field">
+              {{#if help_center.request_ccs_enabled}}
+                <div class="comment-ccs form-field">
+                  {{token_field 'ccs' class='ccs-input'}}
+                </div>
+              {{/if}}
+              {{wysiwyg 'body' rows='7'}}
+              <div class="mt-2">
+                {{upload}}
+              </div>
+            </div>
+          </div>
+          {{#if request.can_be_marked_as_solved}}
+            {{checkbox 'mark_as_solved' class='hidden'}}
+            <button type="button" class="button button-outline button-lg"
+              data-solve-translation="{{t 'mark_as_solved'}}"
+              data-solve-and-submit-translation="{{t 'mark_as_solved_and_submit'}}">
+              {{t 'mark_as_solved'}}
+            </button>
+          {{/if}}
+          {{input class='button button-primary' type='submit'}}
+        {{/form}}
+
+      </section>
+    </article>
+
+    <aside class="lg:col-5 xl:col-4 flex-first lg:flex-last">
+
+      {{! Request metadata }}
+      <div class="border-top border-bottom lg:border-transparent my-4">
+        <h3 class="toggle-title lg:hidden" data-toggle="collapse" data-target="#ticket-details" aria-controls="ticket-details" aria-expanded="false">
+          {{t 'ticket_details'}}
+        </h3>
+        <div class="collapse font-size-sm lg:bg-gray-100 pt-4 lg:px-5 lg:pt-5 lg:flex lg:flex-column lg:h-full" id="ticket-details">
+          {{#if request.followup_source_id}}
+            <dl class="row row-sm">
+              <dt class="col-5 mb-4">
+                {{t 'followup'}}
+              </dt>
+              <dd class="col-7">
+                {{link 'request' id=request.followup_source_id}}
+              </dd>
+            </dl>
+          {{/if}}
+          <dl class="row row-sm">
+            <dt class="col-5 mb-4">
+              {{t 'id'}}
+            </dt>
+            <dd class="col-7">
+              #{{request.id}}
+            </dd>
+            <dt class="col-5 mb-4">
+              {{t 'requester'}}
+            </dt>
+            <dd class="col-7">
+              {{request.requester.name}}
+            </dd>
+            <dt class="col-5 mb-4">
+              {{t 'created'}}
+            </dt>
+            <dd class="col-7">
+              {{date request.created_at}}
+            </dd>
+            <dt class="col-5 mb-4">
+              {{t 'last_activity'}}
+            </dt>
+            <dd class="col-7">
+              {{date request.updated_at}}
+            </dd>
+            {{#if collaborators}}
+              <dt class="col-5 mb-4">
+                {{t 'ccs'}}
+              </dt>
+              <dd class="col-7">
+                <ul class="list-unstyled m-0">
+                  {{#each collaborators}}
+                    <li title="{{name}}">
+                      {{name}}
+                    </li>
+                  {{/each}}
+                </ul>
+              </dd>
+            {{/if}}
+            {{#if assignee}}
+              <dt class="col-5 mb-4">
+                {{t 'assignee'}}
+              </dt>
+              <dd class="col-7">
+                {{assignee.name}}
+              </dd>
+            {{/if}}
+            {{#if group}}
+              <dt class="col-5 mb-4">
+                {{t 'group'}}
+              </dt>
+              <dd class="col-7">
+                {{group.name}}
+              </dd>
+            {{/if}}
+            {{#if request.type}}
+              <dt class="col-5 mb-4">
+                {{t 'type'}}
+              </dt>
+              <dd class="col-7">
+                {{request.type_name}}
+                {{#is request.type 'task'}}
+                  {{t 'task_due_date' due_date=request.due_date}}
+                {{/is}}
+              </dd>
+            {{/if}}
+            {{#if request.priority}}
+              <dt class="col-5 mb-4">
+                {{t 'priority'}}
+              </dt>
+              <dd class="col-7">
+                {{request.priority_name}}
+              </dd>
+            {{/if}}
+            {{#form 'organization' class='col-12 form w-full' id='request-organization'}}
+              <div class="row row-sm">
+                <dt class="col-5 mb-4">
+                  {{t 'organization'}}
+                </dt>
+                <dd class="col-7 form-field mb-4">
+                  {{select 'organization'}}
+                </dd>
+              </div>
+            {{/form}}
+            {{#each custom_fields}}
+              <dt class="col-5 mb-4">
+                {{title}}
+              </dt>
+              <dd class="col-7">
+                {{value}}
+              </dd>
+            {{/each}}
+          </dl>
+          {{#if attachments}}
+            <dl class="pt-6 pb-2 border-top">
+              <dt class="mb-4">
+                {{t 'attachments_heading'}}
+              </dt>
+              <dd>
+                <ul class="list-unstyled mb-0">
+                  {{#each attachments}}
+                    <li class="mb-4">
+                      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" d="M9.5 4v7.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V3C6.5 1.6 7.6.5 9 .5s2.5 1.1 2.5 2.5v9c0 1.9-1.6 3.5-3.5 3.5S4.5 13.9 4.5 12V4"/>
+                      </svg>
+                      <a class="mr-2" href="{{url}}" target="_blank">{{name}}</a><span class="font-size-md text-gray-600">{{size}}</span>
+                    </li>
+                  {{/each}}
+                </ul>
+              </dd>
+            </dl>
+          {{/if}}
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<script type="text/javascript" defer src="{{asset 'page-request.min.js'}}"></script>
+
+<script type="text/javascript">document.documentElement.classList.add('request-page', 'request-' + {{request.id}})</script>

@@ -1,0 +1,187 @@
+{{! Hero element }}
+<section class="hero relative overflow-hidden{{#is settings.community_image_style 'standard'}} bg-community bg-cover bg-center{{/is}}">
+
+  {{! Hero element content }}
+  <div class="container z-30 py-8"{{#if settings.fixed_header}} style="margin-top: {{settings.header_height}};"{{/if}}>
+
+    {{! Hero element search bar }}
+    <div class="search text-base max-w-md my-4 mx-auto">
+      <h2 class="sr-only">{{ t 'search' }}</h2>
+      {{~#if settings.search_placeholder}}
+        {{#if settings.use_translations}}
+          {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=(dc settings.search_placeholder)}}
+        {{else}}
+          {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=settings.search_placeholder}}
+        {{/if}}
+      {{else}}
+        {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false}}
+      {{/if~}}
+      <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+        <use xlink:href="#icon-search" />
+      </svg>
+    </div>
+  </div>
+
+  {{! Hero background image (overlay) }}
+  {{#isnt settings.community_image_style 'standard'}}
+    {{#isnt settings.community_image_style 'parallax'}}
+      <div class="absolute z-20 top-0 left-0 h-full w-full bg-community{{#is settings.community_image_style 'overlay'}} bg-cover bg-center{{/is}}{{#is settings.community_image_style 'overlay-pattern'}} bg-contain bg-repeat{{/is}}"></div>
+    {{/isnt}}
+  {{/isnt}}
+
+  {{! Hero background color }}
+  <div class="absolute z-10 top-0 left-0 h-full w-full bg-hero"></div>
+
+  {{! Hero background image (parallax) }}
+  {{#is settings.community_image_style 'parallax'}}
+    <div class="absolute z-0 top-0 left-0 w-full h-full">
+      <div class="relative w-full h-full overflow-hidden">
+        <div class="absolute top-0 left-0 w-full bg-community bg-cover bg-center" x-data="Widgets.parallaxImage" style="height: 150%"></div>
+      </div>
+    </div>
+  {{/is}}
+
+</section>
+
+<div class="container" id="page-container">
+  <div class="flex justify-content-between align-items-center border-bottom mt-6 py-2">
+
+    {{! Topic/post list page selector }}
+    <div class="dropdown font-size-md" x-data="Widgets.dropdown" @click.away="close">
+      <button class="not-a-button py-2 cursor-pointer" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+        {{t 'all_posts'}}
+        <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+          <use xlink:href="#icon-chevron-down" />
+        </svg>
+      </button>
+      <div class="dropdown-menu" role="menu" x-ref="menu" :aria-expanded="isExpanded">
+        {{#link 'topics' class='dropdown-item' role='menuitem'}}
+          {{t 'show_topics'}}
+        {{/link}}
+        {{#link 'posts' class='dropdown-item' role='menuitem' selected='true'}}
+          {{t 'show_all_posts'}}
+        {{/link}}
+      </div>
+    </div>
+
+    {{! Filters and sorters }}
+    <div class="dropdown ml-auto font-size-md" x-data="Widgets.dropdown" @click.away="close">
+      <button class="not-a-button py-2 cursor-pointer" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+        {{current_filter.label}}
+        <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+          <use xlink:href="#icon-chevron-down" />
+        </svg>
+      </button>
+      <div class="dropdown-menu" role="menu" x-ref="menu" :aria-expanded="isExpanded">
+        {{#each filters}}
+          <a class="dropdown-item" href="{{url}}" aria-selected="{{selected}}" role="menuitem">
+            {{name}}
+          </a>
+        {{/each}}
+      </div>
+    </div>
+    <div class="dropdown ml-4 font-size-md" x-data="Widgets.dropdown" @click.away="close">
+      <button class="not-a-button py-2 cursor-pointer" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+        {{current_sorter.label}}
+        <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+          <use xlink:href="#icon-chevron-down" />
+        </svg>
+      </button>
+      <div class="dropdown-menu" role="menu" x-ref="menu" :aria-expanded="isExpanded">
+        {{#each sorters}}
+          <a class="dropdown-item" href="{{url}}" aria-selected="{{selected}}" role="menuitem">
+            {{name}}
+          </a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  {{! Post list }}
+  {{#if posts}}
+    <ul class="list-unstyled list-bordered mb-6">
+      {{#each posts}}
+        <li class="lg:flex align-items-center justify-content-between py-4">
+          <div class="flex-1">
+            <h3 class="h4 mt-0 mb-1">
+              <a href="{{url}}" title="{{title}}">{{title}}</a>
+              {{#if pinned}}<span class="badge ml-1">{{t 'pinned'}}</span>{{/if}}
+              {{#if featured}}<span class="badge ml-1">{{t 'featured'}}</span>{{/if}}
+              {{#isnt status 'none'}}<span class="badge badge-{{status_dasherized}} ml-1">{{status_name}}</span>{{/isnt}}
+            </h3>
+            <ul class="list-divider font-size-md text-gray-600 mb-0">
+              <li>
+                {{author.name}}
+              </li>
+              <li>
+                {{#if editor}}
+                  {{t 'edited'}} {{date edited_at timeago=true}}
+                {{else}}
+                  {{date created_at timeago=true}}
+                {{/if}}
+              </li>
+            </ul>
+          </div>
+          <ul class="list-divider font-size-md text-gray-600  mb-0">
+            <li class="meta-block inline-block lg:block lg:capitalize lg:text-center lg:mx-4">
+              <span class="lg:block lg:text-base">
+                {{vote_sum}}
+              </span>
+              {{t 'vote' count=vote_sum}}
+            </li>
+            <li class="meta-block inline-block lg:block lg:capitalize lg:text-center lg:mx-4">
+              <span class="lg:block lg:text-base">
+                {{comment_count}}
+              </span>
+              {{t 'comment' count=comment_count}}
+            </li>
+          </ul>
+        </li>
+      {{/each}}
+    </ul>
+
+    {{pagination}}
+
+  {{else}}
+    <p class="text-gray-600 mt-4">
+      {{t 'no_posts_with_filter'}}
+    </p>
+  {{/if}}
+
+  {{! Featured posts }}
+  {{#if featured_posts}}
+    <h2 class="mt-6">
+      {{t 'featured_posts'}}
+    </h2>
+    <ul class="list-unstyled row">
+      {{#each featured_posts}}
+        <li class="md:col-6 -mb-1px">
+          <a class="flex justify-content-between align-items-baseline py-4 border-top border-bottom h-full" href="{{url}}">
+            {{title}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</div>
+
+{{! Recent activity }}
+{{~#if help_center.community_enabled}}
+  {{~#if settings.show_recent_activity_community}}
+    <div class="container py-6 ">
+      {{recent_activity scope='community'}}
+    </div>
+  {{/if~}}
+{{/if~}}
+
+{{! Call-to-action }}
+<div class="py-6 -mb-6">
+  <div class="container my-6 text-center max-w-md mx-auto">
+    <p class="font-size-xl mb-5">
+      {{t 'suggest_new_post'}}
+    </p>
+    {{link 'new_post' class='button button-primary button-lg' role='button'}}
+  </div>
+</div>
+
+<script type="text/javascript">document.documentElement.classList.add('community-post-list-page')</script>

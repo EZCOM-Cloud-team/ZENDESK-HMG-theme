@@ -1,0 +1,150 @@
+{{! Subheader }}
+<div class="bg-gray-200">
+  <div class="container">
+    <div class="row align-items-center pt-4">
+      <div class="col font-size-md">
+        {{breadcrumbs}}
+      </div>
+      {{~#is settings.header_search_style 'none'}}
+        <div class="md:col-4">
+          <div class="search mb-4">
+            <h2 class="sr-only">{{t 'search' }}</h2>
+            {{~#if settings.search_placeholder}}
+              {{#if settings.use_translations}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_kb_search submit=false placeholder=(dc settings.search_placeholder)}}
+              {{else}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_kb_search submit=false placeholder=settings.search_placeholder}}
+              {{/if}}
+            {{else}}
+              {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_kb_search submit=false}}
+            {{/if~}}
+            <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <use xlink:href="#icon-search" />
+            </svg>
+          </div>
+        </div>
+      {{/is~}}
+    </div>
+  </div>
+</div>
+
+<div class="container" id="page-container">
+  <div class="row">
+    <div class="lg:col-9">
+
+      {{! Form heading }}
+      <div class="mb-5">
+        <h1>
+          {{t 'submit_a_request'}}
+        </h1>
+        {{follow_up}}
+      </div>
+      <div class="form">
+
+        {{! New request tip }}
+        {{~#if settings.form_tip}}
+          <div id="form-tip"></div>
+          <script type="text/javascript">
+            ready(function() {
+              var formSelectionField = document.getElementById('request_issue_type_select') || document.getElementById('request_ticket_form_id');
+              if (formSelectionField && formSelectionField.value && formSelectionField.value !== '-') {
+                Util.renderTemplate(document.getElementById('form-tip'), 'form-tip');
+              }
+            });
+          </script>
+        {{/if~}}
+
+        {{! New request form }}
+        {{request_form wysiwyg=true}}
+
+      </div>
+    </div>
+
+  </div> {{! /.row }}
+</div> {{! /#page-container }}
+
+{{! Custom form list }}
+{{#isnt settings.form_list_style 'standard'}}
+<script type="text/javascript" defer src="{{asset 'extension-forms.min.js'}}"></script>
+<script type="text/javascript">
+  ready(function() {
+    new Forms(document.getElementById('new_request'), { template: 'form-list' });
+  });
+</script>
+{{/isnt}}
+
+<script type="text/javascript">document.documentElement.classList.add('new-request-page')</script>
+
+{{!---------------
+   Micro-templates
+   ---------------}}
+
+{{! Form tips }}
+{{~#if settings.form_tip}}
+  <script type="text/template" id="tmpl-form-tip">
+    <div class="note media">
+      <svg class="svg-icon font-size-2xl bottom-0" fill="{{settings.color_note}}" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="none" stroke-width="1" fill-rule="evenodd">
+          <rect opacity="0" x="0" y="0" width="24" height="24"></rect>
+          <circle opacity="0.3" cx="12" cy="12" r="10"></circle>
+          <rect x="11" y="10" width="2" height="7" rx="1"></rect>
+          <rect x="11" y="7" width="2" height="2" rx="1"></rect>
+        </g>
+      </svg>
+      <div class="media-body font-size-md font-medium ml-3">
+        {{~#if settings.use_translations}}
+          {{dc settings.form_tip}}
+        {{else}}
+          {{settings.form_tip}}
+        {{/if~}}
+      </div>
+    </div>
+  </script>
+{{/if}}
+
+{{! Form lists }}
+{{~#isnt settings.form_list_style 'standard'}}
+  {{~#is settings.form_list_style 'boxes'}}
+    <script type="text/template" id="tmpl-form-list">
+      <% if (forms.length) { %>
+        <% if (title) { %>
+          <h2><%= title %></h2>
+        <% } %>
+        <ul class="list-unstyled row row-sm my-6">
+          <% forms.forEach(function(form) { %>
+            <li class="md:col-6 lg:col-4 text-center mb-4" id="<%= form.id %>">
+              <a class="card p-5 link-plain border-primary h-full text-primary hover:text-primary-inverse hover:bg-primary" href="<%= form.html_url %>">
+                <h4 class="h4 m-0 font-medium text-inherit"><%= form.title %></h4>
+              </a>
+            </li>
+          <% }); %>
+        </ul>
+      <% } %>
+    </script>
+  {{/is~}}
+  {{~#is settings.form_list_style 'list'}}
+    <script type="text/template" id="tmpl-form-list">
+      <% if (title) { %>
+        <h2><%= title %></h2>
+      <% } %>
+      <div class="card bg-white my-6">
+        <% if (forms.length) { %>
+          <div class="list-group list-group-flush">
+            <% forms.forEach(function(form) { %>
+              <a class="list-group-item list-group-item-action p-4" href="<%= form.html_url %>">
+                <div class="media align-items-center">
+                  <div class="media-body font-semibold">
+                    <%= form.title %>
+                  </div>
+                  <svg class="svg-icon fill-current text-primary ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 323" aria-hidden="true">
+                    <path d="M190,162 C190,168 187,174 183,178 L38,317 C34,321 28,323 23,323 C17,323 11,321 7,317 C-2,308 -2,294 7,285 L135,162 L7,39 C-2,31 -2,16 7,7 C15,-2 29,-2 38,7 L183,146 C187,150 190,156 190,162 Z"></path>
+                  </svg>
+                </div>
+              </a>
+            <% }); %>
+          </div>
+        <% } %>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}

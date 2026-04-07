@@ -1,0 +1,128 @@
+<div class="container py-5" id="page-container">
+  <header>
+    <h1>
+      {{t 'my_requests'}}
+    </h1>
+    <nav class="nav navbar-light nav-line collapsible-nav mb-5 font-size-md border-bottom border-top md:border-top-0">
+      {{#each filters}}
+        <a class="nav-link py-4{{#unless @last}} md:mr-4{{/unless}}{{#if selected}} is-active{{/if}}" {{#if selected}}aria-selected="true" {{/if}}href="{{url}}">
+          {{name}}
+        </a>
+      {{/each}}
+    </nav>
+  </header>
+
+  {{! Request filters }}
+  {{#form 'requests_filter' class='form flex-container my-4'}}
+    <div class="search mb-5 flex-fill">
+      <h2 class="sr-only">{{ t 'search' }}</h2>
+      <div class="form-field mb-0 flex-fill">
+        {{label 'query' for='quick-search' class='sr-only'}}
+        {{input 'query' id='quick-search' type='search'}}
+      </div>
+      <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+        <use xlink:href="#icon-search" />
+      </svg>
+    </div>
+    {{#if help_center.multiple_organizations_enabled}}
+      <div class="form-field mb-1 empty:hidden md:mb-5 md:ml-4">
+        {{~label 'organization' for='request-organization-select'~}}
+        {{~select 'organization' id='request-organization-select'~}}
+      </div>
+      <div class="form-field subscribe-organization empty:hidden md:ml-1">
+        {{subscribe}}
+      </div>
+    {{else}}
+      <div class="form-field subscribe-organization empty:hidden md:ml-4">
+        {{subscribe}}
+      </div>
+    {{/if}}
+    <div class="form-field md:ml-4">
+      {{label 'status' for='request-status-select'}}
+      {{select 'status' id='request-status-select'}}
+    </div>
+  {{/form}}
+
+  {{#if query}}
+    <p class="text-gray-600 mt-4">
+      {{t 'requests_search_results_info' count=requests.length query=query}}
+    </p>
+  {{else}}
+    {{#unless requests}}
+      <p class="text-gray-600 mt-4">
+        {{t 'no_requests'}}
+      </p>
+    {{/unless}}
+  {{/if}}
+
+  {{! Requests list }}
+  {{#if requests}}
+    <table class="table table-flush {{current_filter.identifier}}-requests">
+      <thead class="hidden md:table-header-group">
+        <tr>
+          <th>{{t 'subject'}}</th>
+          <th>{{t 'id'}}</th>
+          <th>
+            {{#is current_filter.identifier 'my'}}
+              {{#link 'requests' sort_by='created_at' class='relative text-inherit'}}{{t 'created'}}{{/link}}
+            {{else}}
+              {{t 'requester'}}
+            {{/is}}
+          </th>
+          <th>{{#link 'requests' sort_by='updated_at' class='relative text-inherit'}}{{t 'last_activity'}}{{/link}}</th>
+          <th>
+            {{t 'status'}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each requests}}
+          <tr>
+            <td>
+              <a class="block" href="{{url}}" title="{{subject}}">
+                {{#if subject}}
+                  {{subject}}
+                {{else}}
+                  {{excerpt description characters=50}}
+                {{/if}}
+              </a>
+
+              {{! Visible on mobile }}
+              <ul class="list-divider mt-2 mb-0 md:hidden">
+                <li class="text-gray-600">#{{id}}</li>
+                <li class="text-gray-600">{{date created_at timeago=true}}</li>
+                <li class="text-gray-600">
+                  <span class="badge badge-{{status}}" title="{{status_description}}">
+                    {{status_name}}
+                  </span>
+                </li>
+              </ul>
+
+            </td>
+            <td class="hidden md:table-cell">#{{id}}</td>
+            <td class="hidden md:table-cell">
+              {{#is ../current_filter.identifier 'my'}}
+                {{date created_at timeago=true}}
+              {{else}}
+                {{requester.name}}
+              {{/is}}
+            </td>
+            <td class="hidden md:table-cell">{{date updated_at timeago=true}}</td>
+            <td class="hidden md:table-cell">
+              <span class="badge badge-{{status}}" title="{{status_description}}">
+                {{status_name}}
+              </span>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    {{pagination}}
+
+  {{/if}}
+</div>
+
+<script type="text/javascript" defer src="{{asset 'page-requests.min.js'}}"></script>
+
+<script type="text/javascript">document.documentElement.classList.add('requests-page')</script>

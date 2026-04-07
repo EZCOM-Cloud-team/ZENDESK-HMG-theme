@@ -1,0 +1,214 @@
+{{! Subheader }}
+<div class="bg-gray-200">
+  <div class="container">
+    <div class="row align-items-center pt-4">
+      <div class="col font-size-md">
+        {{breadcrumbs}}
+      </div>
+      {{~#is settings.header_search_style 'none'}}
+        <div class="md:col-4">
+          <div class="search mb-4">
+            <h2 class="sr-only">{{t 'search' }}</h2>
+            {{~#if settings.search_placeholder}}
+              {{#if settings.use_translations}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_kb_search submit=false placeholder=(dc settings.search_placeholder)}}
+              {{else}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_kb_search submit=false placeholder=settings.search_placeholder}}
+              {{/if}}
+            {{else}}
+              {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_kb_search submit=false}}
+            {{/if~}}
+            <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <use xlink:href="#icon-search" />
+            </svg>
+          </div>
+        </div>
+      {{/is~}}
+    </div>
+  </div>
+</div>
+
+<div class="container" id="page-container">
+  <div class="row row-lg">
+
+    <div class="col">
+
+      {{! Section header }}
+      <div class="sm:flex flex-wrap justify-content-between mt-4">
+        <h1 class="w-full">
+          {{section.name}}
+        </h1>
+        {{#if section.description}}
+          <p class="font-size-lg text-gray-600">
+            {{section.description}}
+          </p>
+        {{/if}}
+
+        {{! Subscribe link }}
+        {{#if settings.show_follow_section}}
+          <div class="subscribe-section mb-4">
+            {{subscribe}}
+          </div>
+        {{/if}}
+
+      </div>
+
+      <div class="row">
+        <div class="col-12 {{~#is settings.article_list_columns '1'}} lg:col-9{{/is~}}">
+
+          {{! Subsection list }}
+          {{#if section.sections}}
+            <ul class="list-unstyled list-bordered border-top border-bottom my-6">
+              {{#each section.sections}}
+                <li class="bg-white">
+                  <h3 class="my-0">
+                    <a class="flex align-items-center justify-content-between py-4 text-inherit" href="{{url}}">
+                      {{name}}
+                      <svg class="fill-current pointer-events-none rotate-270 ml-3" width="14px" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20,19.5 C19.4,19.5 18.9,19.3 18.4,18.9 L1.4,4.9 C0.3,4 0.2,2.4 1.1,1.4 C2,0.3 3.6,0.2 4.6,1.1 L20,13.8 L35.5,1.1 C36.6,0.2 38.1,0.4 39,1.4 C39.9,2.5 39.7,4 38.7,4.9 L21.7,18.9 C21.1,19.3 20.5,19.5 20,19.5 Z" fill-rule="nonzero"></path>
+                      </svg>
+                    </a>
+                  </h3>
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+
+          {{pagination "section.sections"}}
+
+          {{! Article list }}
+          {{#if section.articles}}
+
+            {{~#if section.sections}}
+              <h2 class="mt-6 h3">
+                {{t 'articles'}}
+              </h2>
+            {{/if~}}
+
+            <div id="article-list-{{section.id}}">
+              {{#if (compare settings.article_list_style '<=' '8')}}
+
+                {{! Built-in article list }}
+                <ul class="row row-{{~#is settings.article_list_style '1-bullet'}}flush list-disc{{else}}sm list-unstyled{{/is~}}">
+                  {{~#each section.articles}}
+                    <li class="col-12
+                      {{~#if (compare ../settings.article_list_columns ">=" "2")}} md:col-6{{/if~}}
+                      {{~#if (compare ../settings.article_list_columns ">=" "3")}} lg:col-4{{/if~}}">
+
+                      <div class="relative media align-items-baseline py-3 h-full
+                        {{~#is ../settings.article_list_style '1-bullet'}} pr-7{{/is~}}
+                        {{~#is ../settings.promoted_article_style 'bold'}}{{#if promoted}} font-bold{{/if}}{{/is~}}
+                        {{~#isnt ../settings.article_list_excerpt 0}} font-semibold{{/isnt~}}
+                        {{~#is ../settings.article_list_style '3-bordered'}} border-bottom{{#is ../settings.article_list_columns "1"}}{{#if @last}} border-bottom-0{{/if}}{{/is}}{{/is~}}">
+
+                        {{~#is ../settings.article_list_style '3-bordered'}}
+                          <div class="flex" x-data="{ src: Theme.assets['article'] }">
+                            <template x-if="src">
+                              <img class="svg-icon mr-3" src="{{asset 'placeholder.png'}}" alt="" aria-hidden="true" :src="src" />
+                            </template>
+                          </div>
+                        {{/is~}}
+
+                        <div class="media-body">
+                          {{~#is ../settings.promoted_article_style 'icon'}}
+                            {{~#if promoted}}
+                              <svg class="svg-icon mr-1 fill-current text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94 93" aria-hidden="true">
+                                <title>{{t 'promoted'}}</title>
+                                <use xlink:href="#icon-star" />
+                              </svg>
+                            {{/if~}}
+                          {{/is~}}
+                          <a class="link-stretched text-inherit" href="{{url}}">
+                            {{~title~}}
+                          </a>
+                          {{~#if internal~}}
+                            <svg class="svg-icon ml-1 fill-current text-base" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                              <title>{{t 'internal'}}</title>
+                              <use xlink:href="#icon-lock" />
+                            </svg>
+                          {{~/if~}}
+                          {{~#isnt ../settings.article_list_excerpt 0}}
+                            <p class="my-2 font-size-md break-words font-normal">
+                              {{excerpt body characters=../settings.article_list_excerpt}}
+                            </p>
+                          {{/isnt~}}
+                        </div>
+                      </div>
+                    </li>
+                  {{/each~}}
+                </ul>
+              {{else}}
+
+                {{! Custom micro-template }}
+                <script type="text/javascript">
+                  ready(function() {
+                    new Navigation(document.getElementById('article-list-{{section.id}}'), {
+                      collection: Theme.contentBlocks || {},
+                      template: 'articles',
+                      sectionId: {{section.id}},
+                      templateData: {
+                        sectionId: {{section.id}},
+                        numberColumns: {{settings.article_list_columns}},
+                        excerptLength: {{settings.article_list_excerpt}},
+                        promotedArticleStyle: "{{settings.promoted_article_style}}"
+                      }
+                    });
+                  });
+                </script>
+              {{/if}}
+            </div>
+          {{else}}
+            {{#unless section.sections}}
+              <p class="mt-5">
+                <a href="{{section.url}}">
+                  {{t 'empty'}}
+                </a>
+              </p>
+            {{/unless}}
+          {{/if}}
+
+          {{pagination "section.articles"}}
+
+        </div>
+      </div>
+    </div>
+
+    {{! Sidebar }}
+    <aside class="relative lg:col-4{{#is settings.section_sidebar 'none'}}{{~#isnt settings.cta_style 'sidebar'}} hidden{{/isnt}}{{/is}}">
+
+      {{! Sidebar navigation }}
+      {{~#isnt settings.section_sidebar 'none'}}
+        <div
+          data-element="navigation"
+          data-template="{{#is settings.section_sidebar 'custom'}}sidebar-navigation{{else}}{{settings.section_sidebar}}{{/is}}">
+        </div>
+      {{/isnt~}}
+
+      {{! Call-to-action }}
+      {{~#is settings.cta_style 'sidebar'}}
+        {{~#isnt settings.cta_location 'home'}}
+          <div
+            data-element="template"
+            data-template="call-to-action">
+          </div>
+        {{/isnt~}}
+      {{/is~}}
+
+    </aside>
+
+  </div> {{! /.row }}
+</div> {{! /#page-container }}
+
+{{! Call-to-action }}
+{{~#isnt settings.cta_style 'none'}}
+  {{~#isnt settings.cta_style 'sidebar'}}
+    {{~#isnt settings.cta_location 'home'}}
+      <div
+        data-element="template"
+        data-template="call-to-action">
+      </div>
+    {{/isnt~}}
+  {{/isnt~}}
+{{/isnt~}}
+
+<script type="text/javascript">document.documentElement.classList.add('section-page', 'section-' + {{section.id}})</script>

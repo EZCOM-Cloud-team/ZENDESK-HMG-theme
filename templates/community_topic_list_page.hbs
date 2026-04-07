@@ -1,0 +1,146 @@
+{{! Hero element }}
+<section class="hero relative overflow-hidden{{#is settings.community_image_style 'standard'}} bg-community bg-cover bg-center{{/is}}">
+
+  {{! Hero element content }}
+  <div class="container z-30 py-8"{{#if settings.fixed_header}} style="margin-top: {{settings.header_height}};"{{/if}}>
+
+    {{! Hero element search bar }}
+    <div class="search text-base max-w-md my-4 mx-auto">
+      <h2 class="sr-only">{{ t 'search' }}</h2>
+      {{~#if settings.search_placeholder}}
+        {{#if settings.use_translations}}
+          {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=(dc settings.search_placeholder)}}
+        {{else}}
+          {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=settings.search_placeholder}}
+        {{/if}}
+      {{else}}
+        {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false}}
+      {{/if~}}
+      <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+        <use xlink:href="#icon-search" />
+      </svg>
+    </div>
+  </div>
+
+  {{! Hero background image (overlay) }}
+  {{#isnt settings.community_image_style 'standard'}}
+    {{#isnt settings.community_image_style 'parallax'}}
+      <div class="absolute z-20 top-0 left-0 h-full w-full bg-community{{#is settings.community_image_style 'overlay'}} bg-cover bg-center{{/is}}{{#is settings.community_image_style 'overlay-pattern'}} bg-contain bg-repeat{{/is}}"></div>
+    {{/isnt}}
+  {{/isnt}}
+
+  {{! Hero background color }}
+  <div class="absolute z-10 top-0 left-0 h-full w-full bg-hero"></div>
+
+  {{! Hero background image (parallax) }}
+  {{#is settings.community_image_style 'parallax'}}
+    <div class="absolute z-0 top-0 left-0 w-full h-full">
+      <div class="relative w-full h-full overflow-hidden">
+        <div class="absolute top-0 left-0 w-full bg-community bg-cover bg-center" x-data="Widgets.parallaxImage" style="height: 150%"></div>
+      </div>
+    </div>
+  {{/is}}
+
+</section>
+
+<div class="container" id="page-container">
+
+  {{! Topic/post list page selector }}
+  <div class="flex justify-content-between align-items-center mt-6 py-2">
+    <div class="dropdown font-size-md" x-data="Widgets.dropdown" @click.away="close">
+      <button class="not-a-button py-2 cursor-pointer" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+        {{t 'community_topics'}}
+        <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+          <use xlink:href="#icon-chevron-down" />
+        </svg>
+      </button>
+      <div class="dropdown-menu" role="menu" x-ref="menu" :aria-expanded="isExpanded">
+        {{#link 'topics' class='dropdown-item' role='menuitem' selected='true'}}
+          {{t 'show_topics'}}
+        {{/link}}
+        {{#link 'posts' class='dropdown-item' role='menuitem'}}
+          {{t 'show_all_posts'}}
+        {{/link}}
+      </div>
+    </div>
+  </div>
+
+  {{! Topic list }}
+  {{#if topics}}
+    <ul class="list-unstyled row mt-2 mb-6">
+      {{#each topics}}
+        <li class="md:col-6 lg:col-4 text-center group mb-4">
+          <a class="card p-5 link-plain border-primary h-full transition-fast text-primary hover:text-primary-inverse hover:bg-primary" href="{{url}}">
+            <h3 class="m-0 font-semibold text-inherit">
+              {{name}}
+              {{~#if internal}}
+                <svg class="svg-icon text-base ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                  <title>{{t 'internal'}}</title>
+                  <use xlink:href="#icon-lock" />
+                </svg>
+              {{/if~}}
+            </h3>
+            {{~#if description}}
+              <p class="mt-3 mb-auto">
+                {{excerpt description}}
+              </p>
+            {{/if~}}
+            <ul class="list-divider justify-content-center mt-3 mb-0 font-size-md text-gray-600">
+              <li class="group-hover:text-primary-inverse">
+                {{t 'post_count' count=post_count}}
+              </li>
+              <li class="group-hover:text-primary-inverse">
+                {{t 'follower_count' count=follower_count}}
+              </li>
+            </ul>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+
+    {{pagination}}
+
+  {{else}}
+    <p class="text-gray-600 mt-4">
+      {{t 'no_content'}}
+    </p>
+  {{/if}}
+
+  {{! Featured posts }}
+  {{#if featured_posts}}
+    <h2 class="mt-6">
+      {{t 'featured_posts'}}
+    </h2>
+    <ul class="list-unstyled row">
+      {{#each featured_posts}}
+        <li class="md:col-6 -mb-1px">
+          <a class="flex justify-content-between align-items-baseline py-4 border-top border-bottom h-full" href="{{url}}">
+            {{title}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+</div>
+
+{{! Recent activity }}
+{{~#if help_center.community_enabled}}
+  {{~#if settings.show_recent_activity_community}}
+    <div class="container py-6">
+      {{recent_activity scope='community'}}
+    </div>
+  {{/if~}}
+{{/if~}}
+
+{{! Call-to-action }}
+<div class="py-6 -mb-6">
+  <div class="container my-6 text-center max-w-md mx-auto">
+    <p class="font-size-xl mb-5">
+      {{t 'suggest_new_post'}}
+    </p>
+    {{link 'new_post' class='button button-primary button-lg' role='button'}}
+  </div>
+</div>
+
+<script type="text/javascript">document.documentElement.classList.add('community-topic-list-page')</script>

@@ -1,0 +1,321 @@
+<a class="sr-only sr-only-focusable" tabindex="1" href="#page-container">
+  {{t 'skip_navigation'}}
+</a>
+
+{{! Notification }}
+{{~#is settings.notification_location 'header'}}
+  {{~#if settings.notification_content}}
+    <div
+      data-element="template"
+      data-template="notification">
+    </div>
+  {{/if~}}
+{{/is~}}
+
+{{! Topbar }}
+{{~#is settings.header_layout 'links-topbar'}}
+  <div id="topbar">
+    <script type="text/javascript">
+      ready(function() {
+        var links = Array.prototype.slice.call(document.querySelectorAll('.header .header-link'));
+        Util.renderTemplate(document.getElementById('topbar'), 'topbar', {
+          links: links.map(function(link) {
+            var obj = { text: link.textContent, html_url: link.href };
+            link.remove();
+            return obj;
+          })
+        });
+      });
+    </script>
+  </div>
+{{/is~}}
+
+<div class="layout flex flex-1 flex-column{{#if settings.boxed_layout}} layout--boxed{{/if}}" x-data="Widgets.mobileMenu">
+
+  {{! Page header }}
+  <header class="header relative border-bottom{{#if settings.fixed_header}} fixed-header{{/if}}{{#if settings.sticky_header}} sticky-header{{/if}}"
+    x-data="Widgets.header({ isFixed: {{settings.fixed_header}}, isSticky: {{settings.sticky_header}} })"
+    :class="{ {{#if settings.sticky_header}}'text-header bg-header': isStuck, 'shadow': isStuck, {{/if}}'border-bottom': !isFixed }">
+
+    <nav class="navbar container{{#if settings.full_width_header}}-fluid{{/if}} h-full" {{~#isnt settings.nav_style 'slide-in'}} :class="{ 'text-header': isOpen }{{/isnt}}">
+
+      {{! Logo }}
+      <a href="{{page_path 'help_center'}}" class="navbar-brand m{{#is current_locale.direction 'ltr'}}r{{else}}l{{/is}}-auto">
+        <img class="block img-fluid{{~#is settings.nav_style 'standard'}} z-100{{/is}}" id="logo" src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}">
+        {{~#if settings.tagline}}
+          <span class="navbar-tagline mx-3 white-space-no-wrap lg:font-size-lg">
+            {{~#if settings.use_translations}}
+              {{dc settings.tagline}}
+            {{else}}
+              {{settings.tagline}}
+            {{/if~}}
+          </span>
+        {{/if~}}
+      </a>
+
+      {{! Mobile menu toggle }}
+      <button class="navbar-toggle ml-2 {{settings.nav_breakpoint}}:hidden"
+        x-ref="toggle"
+        :aria-expanded="isOpen && 'true'"
+        @click="toggle"
+        @keydown.escape="toggle">
+        <span></span>
+        <span class="sr-only">{{t 'toggle_navigation'}}</span>
+      </button>
+
+      {{! Mobile menu backdrop }}
+      {{~#is settings.nav_style 'slide-in'}}
+        <div class="backdrop {{settings.nav_breakpoint}}:hidden"
+          x-cloak
+          x-show="isOpen"
+          @click="close"
+          x-transition:enter="transition-fast"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition-fast"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0">
+        </div>
+      {{/is}}
+
+      {{! Primary navigation menu }}
+      <div class="nav menu menu-{{settings.nav_style}} menu-{{settings.header_layout}} {{settings.nav_breakpoint}}:flex {{settings.nav_breakpoint}}:align-items-center {{settings.nav_breakpoint}}:font-size-md {{settings.nav_breakpoint}}:menu-expanded
+        {{~#is settings.header_layout 'links-left'}} {{settings.nav_breakpoint}}:justify-content-start{{/is~}}
+        {{~#is settings.header_layout 'links-center'}} {{settings.nav_breakpoint}}:justify-content-center{{/is~}}
+        {{~#is settings.header_layout 'links-right'}} {{settings.nav_breakpoint}}:justify-content-end{{/is~}}
+        {{~#is settings.header_layout 'links-topbar'}} {{settings.nav_breakpoint}}:justify-content-end{{/is~}}"
+        x-cloak
+        x-show="isOpen"
+        :class="{ 'text-header': isOpen }"
+        x-transition:enter="transition-fast"
+        x-transition:enter-start="{{~#is settings.nav_style 'slide-in'}}translate-x-full{{else}}opacity-0{{/is}}"
+        x-transition:enter-end="{{~#is settings.nav_style 'slide-in'}}translate-x-0{{else}}opacity-100{{/is}}"
+        x-transition:leave="transition-fast"
+        x-transition:leave-start="{{~#is settings.nav_style 'slide-in'}}translate-x-0{{else}}opacity-100{{/is}} text-header"
+        x-transition:leave-end="{{~#is settings.nav_style 'slide-in'}}translate-x-full{{else}}opacity-0{{/is}} text-header">
+
+        {{! Mobile search bar }}
+        {{~#isnt settings.header_search_style 'none'}}
+          <div class="search flex text-base mx-4 mb-4 flex-first {{settings.nav_breakpoint}}:max-w-13 {{settings.nav_breakpoint}}:flex-1 {{settings.nav_breakpoint}}:mx-5 {{settings.nav_breakpoint}}:mb-0{{#isnt settings.header_search_style 'inline'}} {{settings.nav_breakpoint}}:hidden{{/isnt}}" x-data="Widgets.search">
+            {{~#if settings.search_placeholder}}
+              {{#if settings.use_translations}}
+                {{search class='form-field flex-1 mb-0' submit=false placeholder=(dc settings.search_placeholder)}}
+              {{else}}
+                {{search class='form-field flex-1 mb-0' submit=false placeholder=settings.search_placeholder}}
+              {{/if}}
+            {{else}}
+              {{search class='form-field flex-1 mb-0' submit=false}}
+            {{/if~}}
+            <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <use xlink:href="#icon-search" />
+            </svg>
+          </div>
+        {{/isnt}}
+
+        {{! Custom links }}
+        {{~#if settings.header_link_1_text}}
+          <a class="nav-link header-link" href="{{#if settings.use_translations}}{{dc settings.header_link_1_url}}{{else}}{{settings.header_link_1_url}}{{/if}}" x-data="link">
+            {{~#if settings.use_translations}}
+              {{dc settings.header_link_1_text}}
+            {{else}}
+              {{settings.header_link_1_text}}
+            {{/if~}}
+          </a>
+        {{/if~}}
+        {{~#if settings.header_link_2_text}}
+          <a class="nav-link header-link" href="{{#if settings.use_translations}}{{dc settings.header_link_2_url}}{{else}}{{settings.header_link_2_url}}{{/if}}" x-data="link">
+            {{~#if settings.use_translations}}
+              {{dc settings.header_link_2_text}}
+            {{else}}
+              {{settings.header_link_2_text}}
+            {{/if~}}
+          </a>
+        {{/if~}}
+        {{~#if settings.header_link_3_text}}
+          <a class="nav-link header-link" href="{{#if settings.use_translations}}{{dc settings.header_link_3_url}}{{else}}{{settings.header_link_3_url}}{{/if}}" x-data="link">
+            {{~#if settings.use_translations}}
+              {{dc settings.header_link_3_text}}
+            {{else}}
+              {{settings.header_link_3_text}}
+            {{/if~}}
+          </a>
+        {{/if~}}
+
+        {{! Community link }}
+        {{~#if help_center.community_enabled}}
+          {{link 'community' class='nav-link header-link'}}
+        {{/if~}}
+
+        {{! Category dropdown }}
+        {{~#isnt settings.category_dropdown_style 'none'}}
+          <div
+            data-element="template"
+            data-template="category-dropdown">
+          </div>
+        {{/isnt~}}
+
+        {{! Submit a Request link }}
+        {{~#if settings.show_submit_a_request_link}}
+          {{link 'new_request' class='nav-link header-link'}}
+        {{/if~}}
+
+        {{! Header search }}
+        {{~#isnt settings.header_search_style 'none'}}
+          {{#isnt settings.header_search_style 'inline'}}
+            <div
+              data-element="template"
+              data-template="header-search">
+            </div>
+          {{/isnt}}
+        {{/isnt}}
+
+        {{! User menu }}
+        {{~#if signed_in}}
+          <div class="user-menu relative mb-2 flex-first {{settings.nav_breakpoint}}:order-inherit {{settings.nav_breakpoint}}:border-bottom-0 {{settings.nav_breakpoint}}:mb-0 {{settings.nav_breakpoint}}:pb-0
+            {{#is settings.header_layout 'links-left'}} {{settings.nav_breakpoint}}:ml-auto{{/is}}
+            {{#is settings.header_layout 'links-center'}} {{settings.nav_breakpoint}}:ml-auto{{/is}}"
+            :class="{ 'mb-0': isExpanded }"
+            x-data="Widgets.dropdown"
+            @click.away="close">
+            <button class="nav-link not-a-button{{#isnt settings.nav_style 'slide-in'}} w-full{{/isnt}}" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+              <span class="mr-1">
+                {{user_avatar class="avatar-img circle -my-4 w-6 h-6 border-0"}}
+              </span>
+              {{user_name}}
+              <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+                <use xlink:href="#icon-chevron-down" />
+              </svg>
+            </button>
+            <div class="z-dropdown mt-2 bg-white {{settings.nav_breakpoint}}:absolute {{settings.nav_breakpoint}}:border {{settings.nav_breakpoint}}:border-radius {{settings.nav_breakpoint}}:shadow-md {{settings.nav_breakpoint}}:min-w-dropdown" x-ref="menu" x-cloak x-show="isExpanded">
+              <div class="py-2 {{settings.nav_breakpoint}}:font-size-sm {{settings.nav_breakpoint}}:text-left">
+                {{#my_profile class='dropdown-item'}}{{t 'profile'}}{{/my_profile}}
+                {{link "requests" class='dropdown-item'}}
+                {{#link "contributions" class='dropdown-item'}}{{t "activities"}}{{/link}}
+                {{contact_details class='dropdown-item line-height-normal cursor-pointer'}}
+                {{change_password class='dropdown-item line-height-normal cursor-pointer'}}
+                {{link "sign_out" class='dropdown-item'}}
+              </div>
+            </div>
+          </div>
+        {{else}}
+          {{#link "sign_in" class='nav-link'}}
+            {{t 'sign_in'}}
+          {{/link}}
+        {{/if~}}
+
+      </div>
+
+    </nav>
+  </header> {{! .layout is closed in the footer.hbs template }}
+
+{{!---------------
+   Micro-templates
+   ---------------}}
+
+{{! Topbar }}
+{{~#is settings.header_layout 'links-topbar'}}
+  <script type="text/template" id="tmpl-topbar">
+    <div class="topbar bg-gray-100 border-bottom{{#if settings.boxed_layout}} layout--boxed{{/if}}">
+      <nav class="navbar font-size-sm container{{#if settings.full_width_header}}-fluid{{/if}} py-1 justify-content-end">
+        <% links.forEach(function(link) { %>
+          <a class="nav-link" href="<%= link.html_url %>"><%= link.text %></a>
+        <% }) %>
+      </nav>
+    </div>
+  </script>
+{{/is~}}
+
+{{! Header search }}
+{{~#isnt settings.header_search_style 'none'}}
+  {{~#is settings.header_search_style 'collapsible'}}
+    <script type="text/template" id="tmpl-header-search">
+      <div x-data="Widgets.search" @keydown.escape="close" @click.away="close">
+        <button class="search-toggle nav-link not-a-button hidden {{settings.nav_breakpoint}}:h-full" :class="{ '{{settings.nav_breakpoint}}:block': {{#is settings.header_search_style 'collapsible'}}!isOpen{{else}}true{{/is}} }" @click="toggle" x-ref="toggle">
+          <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" x-show="!isOpen">
+            <use xlink:href="#icon-search" />
+          </svg>
+          <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58" aria-hidden="true" x-show="isOpen">
+            <line x1="3" y1="3" x2="55" y2="55"></line>
+            <path d="M55,58 C54.2046186,57.9992998 53.4420694,57.6827699 52.88,57.12 L0.88,5.12 C-0.221435442,3.93796098 -0.188935504,2.09596111 0.953512804,0.953512804 C2.09596111,-0.188935504 3.93796098,-0.221435442 5.12,0.88 L57.12,52.88 C57.9768812,53.7379473 58.2330328,55.0273683 57.7691479,56.1476941 C57.305263,57.2680198 56.2125666,57.9989335 55,58 Z"></path>
+            <line x1="3" y1="55" x2="55" y2="3"></line>
+            <path d="M3,58 C1.78743338,57.9989335 0.694736971,57.2680198 0.230852095,56.1476941 C-0.233032781,55.0273683 0.0231187894,53.7379473 0.88,52.88 L52.88,0.88 C54.062039,-0.221435442 55.9040389,-0.188935504 57.0464872,0.953512804 C58.1889355,2.09596111 58.2214354,3.93796098 57.12,5.12 L5.12,57.12 C4.55793057,57.6827699 3.7953814,57.9992998 3,58 Z"></path>
+          </svg>
+          <span class="ml-1 sr-only">{{t 'search'}}</span>
+        </button>
+        <div class="search search-sm align-self-center flex-1 text-base mx-2" :class="{ 'hidden': !isOpen }">
+          {{~#if settings.search_placeholder}}
+            {{#if settings.use_translations}}
+              {{search class='form-field mb-0' submit=false placeholder=(dc settings.search_placeholder)}}
+            {{else}}
+              {{search class='form-field mb-0' submit=false placeholder=settings.search_placeholder}}
+            {{/if}}
+          {{else}}
+            {{search class='form-field mb-0' submit=false}}
+          {{/if~}}
+          <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+            <use xlink:href="#icon-search" />
+          </svg>
+        </div>
+      </div>
+    </script>
+  {{/is~}}
+  {{~#is settings.header_search_style 'slide-down'}}
+    <script type="text/template" id="tmpl-header-search">
+      <div x-data="Widgets.search" @keydown.escape="close" @click.away="close">
+        <button class="search-toggle nav-link not-a-button hidden {{settings.nav_breakpoint}}:h-full" :class="{ '{{settings.nav_breakpoint}}:block': {{#is settings.header_search_style 'inline'}}!isOpen{{else}}true{{/is}} }" @click="toggle" x-ref="toggle">
+          <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" x-show="!isOpen">
+            <use xlink:href="#icon-search" />
+          </svg>
+          <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58" aria-hidden="true" x-show="isOpen">
+            <line x1="3" y1="3" x2="55" y2="55"></line>
+            <path d="M55,58 C54.2046186,57.9992998 53.4420694,57.6827699 52.88,57.12 L0.88,5.12 C-0.221435442,3.93796098 -0.188935504,2.09596111 0.953512804,0.953512804 C2.09596111,-0.188935504 3.93796098,-0.221435442 5.12,0.88 L57.12,52.88 C57.9768812,53.7379473 58.2330328,55.0273683 57.7691479,56.1476941 C57.305263,57.2680198 56.2125666,57.9989335 55,58 Z"></path>
+            <line x1="3" y1="55" x2="55" y2="3"></line>
+            <path d="M3,58 C1.78743338,57.9989335 0.694736971,57.2680198 0.230852095,56.1476941 C-0.233032781,55.0273683 0.0231187894,53.7379473 0.88,52.88 L52.88,0.88 C54.062039,-0.221435442 55.9040389,-0.188935504 57.0464872,0.953512804 C58.1889355,2.09596111 58.2214354,3.93796098 57.12,5.12 L5.12,57.12 C4.55793057,57.6827699 3.7953814,57.9992998 3,58 Z"></path>
+          </svg>
+          <span class="ml-1 sr-only">{{t 'search'}}</span>
+        </button>
+        <div class="absolute top-100 left-0 right-0 z-sticky flex h-full max-h-0 bg-header overflow-hidden shadow-bottom transition-fast" :style="isOpen ? 'max-height: {{settings.header_height}}' : '0'" x-ref="dropdown">
+          <div class="container-fluid flex h-full">
+            <div class="search align-self-center flex-1 text-base">
+              {{~#if settings.search_placeholder}}
+                {{#if settings.use_translations}}
+                  {{search class='form-field mb-0' submit=false placeholder=(dc settings.search_placeholder)}}
+                {{else}}
+                  {{search class='form-field mb-0' submit=false placeholder=settings.search_placeholder}}
+                {{/if}}
+              {{else}}
+                {{search class='form-field mb-0' submit=false}}
+              {{/if~}}
+              <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+                <use xlink:href="#icon-search" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}
+
+{{! Category dropdown }}
+{{~#isnt settings.category_dropdown_style 'none'}}
+  {{~#is settings.category_dropdown_style 'dropdown'}}
+    <script type="text/template" id="tmpl-category-dropdown">
+      <div class="relative h-full" x-data="Widgets.dropdown" @click.away="close">
+        <button class="nav-link not-a-button{{#isnt settings.nav_style 'slide-in'}} w-full{{/isnt}}" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+          {{t 'categories'}}
+          <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+            <use xlink:href="#icon-chevron-down" />
+          </svg>
+        </button>
+        <div class="z-dropdown mt-2 bg-white {{settings.nav_breakpoint}}:absolute {{settings.nav_breakpoint}}:border {{settings.nav_breakpoint}}:border-radius {{settings.nav_breakpoint}}:shadow-md {{settings.nav_breakpoint}}:min-w-dropdown" x-ref="menu" x-cloak x-show="isExpanded" :aria-expanded="isExpanded">
+          <div class="py-2 {{settings.nav_breakpoint}}:font-size-sm {{settings.nav_breakpoint}}:text-left" x-data="Widgets.categories" x-init="getCategories">
+            <template x-for="category in categories">
+              <a class="dropdown-item" :href="category.html_url" x-text="category.name"></a>
+            </template>
+          </div>
+        </div>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}

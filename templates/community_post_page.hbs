@@ -1,0 +1,343 @@
+{{! Subheader }}
+<div class="bg-gray-200 mb-4">
+  <div class="container">
+    <div class="row align-items-center pt-4">
+      <div class="col font-size-md">
+        {{breadcrumbs}}
+      </div>
+      {{~#is settings.header_search_style 'none'}}
+        <div class="md:col-4">
+          <div class="search mb-4">
+            <h2 class="sr-only">{{t 'search' }}</h2>
+            {{~#if settings.search_placeholder}}
+              {{#if settings.use_translations}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=(dc settings.search_placeholder)}}
+              {{else}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=settings.search_placeholder}}
+              {{/if}}
+            {{else}}
+              {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false}}
+            {{/if~}}
+            <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <use xlink:href="#icon-search" />
+            </svg>
+          </div>
+        </div>
+      {{/is~}}
+    </div>
+  </div>
+</div>
+
+<div class="container" id="page-container">
+  <div class="row">
+    <article class="md:col-9">
+      <header class="mb-4">
+        <h1 class="xl:font-size-4xl">
+          {{post.title}}
+          {{#if post.internal}}
+            <svg class="svg-icon text-base font-size-xl ml-1 mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+              <title>{{t 'internal'}}</title>
+              <use xlink:href="#icon-lock" />
+            </svg>
+          {{/if}}
+          {{#if post.pinned}}<span class="badge align-middle font-size-xs ml-1">{{t 'pinned'}}</span>{{/if}}
+          {{#if post.featured}}<span class="badge align-middle font-size-xs ml-1">{{t 'featured'}}</span>{{/if}}
+          {{#is post.status 'none'}}
+          {{else}}
+            <span class="badge badge-{{post.status_dasherized}} align-middle font-size-xs ml-1">{{post.status_name}}</span>
+          {{/is}}
+        </h1>
+
+        {{! Post metadata }}
+        <div class="flex">
+          <div class="media">
+            <div class="avatar">
+              {{#if post.author.agent}}
+                <svg class="svg-icon absolute bottom-0 right-0 text-primary bg-white border border-white circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+                  <use xlink:href="#icon-agent" />
+                </svg>
+              {{/if}}
+              <img class="avatar-img" alt="" src="{{post.author.avatar_url}}">
+            </div>
+            <div class="media-body font-size-md align-self-center">
+              {{#link 'user_profile' class="link-implied" id=post.author.id}}
+                {{post.author.name}}
+              {{/link}}
+              {{#each post.author.badges}}
+                {{#is category_slug "titles"}}
+                  <span class="badge bg-primary text-primary-inverse py-1 pr-2 mx-2" title="{{description}}" aria-label="{{name}}">
+                  {{#if icon_url}}
+                    <img src="{{icon_url}}" alt="{{description}}" />
+                  {{/if}}
+                    {{name}}
+                </span>
+                {{/is}}
+              {{/each}}
+              {{#each post.author.badges}}
+                {{#is category_slug "achievements"}}
+                  {{#if icon_url}}
+                    <img width="22" height="22" src="{{icon_url}}" alt="{{name}}" title="{{name}} | {{description}}" aria-label="{{name}}" />
+                  {{/if}}
+                {{/is}}
+              {{/each}}
+              <ul class="list-divider">
+                {{#if post.editor}}
+                  <li class="text-gray-600">
+                    {{t 'edited'}} {{date post.edited_at timeago=true}}
+                  </li>
+                {{else}}
+                  <li class="text-gray-600">
+                    {{date post.created_at timeago=true}}
+                  </li>
+                {{/if}}
+                {{#if comments}}
+                  <li class="text-gray-600">
+                    <a href="#comments">
+                      {{t 'comments_count' count=post.comment_count}}
+                    </a>
+                  </li>
+                {{/if}}
+              </ul>
+            </div>
+
+            {{! Subscribe link }}
+            {{#if settings.show_follow_post}}
+              <div class="subscribe-topic">
+                {{subscribe}}
+              </div>
+            {{/if}}
+
+            {{! Post actions }}
+            <div class="actions-comment align-self-center hover:text-primary">
+              {{#post.actions}}
+                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                  <path fill="none" stroke="currentColor" d="M13.17 3.07l-1.64.71c-.48-.4-1.03-.72-1.63-.94l-.22-1.79a.511.511 0 00-.4-.44C8.86.54 8.44.5 8 .5c-.44 0-.86.04-1.28.11-.22.04-.38.22-.4.44l-.21 1.79c-.6.22-1.15.54-1.63.94l-1.65-.71a.491.491 0 00-.58.13c-.55.65-.99 1.4-1.29 2.21-.08.21 0 .44.18.58l1.45 1.08a4.91 4.91 0 000 1.87l-1.45 1.08c-.18.13-.25.37-.18.58.3.81.74 1.55 1.28 2.2.14.17.38.22.58.13l1.65-.71c.48.4 1.03.72 1.63.94l.21 1.79c.03.22.19.4.4.44.43.07.85.11 1.29.11.44 0 .86-.04 1.28-.11.22-.04.38-.22.4-.44l.21-1.79c.6-.22 1.15-.54 1.63-.94l1.65.71c.2.09.44.04.58-.13.54-.65.98-1.39 1.28-2.2.08-.21 0-.44-.18-.57L13.4 8.95c.07-.32.1-.63.1-.95s-.03-.63-.09-.94l1.45-1.08c.18-.13.25-.37.18-.58-.3-.81-.74-1.55-1.28-2.2a.51.51 0 00-.59-.13z"/>
+                  <circle cx="8" cy="8" r="2.5" fill="none" stroke="currentColor"/>
+                </svg>
+              {{/post.actions}}
+            </div>
+
+          </div>
+        </div>
+      </header>
+
+      {{! Post content }}
+      <section class="content">
+        {{post.details}}
+      </section>
+
+      {{! Content tags }}
+      {{#if (compare post.content_tags.length ">" 0)}}
+        <section class="my-6">
+          <p class="mb-3 text-gray-600">
+            {{t 'content_tags_label'}}
+          </p>
+          <ul class="list-divider font-size-md">
+            {{#each post.content_tags}}
+              <li data-divider="|">
+                {{#link "search_result" content_tag_id=id}}
+                  {{name}}
+                {{/link}}
+              </li>
+            {{/each}}
+          </ul>
+        </section>
+      {{/if}}
+
+      <footer class="flex justify-content-between mt-6">
+
+        {{! Post voting }}
+        <div class="mb-4">
+          {{#with post}}
+            <div class="button-group button-group-sm" role="group">
+              {{#vote 'up' class='button button-outline' selected_class ='is-active' role='radio'}}
+                <svg class="svg-icon rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 6.5l3.6 3.6c.2.2.5.2.7 0L12 6.5"></path>
+                </svg>
+              {{/vote}}
+              {{#vote 'down' class='button button-outline' selected_class='is-active' role='radio'}}
+                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 6.5l3.6 3.6c.2.2.5.2.7 0L12 6.5"/>
+                </svg>
+              {{/vote}}
+            </div>
+            {{vote 'sum' class='font-size-sm text-gray-600 ml-1'}}
+          {{/with}}
+        </div>
+
+        {{! Post sharing }}
+        {{#if settings.show_post_sharing}}
+          {{share}}
+        {{/if}}
+
+      </footer>
+
+      {{! Post comments }}
+      <section id="comments" itemscope itemtype="http://schema.org/UserComments">
+        <header class="border-top border-bottom py-2">
+          <h3 class="my-4">
+            {{t 'comments'}}
+          </h3>
+          <div class="flex justify-content-between align-items-baseline text-gray-600">
+            <p>
+              {{t 'comments_count' count=post.comment_count}}
+            </p>
+            {{#if comments}}
+
+              {{! Sorters }}
+              <div class="dropdown" x-data="Widgets.dropdown" @click.away="close">
+                <button class="not-a-button py-2 cursor-pointer" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+                  {{t 'sort_by'}}
+                  <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+                    <use xlink:href="#icon-chevron-down" />
+                  </svg>
+                </button>
+                <span class="dropdown-menu" role="menu" x-ref="menu" :aria-expanded="isExpanded">
+                  {{#each comment_sorters}}
+                    <a class="dropdown-item" aria-selected="{{selected}}" href="{{url}}" role="menuitem">
+                      {{name}}
+                    </a>
+                  {{/each}}
+                </span>
+              </div>
+            {{/if}}
+          </div>
+        </header>
+        {{#if comments}}
+          <ul class="list-unstyled list-bordered">
+            {{#each comments}}
+              <li class="comment py-5 border-bottom{{#if official}} comment-official{{/if}}" id="{{anchor}}">
+
+                {{! Comment metadata }}
+                <div class="media mb-4">
+                  <div class="avatar">
+                    {{#if author.agent}}
+                      <svg class="svg-icon absolute bottom-0 right-0 text-primary bg-white border border-white circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+                        <use xlink:href="#icon-agent" />
+                      </svg>
+                    {{/if}}
+                    <img class="avatar-img" src="{{author.avatar_url}}" alt="Comment author">
+                  </div>
+                  <div class="media-body">
+                    {{#link 'user_profile' class="link-implied" title=author.name id=author.id}}
+                      {{author.name}}
+                    {{/link}}
+                    {{#each author.badges}}
+                      {{#is category_slug "titles"}}
+                        <span class="badge bg-primary text-primary-inverse py-1 pr-2 mx-2" title="{{description}}" aria-label="{{name}}">
+                          {{#if icon_url}}
+                            <img src="{{icon_url}}" alt="{{description}}" />
+                          {{/if}}
+                          {{name}}
+                        </span>
+                      {{/is}}
+                    {{/each}}
+                    {{#each author.badges}}
+                      {{#is category_slug "achievements"}}
+                        {{#if icon_url}}
+                          <img width="22" height="22" src="{{icon_url}}" alt="{{name}}" title="{{name}} | {{description}}" aria-label="{{name}}" />
+                        {{/if}}
+                      {{/is}}
+                    {{/each}}
+                    <ul class="list-divider">
+                      <li class="text-gray-600">
+                        {{#if editor}}
+                          {{t 'edited'}} {{date edited_at timeago=true}}
+                        {{else}}
+                          {{date created_at timeago=true}}
+                        {{/if}}
+                      </li>
+                      {{#if official}}
+                        <li class="text-gray-600">
+                          <span class="badge badge-official">
+                            {{t 'official_comment'}}
+                          </span>
+                        </li>
+                      {{/if}}
+                    </ul>
+                  </div>
+                  <div class="actions-comment">
+                    {{#actions}}
+                      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                        <path fill="none" stroke="currentColor" d="M13.17 3.07l-1.64.71c-.48-.4-1.03-.72-1.63-.94l-.22-1.79a.511.511 0 00-.4-.44C8.86.54 8.44.5 8 .5c-.44 0-.86.04-1.28.11-.22.04-.38.22-.4.44l-.21 1.79c-.6.22-1.15.54-1.63.94l-1.65-.71a.491.491 0 00-.58.13c-.55.65-.99 1.4-1.29 2.21-.08.21 0 .44.18.58l1.45 1.08a4.91 4.91 0 000 1.87l-1.45 1.08c-.18.13-.25.37-.18.58.3.81.74 1.55 1.28 2.2.14.17.38.22.58.13l1.65-.71c.48.4 1.03.72 1.63.94l.21 1.79c.03.22.19.4.4.44.43.07.85.11 1.29.11.44 0 .86-.04 1.28-.11.22-.04.38-.22.4-.44l.21-1.79c.6-.22 1.15-.54 1.63-.94l1.65.71c.2.09.44.04.58-.13.54-.65.98-1.39 1.28-2.2.08-.21 0-.44-.18-.57L13.4 8.95c.07-.32.1-.63.1-.95s-.03-.63-.09-.94l1.45-1.08c.18-.13.25-.37.18-.58-.3-.81-.74-1.55-1.28-2.2a.51.51 0 00-.59-.13z"/>
+                        <circle cx="8" cy="8" r="2.5" fill="none" stroke="currentColor"/>
+                      </svg>
+                    {{/actions}}
+                  </div>
+                </div>
+                {{#with ticket}}
+                  <a href="{{url}}" target="_zendesk_lotus" class="status-label escalation-badge">
+                    {{t 'request'}} {{id}}
+                  </a>
+                {{/with}}
+                {{#if pending}}
+                  <span class="badge badge-pending">
+                    {{t 'pending_approval'}}
+                  </span>
+                {{/if}}
+
+                {{! Comment content }}
+                <section class="content">
+                  {{body}}
+                </section>
+
+                {{! Comment voting }}
+                {{#unless official}}
+                  <div class="button-group button-group-sm" role="group">
+                    {{#vote 'up' class='button button-outline' selected_class ='is-active' role='radio'}}
+                      <svg class="svg-icon rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 6.5l3.6 3.6c.2.2.5.2.7 0L12 6.5"></path>
+                      </svg>
+                    {{/vote}}
+                    {{#vote 'down' class='button button-outline' selected_class='is-active' role='radio'}}
+                      <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 6.5l3.6 3.6c.2.2.5.2.7 0L12 6.5"/>
+                      </svg>
+                    {{/vote}}
+                  </div>
+                  {{vote 'sum' class='font-size-sm text-gray-600 ml-1'}}
+                {{/unless}}
+              </li>
+            {{/each}}
+          </ul>
+
+          {{pagination}}
+
+        {{/if}}
+
+        {{! Comment form }}
+        {{#form 'comment' class='form comment-form my-4'}}
+          <div class="media my-4">
+            <div class="avatar">
+              {{user_avatar class='avatar-img'}}
+            </div>
+            <div class="media-body form-field">
+              {{wysiwyg 'body'}}
+            </div>
+          </div>
+          <div class="flex align-items-center justify-content-end">
+            <div class="form-field boolean inline-flex align-items-center mt-2 mb-0 mr-4">
+              {{checkbox 'official' class="mb-2"}}
+              {{label 'official'}}
+            </div>
+            {{input type='submit' class='button button-primary button-lg'}}
+          </div>
+        {{/form}}
+        <p class="text-gray-600 mt-4">
+          {{comment_callout}}
+        </p>
+      </section>
+    </article>
+
+    {{! New post callout }}
+    <aside class="hidden md:col-3 md:block">
+      <h3>
+        {{t 'suggest_new_post'}}
+      </h3>
+      {{link 'new_post' class='button button-primary mt-1'}}
+    </aside>
+
+  </div>
+</div>
+
+<script type="text/javascript">document.documentElement.classList.add('post-page', 'post-' + {{post.id}})</script>

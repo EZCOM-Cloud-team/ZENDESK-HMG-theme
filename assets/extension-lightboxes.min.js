@@ -1,0 +1,1 @@
+(function(){"use strict";each(".content img",function(b){if(!Util.closest(b,"a")){var c=document.createElement("a");c.href=b.src,c.setAttribute("data-fancybox",""),b.hasAttribute("alt")&&c.setAttribute("data-caption",b.getAttribute("alt")),b.insertAdjacentElement("afterend",c),c.appendChild(b)}})})();

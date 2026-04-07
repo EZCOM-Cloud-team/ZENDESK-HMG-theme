@@ -1,0 +1,1163 @@
+  {{! Page footer }}
+  <footer class="footer mt-6{{#is settings.footer_shape 'none'}}{{#is settings.bg_color settings.bg_color_footer}} border-top{{/is}}{{/is}}" id="footer">
+
+    {{! SVG dividers }}
+    {{~#isnt settings.footer_shape 'none'}}
+      <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+        {{~#is settings.footer_shape 'book'}}class="svg-shape" viewBox="0 0 1200 120"{{/is~}}
+        {{~#is settings.footer_shape 'curve'}}class="svg-shape rotate-180" viewBox="0 0 100 100"{{/is~}}
+        {{~#is settings.footer_shape 'curves'}}class="svg-shape top-0" viewBox="0 0 240 24"{{/is~}}
+        {{~#is settings.footer_shape 'diagonal'}}class="svg-shape top-0" viewBox="0 0 1000 100"{{/is~}}
+        {{~#is settings.footer_shape 'hills'}}class="svg-shape top-0 rotate-180" viewBox="0 0 240 24"{{/is~}}
+        {{~#is settings.footer_shape 'mountains'}}class="svg-shape top-0" viewBox="0 0 1000 100"{{/is~}}
+        {{~#is settings.footer_shape 'rays'}}class="svg-shape top-0" viewBox="0 0 2600 130.1"{{/is~}}
+        {{~#is settings.footer_shape 'triangle'}}class="svg-shape top-0" viewBox="0 0 1000 100"{{/is~}}
+        {{~#is settings.footer_shape 'wave'}}class="svg-shape top-0" viewBox="0 0 1000 100"{{/is~}}
+        {{~#is settings.footer_shape 'waves'}}class="svg-shape top-0" viewBox="0 0 283.5 27.8"{{/is~}}
+        {{~#is settings.footer_shape 'zigzag'}}class="svg-shape top-0" viewBox="0 0 1000 100"{{/is~}}>
+        <use xlink:href="#shape-{{settings.footer_shape}}" />
+      </svg>
+    {{~/isnt}}
+
+    <div class="container py-7{{~#is settings.back_to_top_link_style 'footer'}} relative{{/is}}">
+
+      <nav class="nav font-size-md
+        {{~#is settings.footer_layout 'links-stacked'}} mb-4{{/is~}}
+        {{~#is settings.footer_layout 'links-right'}} justify-content-end{{/is~}}
+        {{~#is settings.footer_layout 'links-center'}} justify-content-center{{/is~}}">
+
+        {{! Custom links }}
+        {{~#if settings.footer_link_1_text}}
+          <a class="nav-link" href="{{#if settings.use_translations}}{{dc settings.footer_link_1_url}}{{else}}{{settings.footer_link_1_url}}{{/if}}" x-data="link">
+            {{~#if settings.use_translations}}
+              {{dc settings.footer_link_1_text}}
+            {{else}}
+              {{settings.footer_link_1_text}}
+            {{/if~}}
+          </a>
+        {{/if~}}
+        {{~#if settings.footer_link_2_text}}
+          <a class="nav-link" href="{{#if settings.use_translations}}{{dc settings.footer_link_2_url}}{{else}}{{settings.footer_link_2_url}}{{/if}}" x-data="link">
+            {{#if settings.use_translations}}
+              {{dc settings.footer_link_2_text}}
+            {{else}}
+              {{settings.footer_link_2_text}}
+            {{/if}}
+          </a>
+        {{/if~}}
+        {{~#if settings.footer_link_3_text}}
+          <a class="nav-link" href="{{#if settings.use_translations}}{{dc settings.footer_link_3_url}}{{else}}{{settings.footer_link_3_url}}{{/if}}" x-data="link">
+            {{#if settings.use_translations}}
+              {{dc settings.footer_link_3_text}}
+            {{else}}
+              {{settings.footer_link_3_text}}
+            {{/if}}
+          </a>
+        {{/if~}}
+
+        {{~#is settings.footer_layout 'links-stacked'}}
+      </nav>
+
+      <nav class="nav font-size-md{{#is settings.footer_layout 'links-right'}} justify-content-end{{/is}}">
+      {{/is~}}
+
+        {{! Language selector }}
+        {{~#if alternative_locales}}
+          <div class="relative" x-data="Widgets.dropdown" @click.away="close">
+            <button class="nav-link not-a-button h-full{{#isnt settings.nav_style 'slide-in'}} w-full{{/isnt}}" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+              <svg class="svg-icon mr-1 fill-current hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <use xlink:href="#icon-locales" />
+              </svg>
+              {{current_locale.name}}
+              <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+                <use xlink:href="#icon-chevron-down" />
+              </svg>
+            </button>
+            <div class="z-dropdown absolute my-2 bg-white border border-radius shadow-md min-w-dropdown" x-ref="menu" x-cloak x-show="isExpanded">
+              <div class="py-2 font-size-sm text-left">
+                {{#each alternative_locales}}
+                  <a class="dropdown-item" href="{{url}}" dir="{{direction}}" rel="nofollow">
+                    {{name}}
+                  </a>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        {{/if~}}
+
+        {{! Social links }}
+        {{~#if settings.facebook_link}}
+          <a class="nav-link" href="{{settings.facebook_link}}" target="_blank">
+            <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M6 0a6 6 0 01.813 11.945V7.63h1.552l.244-1.585H6.812v-.867c0-.658.214-1.242.827-1.242h.985V2.55c-.173-.024-.538-.075-1.23-.075-1.444 0-2.29.767-2.29 2.513v1.055H3.618v1.585h1.484v4.304A6.001 6.001 0 016 0z"></path>
+            </svg>
+          </a>
+        {{/if~}}
+        {{~#if settings.twitter_link}}
+          <a class="nav-link" href="{{settings.twitter_link}}" target="_blank">
+            <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.095479,10.316482L22.286354,1h-1.940718l-7.115352,8.087682L7.551414,1H1l8.589488,12.231093L1,23h1.940717  l7.509372-8.542861L16.448587,23H23L14.095479,10.316482z M11.436522,13.338465l-0.871624-1.218704l-6.924311-9.68815h2.981339  l5.58978,7.82155l0.867949,1.218704l7.26506,10.166271h-2.981339L11.436522,13.338465z"/>
+            </svg>
+          </a>
+        {{/if~}}
+        {{~#if settings.linkedin_link}}
+          <a class="nav-link" href="{{settings.linkedin_link}}" target="_blank">
+            <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M10.8 0A1.2 1.2 0 0112 1.2v9.6a1.2 1.2 0 01-1.2 1.2H1.2A1.2 1.2 0 010 10.8V1.2A1.2 1.2 0 011.2 0h9.6zM8.09 4.356a1.87 1.87 0 00-1.598.792l-.085.133h-.024v-.783H4.676v5.727h1.778V7.392c0-.747.142-1.47 1.068-1.47.913 0 .925.854.925 1.518v2.785h1.778V7.084l-.005-.325c-.05-1.38-.456-2.403-2.13-2.403zm-4.531.142h-1.78v5.727h1.78V4.498zm-.89-2.846a1.032 1.032 0 100 2.064 1.032 1.032 0 000-2.064z"></path>
+            </svg>
+          </a>
+        {{/if~}}
+        {{~#if settings.instagram_link}}
+          <a class="nav-link" href="{{settings.instagram_link}}" target="_blank">
+            <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+              <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+            </svg>
+          </a>
+        {{/if~}}
+        {{~#if settings.youtube_link}}
+          <a class="nav-link" href="{{settings.youtube_link}}" target="_blank">
+            <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" aria-hidden="true">
+              <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
+            </svg>
+          </a>
+        {{/if~}}
+
+        {{! Credit link }}
+        {{~#if settings.show_credit_link}}
+          <a class="nav-link{{#is settings.footer_layout 'links-left'}} ml-auto{{/is}}{{#is settings.footer_layout 'links-stacked'}} ml-auto{{/is}}" href="https://www.zenplates.co" target="_blank">
+            <span class="sr-only">Zendesk </span>Theme by Zenplates
+          </a>
+        {{/if~}}
+
+      </nav>
+
+      {{! Back to Top link }}
+      {{~#isnt settings.back_to_top_link_style 'none'}}
+        <div
+          class="{{#is settings.back_to_top_link_style 'footer'}}absolute top-0 right-0{{else}}fixed bottom-0 left-0{{/is}}"
+          data-element="back-to-top"
+          data-template="back-to-top-link"
+          data-threshold="{{#is settings.back_to_top_link_style 'footer'}}0{{else}}250px{{/is}}">
+        </div>
+      {{/isnt~}}
+
+    </div>
+  </footer> {{! /.footer }}
+
+</div> {{! /.layout from the header.hbs template }}
+
+{{!----------
+   Extensions
+   ----------}}
+<script type="text/javascript" src="{{asset 'extension-animations.min.js'}}" defer></script>
+<script type="text/javascript" src="{{asset 'extension-assets.min.js'}}" defer></script>
+<script type="text/javascript" src="{{asset 'extensions.min.js'}}" defer></script>
+<script type="text/javascript" src="{{asset 'widgets.min.js'}}" defer></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/combine/npm/alpinejs@3.13.0/dist/cdn.min.js
+  {{~#if settings.enable_lightboxes}},npm/jquery@3.5.1/dist/jquery.min.js,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js
+  {{~else}}{{~#if settings.promoted_video_ids}},npm/jquery@3.5.1/dist/jquery.min.js,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js{{~/if}}{{~/if}}
+  {{~#if settings.enable_video_player}},npm/plyr@~3.6.4/dist/plyr.polyfilled.min.js{{~/if}}
+  {{~#if settings.promoted_video_ids}},npm/swiper@7.0.9/swiper-bundle.min.js{{~/if}}" defer>
+</script>
+<script type="text/javascript" src="{{asset 'extension-navigation.min.js'}}" defer></script>
+{{~#if settings.promoted_video_ids}}<script type="text/javascript" src="{{asset 'extension-video-library.min.js'}}" defer></script>{{/if~}}
+{{~#if settings.enable_lightboxes}}<script type="text/javascript" src="{{asset 'extension-lightboxes.min.js'}}" defer></script>{{/if~}}
+{{~#if settings.enable_video_player}}<script type="text/javascript" src="{{asset 'extension-video.min.js'}}" defer></script>{{/if~}}
+{{~#isnt settings.article_navigation_style 'none'}}<script type="text/javascript" src="{{asset 'extension-article-navigation.min.js'}}" defer></script>{{/isnt~}}
+{{~#isnt settings.back_to_top_link_style 'none'}}<script type="text/javascript" src="{{asset 'extension-back-to-top.min.js'}}" defer></script>{{/isnt~}}
+
+{{!---------------
+   Micro-templates
+   ---------------}}
+
+{{! Notifications }}
+{{~#isnt settings.notification_location 'none'}}
+  {{~#if settings.notification_content}}
+    <script type="text/template" id="tmpl-notification">
+      <div class="{{#is settings.notification_location 'header'}}{{#if settings.boxed_layout}}layout--boxed{{/if}}{{else}}container my-6{{/is}}" data-widget x-data="Widgets.notification" x-init="getNotification">
+        <template x-if="isDismissed !== true">
+          <div class="bg-notification text-notification container-fluid relative {{#is settings.notification_location 'home'}}py-5 border-radius{{else}}py-3{{/is}}">
+            <div class="flex align-items-start" x-data="{ src: Theme.assets.notification }" x-init="$nextTick(() => Util.replaceWithSVG($refs.icon) )">
+              <template x-if="src">
+                <img class="svg-icon fill-current bottom-0 font-size-3xl mr-3 invisible" x-ref="icon" src="{{asset 'placeholder.png'}}" alt="" aria-hidden="true" :src="src" data-inline-svg />
+              </template>
+              <div class="m-1 font-medium mr-auto" x-ref="content">
+                {{dc settings.notification_content}}
+              </div>
+              <button class="not-a-button p-1 cursor-pointer hover:text-gray-100" @click="dismiss">
+                <svg class="svg-icon fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" aria-hidden="true">
+                  <polygon points="980.528,205.539 874.462,99.473 540,433.935 205.539,99.473 99.473,205.539 433.935,540 99.473,874.462 205.539,980.527 540,646.066 874.462,980.527 980.527,874.462 646.066,540 "/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </template>
+      </div>
+    </script>
+  {{/if~}}
+{{/isnt~}}
+
+{{! Popular keywords }}
+{{~#isnt settings.popular_keywords_style 'none'}}
+  {{~#isnt settings.popular_keywords_style 'custom'}}
+    {{~#if settings.popular_keywords}}
+      <script type="text/template" id="tmpl-popular-keywords">
+        <div class="flex flex-first flex-wrap mt-5 mb-4{{#is settings.hero_content_alignment 'center'}} justify-content-center{{/is}}"
+          x-data="Widgets.popularKeywords"
+          x-init="parseKeywords('<%= keywords %>')">
+          {{~#if settings.popular_keywords_heading}}
+            <p class="font-semibold m-1">
+              {{~#if settings.use_translations}}
+                {{dc settings.popular_keywords_heading}}
+              {{else}}
+                {{settings.popular_keywords_heading}}
+              {{/if~}}
+            </p>
+          {{/if~}}
+          <div class="flex flex-wrap align-items-center">
+            <template x-for="(keyword, index) in keywords" :key="index">
+              <div class="flex align-items-center m-1">
+                <a class="inline-block text-inherit{{#is settings.popular_keywords_style 'badges'}} badge bg-translucent blur text-inherit rounded px-3 py-2{{else}} hover:text-inherit{{/is}}"
+                  :href="keyword.html_url"
+                  :title="keyword.title"
+                  x-text="keyword.title">
+                </a>{{#is settings.popular_keywords_style 'links'}}<span x-show="index !== keywords.length - 1">,</span>{{/is}}
+              </div>
+            </template>
+          </div>
+        </div>
+      </script>
+    {{/if~}}
+  {{/isnt~}}
+{{/isnt~}}
+
+{{! Custom blocks }}
+{{~#isnt settings.custom_block_style 'none'}}
+  {{~#is settings.custom_block_style 'boxes'}}
+    <script type="text/template" id="tmpl-custom-blocks">
+      <% var getColumnClasses = function(numberColumns) {
+        var classNames = numberColumns === 'auto' ? 'col-auto' : 'col-12';
+        if (numberColumns >= 2) classNames += ' md:col-6';
+        if (numberColumns >= 3) classNames += ' lg:col-4';
+        if (numberColumns >= 4) classNames += ' xl:col-3';
+        return classNames;
+      } %>
+      <div class="text-{{settings.custom_block_alignment}}">
+        <% if (heading) { %>
+          <h2 class="inline-flex align-items-baseline mt-6" x-data="{ src: Theme.assets['custom-blocks-heading'] }">
+            <template x-if="src">
+              <img class="svg-icon mr-2" src="{{asset 'placeholder.png'}}" alt="" aria-hidden="true" :src="src" />
+            </template>
+            <%= heading %>
+          </h2>
+        <% } %>
+        <ul class="list-unstyled row row-sm justify-content-start<% if (!heading) { %> mt-4<% } %>">
+          <% blocks.forEach(function(block, index) { %>
+            <li class="-mb-1px <%= getColumnClasses(numberColumns) %>">
+              <div class="media py-6 px-3 border-top border-bottom h-full text-base text-<%= alignment %><% if (color === 'white') { %> hover:bg-gray-100<% } %><% if (block.html_url) { %> hover:text-<% if (color === 'white') { %>primary<% } else { %><%= color %><% } %><% } %><% if (alignment === 'center') { %> flex-column align-items-center<% } %>">
+                <% if (imageHeight) { %>
+                  <img class="<% if (alignment === 'center') { %>mb-4<% } else { %>mr-5<% } %>" alt="" src="<%= images[index] || images[0] %>" style="height: <%= imageHeight %>; width: auto;" />
+                <% } %>
+                <div class="media-body">
+                  <% if (block.name) { %>
+                    <h3 class="m-0">
+                      <% if (block.html_url) { %>
+                        <a class="link-stretched text-inherit transition-fast hover:no-underline hover:text-<% if (color === 'white') { %>primary<% } else { %><%= color %><% } %>" href="<%= block.html_url %>" x-data="link">
+                          <%= block.name %>
+                        </a>
+                      <% } else { %>
+                        <%= block.name %>
+                      <% } %>
+                    </h3>
+                  <% } %>
+                  <% if (block.description) { %>
+                    <p class="mt-3 mb-auto">
+                      <% if (block.html_url && !block.name) { %>
+                        <a class="link-stretched text-inherit transition-fast hover:no-underline hover:text-<% if (color === 'white') { %>primary<% } else { %><%= color %><% } %>" href="<%= block.html_url %>" x-data="link">
+                          <%= block.description %>
+                        </a>
+                      <% } else { %>
+                        <%= block.description %>
+                      <% } %>
+                    </p>
+                  <% } %>
+                </div>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}
+
+{{! Content blocks }}
+{{#isnt settings.content_block_style 'none'}}
+  {{~#is settings.content_block_style 'toggles'}}
+    <script type="text/template" id="tmpl-content-blocks">
+      <div class="container py-{{#is settings.bg_color settings.bg_color_content_blocks}}2{{else}}4{{/is}}">
+        <% if (heading) { %>
+          <h2 class="inline-flex align-items-baseline mt-6" x-data="{ src: Theme.assets['content-blocks-heading'] }">
+            <template x-if="src">
+              <img class="svg-icon mr-2" src="{{asset 'placeholder.png'}}" alt="" aria-hidden="true" :src="src" />
+            </template>
+            <%= heading %>
+          </h2>
+        <% } %>
+        <div class="list-bordered border border-radius bg-white overflow-hidden mb-4<% if (!heading) { %> mt-4<% } %>">
+          <% if (categories.length > 1) { %>
+            <% categories.forEach(function(category, index) { %>
+              <div x-data="{ open: false }">
+                <a class="h3 flex align-items-center justify-content-between px-6 py-4 my-0 transition hover:no-underline <% if (['primary', 'secondary', 'tertiary'].indexOf(color) !== -1) { %>hover:text-<%= color %><% } else { %>hover:text-inherit<% } %>" href="#" @click="open = !open" data-active-class="<% if (['primary', 'secondary', 'tertiary'].indexOf(color) !== -1) { %>text-<%= color %><% } %>" data-toggle="collapse" aria-expanded="false" data-target="#category-<%= category.id %>">
+                  <%= category.name %>
+                  <svg class="fill-current pointer-events-none ml-3" :class="open && 'rotate-180'" width="14px" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20,19.5 C19.4,19.5 18.9,19.3 18.4,18.9 L1.4,4.9 C0.3,4 0.2,2.4 1.1,1.4 C2,0.3 3.6,0.2 4.6,1.1 L20,13.8 L35.5,1.1 C36.6,0.2 38.1,0.4 39,1.4 C39.9,2.5 39.7,4 38.7,4.9 L21.7,18.9 C21.1,19.3 20.5,19.5 20,19.5 Z" fill-rule="nonzero"></path>
+                  </svg>
+                </a>
+                <div class="collapse" id="category-<%= category.id %>">
+                  <% if (category.sections.length) { %>
+                    <ul class="list-unstyled bg-gray-100 border-top mb-0 py-2">
+                      <% category.sections.forEach(function(section) { %>
+                        <li>
+                          <a class="block px-6 py-2 text-inherit transition hover:text-inherit hover:no-underline hover:bg-gray-200" href="<%= section.html_url %>">
+                            <%= section.name %>
+                          </a>
+                        </li>
+                      <% }) %>
+                    </ul>
+                  <% } else { %>
+                    <p class="bg-gray-100 border-top mb-0 py-2">
+                      <a class="block px-6 py-4 text-inherit transition hover:text-inherit hover:no-underline hover:bg-gray-200" href="<%= category.html_url %>">
+                        {{t 'empty'}}
+                      </a>
+                    </p>
+                  <% } %>
+                </div>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <% sections.forEach(function(section, index) { %>
+              <div x-data="{ open: false }">
+                <a class="h3 flex align-items-center justify-content-between px-6 py-4 my-0 transition hover:text-primary hover:no-underline <% if (['primary', 'secondary', 'tertiary'].indexOf(color) !== -1) { %>hover:text-<%= color %><% } else { %>hover:text-inherit<% } %>" href="#" @click="open = !open" data-active-class="<% if (['primary', 'secondary', 'tertiary'].indexOf(color) !== -1) { %>text-<%= color %><% } %>" data-toggle="collapse" aria-expanded="false" data-target="#section-<%= section.id %>">
+                  <%= section.name %>
+                  <svg class="fill-current pointer-events-none ml-3" :class="open && 'rotate-180'" width="14px" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20,19.5 C19.4,19.5 18.9,19.3 18.4,18.9 L1.4,4.9 C0.3,4 0.2,2.4 1.1,1.4 C2,0.3 3.6,0.2 4.6,1.1 L20,13.8 L35.5,1.1 C36.6,0.2 38.1,0.4 39,1.4 C39.9,2.5 39.7,4 38.7,4.9 L21.7,18.9 C21.1,19.3 20.5,19.5 20,19.5 Z" fill-rule="nonzero"></path>
+                  </svg>
+                </a>
+                <div class="collapse" id="section-<%= section.id %>">
+                  <% if (section.sections.length) { %>
+                    <ul class="list-unstyled bg-gray-100 border-top mb-0 py-2">
+                      <% section.sections.forEach(function(section) { %>
+                        <li>
+                          <a class="block px-6 py-2 text-inherit transition hover:text-inherit hover:no-underline hover:bg-gray-200" href="<%= section.html_url %>">
+                            <%= section.name %>
+                          </a>
+                      </li>
+                      <% }) %>
+                    </ul>
+                  <% } else if (section.articles.length) {  %>
+                    <ul class="list-unstyled bg-gray-100 border-top mb-0 py-2">
+                      <% section.articles.forEach(function(article) { %>
+                        <li>
+                          <a class="block px-6 py-2 text-inherit transition hover:text-inherit hover:no-underline hover:bg-gray-200" href="<%= article.html_url %>">
+                            <%= article.title %>
+                          </a>
+                        </li>
+                      <% }) %>
+                    </ul>
+                  <% } else { %>
+                    <p class="bg-gray-100 border-top mb-0 py-2">
+                      <a class="block px-6 py-4 text-inherit transition hover:text-inherit hover:no-underline hover:bg-gray-200" href="<%= category.html_url %>">
+                        {{t 'empty'}}
+                      </a>
+                    </p>
+                  <% } %>
+                </div>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}
+
+{{! Promoted article lists }}
+{{~#isnt settings.promoted_article_list_style 'none'}}
+  {{~#is settings.promoted_article_list_style 'cards'}}
+    <script type="text/template" id="tmpl-promoted-articles">
+      <div class="container text-{{settings.promoted_articles_alignment}} py-{{#is settings.promoted_article_list_position 'before'}}6{{else}}4{{/is}}">
+        {{~#if settings.promoted_articles_heading}}
+          <h2 class="inline-flex align-items-baseline my-4" x-data="{ src: Theme.assets['promoted-articles-heading'] }">
+            <template x-if="src">
+              <img class="svg-icon mr-2" src="{{asset 'placeholder.png'}}" alt="" aria-hidden="true" :src="src" />
+            </template>
+            {{~#if settings.use_translations}}
+              {{dc settings.promoted_articles_heading}}
+            {{else}}
+              {{settings.promoted_articles_heading}}
+            {{/if~}}
+          </h2>
+        {{/if~}}
+        <% if (articles.length) { %>
+          <ul class="list-unstyled row row-sm{{#unless settings.promoted_articles_heading}} mt-4{{/unless}}">
+            <% articles.forEach(function(article) { %>
+              <li class="col-12 mb-4
+                {{~#if (compare settings.promoted_article_list_columns ">=" "2")}} md:col-6{{/if~}}
+                {{~#if (compare settings.promoted_article_list_columns ">=" "3")}} lg:col-4{{/if~}}">
+                <div class="card card-body h-full bg-white">
+                  <div class="media">
+                    <div class="media-body pr-4">
+                      <h3 class="mt-4{{#isnt settings.promoted_article_list_excerpt 0}} mb-2{{/isnt}}">
+                        <%= article.title %>
+                        <% if (article.internal) { %>
+                          <svg class="svg-icon text-base ml-2" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <title>{{t 'internal'}}</title>
+                            <use xlink:href="#icon-lock" />
+                          </svg>
+                        <% } %>
+                      </h3>
+                      {{#isnt settings.promoted_article_list_excerpt 0}}
+                        <p class="text-gray-600">
+                          <%= Util.getExcerpt(article.body, {{settings.promoted_article_list_excerpt}}) %>
+                        </p>
+                      {{/isnt}}
+                    </div>
+                    <a class="flex align-self-center align-items-center justify-content-center link-stretched circle transition w-6 h-6 bg-gray-100 hover:bg-gray-200" href="<%= article.html_url %>">
+                      <svg class="fill-current" width="8px" height="13px" viewBox="0 0 8 13" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <polygon fill-rule="nonzero" points="1.59 12.16 7.25 6.5 1.59 0.84 0.89 1.55 5.84 6.5 0.89 11.45"></polygon>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <p>
+            {{t 'empty'}}
+          </p>
+        <% } %>
+      </div>
+    </script>
+  {{/is~}}
+  {{~#is settings.promoted_article_list_style 'toggles'}}
+    <script type="text/template" id="tmpl-promoted-articles">
+      <div class="container py-{{#is settings.promoted_article_list_position 'before'}}6{{else}}4{{/is}}">
+        {{~#if settings.promoted_articles_heading}}
+          <h2 class="inline-flex align-items-baseline my-4" x-data="{ src: Theme.assets['promoted-articles-heading'] }">
+            <template x-if="src">
+              <img class="svg-icon mr-2" src="{{asset 'placeholder.png'}}" alt="" aria-hidden="true" :src="src" />
+            </template>
+            {{~#if settings.use_translations}}
+              {{dc settings.promoted_articles_heading}}
+            {{else}}
+              {{settings.promoted_articles_heading}}
+            {{/if~}}
+          </h2>
+        {{/if~}}
+        <% if (articles.length) { %>
+          <div class="list-bordered border border-radius overflow-hidden{{#unless settings.promoted_articles_heading}} mt-4{{/unless}}">
+            <% articles.forEach(function(article) { %>
+              <div class="bg-white" x-data="{ open: false }">
+                <a class="h3 flex align-items-center justify-content-between px-6 py-4 my-0 transition hover:text-primary hover:no-underline" href="#" @click="open = !open" data-active-class="text-primary" data-toggle="collapse" aria-expanded="false" data-target="#article-<%= article.id %>">
+                  <%= article.title %>
+                  <svg class="fill-current pointer-events-none ml-3" :class="open && 'rotate-180'" width="14px" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20,19.5 C19.4,19.5 18.9,19.3 18.4,18.9 L1.4,4.9 C0.3,4 0.2,2.4 1.1,1.4 C2,0.3 3.6,0.2 4.6,1.1 L20,13.8 L35.5,1.1 C36.6,0.2 38.1,0.4 39,1.4 C39.9,2.5 39.7,4 38.7,4.9 L21.7,18.9 C21.1,19.3 20.5,19.5 20,19.5 Z" fill-rule="nonzero"></path>
+                  </svg>
+                </a>
+                <div class="collapse content px-6 py-2" id="article-<%= article.id %>">
+                  <%= Util.getExcerpt(article.body, {{settings.promoted_article_list_excerpt}}) %>
+                  {{~#isnt settings.promoted_article_list_excerpt 0}}
+                    <p class="my-4">
+                      <a class="button button-outline button-sm" href="<%= article.html_url %>">
+                        {{t 'see_more'}}
+                      </a>
+                    </p>
+                  {{/isnt~}}
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        <% } else { %>
+          <p>
+            {{t 'empty'}}
+          </p>
+        <% } %>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}
+
+{{! Contact blocks }}
+{{~#isnt settings.contact_block_style 'none'}}
+  {{~#is settings.contact_block_style 'boxes'~}}
+    <script type="text/template" id="tmpl-contact-blocks">
+      <% var getColumnClasses = function(numberColumns) {
+        var classNames = numberColumns === 'auto' ? 'col-auto' : 'col-12';
+        if (numberColumns >= 2) classNames += ' md:col-6';
+        if (numberColumns >= 3) classNames += ' lg:col-4';
+        if (numberColumns >= 4) classNames += ' xl:col-3';
+        return classNames;
+      } %>
+      <div class="container py-4">
+        <% if (heading) { %>
+          <h2 class="inline-flex align-items-baseline mt-6" x-data="{ src: Theme.assets['contact-blocks-heading'] }">
+            <template x-if="src">
+              <img class="svg-icon mr-2" src="{{asset 'placeholder.png'}}" alt="" aria-hidden="true" :src="src" />
+            </template>
+            <%= heading %>
+          </h2>
+        <% } %>
+        <ul class="list-unstyled row row-sm justify-content-start<% if (!heading) { %> mt-4<% } %>">
+          <% blocks.forEach(function(block, index) { %>
+            <li class="-mb-1px <%= getColumnClasses(numberColumns) %>">
+              <div class="media py-6 px-3 border-top border-bottom h-full text-base text-left<% if (color === 'white') { %> hover:bg-gray-100<% } %><% if (block.html_url) { %> hover:text-<% if (color === 'white') { %>primary<% } else { %><%= color %><% } %><% } %>">
+                <% if (imageHeight) { %>
+                  <img class="mr-5" alt="" src="<%= images[index] || images[0] %>" style="height: <%= imageHeight %>; width: auto;" />
+                <% } %>
+                <div class="media-body">
+                  <% if (block.name) { %>
+                    <h3 class="m-0">
+                      <% if (block.html_url) { %>
+                        <a class="link-stretched text-inherit transition-fast hover:no-underline hover:text-<% if (color === 'white') { %>primary<% } else { %><%= color %><% } %>" href="<%= block.html_url %>" x-data="link">
+                          <%= block.name %>
+                        </a>
+                      <% } else { %>
+                        <%= block.name %>
+                      <% } %>
+                    </h3>
+                  <% } %>
+                  <% if (block.description) { %>
+                    <p class="mt-3 mb-auto">
+                      <% if (block.html_url && !block.name) { %>
+                        <a class="link-stretched text-inherit transition-fast hover:no-underline hover:text-<% if (color === 'white') { %>primary<% } else { %><%= color %><% } %>" href="<%= block.html_url %>" x-data="link">
+                          <%= block.description %>
+                        </a>
+                      <% } else { %>
+                        <%= block.description %>
+                      <% } %>
+                    </p>
+                  <% } %>
+                </div>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </script>
+  {{/is}}
+{{/isnt~}}
+
+{{! Call-to-actions }}
+{{~#isnt settings.cta_location 'none'}}
+  {{~#is settings.cta_style 'banner'}}
+    <script type="text/template" id="tmpl-call-to-action">
+      <div class="cta relative mt-6 -mb-6{{#is settings.bg_color settings.bg_color_cta}} border-top{{/is}} bg-center bg-cover" style="background-image: url('{{settings.cta_block_image}}')">
+        <div class="container relative z-10 py-6">
+          <div class="max-w-lg mx-auto text-center">
+            {{#if settings.cta_element_heading}}
+              <h3 class="h2 md:font-size-3xl">
+                {{#if settings.use_translations}}
+                  {{dc settings.cta_element_heading}}
+                {{else}}
+                  {{settings.cta_element_heading}}
+                {{/if}}
+              </h3>
+            {{/if}}
+            {{#if settings.cta_element_body}}
+              <p class="font-size-lg">
+                {{#if settings.use_translations}}
+                  {{dc settings.cta_element_body}}
+                {{else}}
+                  {{settings.cta_element_body}}
+                {{/if}}
+              </p>
+            {{/if}}
+            <a class="button button-primary button-lg my-4" href="{{page_path 'new_request'}}">
+              {{#if settings.cta_element_link_text}}
+                {{#if settings.use_translations}}
+                  {{dc settings.cta_element_link_text}}
+                {{else}}
+                  {{settings.cta_element_link_text}}
+                {{/if}}
+              {{else}}
+                {{t 'submit_a_request'}}
+              {{/if}}
+            </a>
+          </div>
+        </div>
+        <div class="absolute-top left-0 z-0 w-full h-full cta"></div>
+      </div>
+    </script>
+  {{/is~}}
+  {{~#is settings.cta_style 'boxed'}}
+    <script type="text/template" id="tmpl-call-to-action">
+      <div class="container">
+        <div class="card cta overflow-hidden my-6{{#isnt settings.bg_color settings.bg_color_cta}} border-0{{/isnt}}">
+          <div class="p-6">
+            {{#if settings.cta_element_heading}}
+              <h3 class="h2 md:font-size-3xl">
+                {{#if settings.use_translations}}
+                  {{dc settings.cta_element_heading}}
+                {{else}}
+                  {{settings.cta_element_heading}}
+                {{/if}}
+              </h3>
+            {{/if}}
+            {{#if settings.cta_element_body}}
+              <p class="font-size-lg">
+                {{#if settings.use_translations}}
+                  {{dc settings.cta_element_body}}
+                {{else}}
+                  {{settings.cta_element_body}}
+                {{/if}}
+              </p>
+            {{/if}}
+            <a class="button button-primary button-lg my-4" href="{{page_path 'new_request'}}">
+              {{#if settings.cta_element_link_text}}
+                {{#if settings.use_translations}}
+                  {{dc settings.cta_element_link_text}}
+                {{else}}
+                  {{settings.cta_element_link_text}}
+                {{/if}}
+              {{else}}
+                {{t 'submit_a_request'}}
+              {{/if}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </script>
+  {{/is~}}
+  {{~#is settings.cta_style 'boxed-image'}}
+    <script type="text/template" id="tmpl-call-to-action">
+      <div class="container">
+        <div class="card cta overflow-hidden my-6{{#isnt settings.bg_color settings.bg_color_cta}} border-0{{/isnt}}">
+          <div class="row">
+            <div class="p-9 sm:col-6 relative bg-center bg-cover" style="background-image: url('{{settings.cta_block_image}}')"></div>
+            <div class="p-6 sm:col-6 sm:px-6 sm:py-8">
+              {{#if settings.cta_element_heading}}
+                <h3 class="h2 md:font-size-3xl">
+                  {{#if settings.use_translations}}
+                    {{dc settings.cta_element_heading}}
+                  {{else}}
+                    {{settings.cta_element_heading}}
+                  {{/if}}
+                </h3>
+              {{/if}}
+              {{#if settings.cta_element_body}}
+                <p class="font-size-lg">
+                  {{#if settings.use_translations}}
+                    {{dc settings.cta_element_body}}
+                  {{else}}
+                    {{settings.cta_element_body}}
+                  {{/if}}
+                </p>
+              {{/if}}
+              <a class="button button-primary button-lg my-4" href="{{page_path 'new_request'}}">
+                {{#if settings.cta_element_link_text}}
+                  {{#if settings.use_translations}}
+                    {{dc settings.cta_element_link_text}}
+                  {{else}}
+                    {{settings.cta_element_link_text}}
+                  {{/if}}
+                {{else}}
+                  {{t 'submit_a_request'}}
+                {{/if}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+  {{/is~}}
+  {{~#is settings.cta_style 'sidebar'}}
+    <script type="text/template" id="tmpl-call-to-action">
+      <div class="cta border-radius py-4 px-6 my-5">
+        {{#if settings.cta_element_heading}}
+          <h3 class="my-4">
+            {{#if settings.use_translations}}
+              {{dc settings.cta_element_heading}}
+            {{else}}
+              {{settings.cta_element_heading}}
+            {{/if}}
+          </h3>
+        {{/if}}
+        {{#if settings.cta_element_body}}
+          <p>
+            {{#if settings.use_translations}}
+              {{dc settings.cta_element_body}}
+            {{else}}
+              {{settings.cta_element_body}}
+            {{/if}}
+          </p>
+        {{/if}}
+        <a class="button button-primary my-4" href="{{page_path 'new_request'}}">
+          {{#if settings.cta_element_link_text}}
+            {{#if settings.use_translations}}
+              {{dc settings.cta_element_link_text}}
+            {{else}}
+              {{settings.cta_element_link_text}}
+            {{/if}}
+          {{else}}
+            {{t 'submit_a_request'}}
+          {{/if}}
+        </a>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}
+
+{{! Back to Top links }}
+{{~#isnt settings.back_to_top_link_style 'none'}}
+  {{~#is settings.back_to_top_link_style 'standard'}}
+    <script type="text/template" id="tmpl-back-to-top-link">
+      <button class="flex button button-outline button-sm bg-white p-3 m-4">
+        <span class="sr-only">{{t 'return_to_top'}}</span>
+        <svg class="fill-current" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+          <polygon points="12.4,40.1 25.8,53.6 40.5,38.8 40.5,97.5 59.5,97.5 59.5,38.8 74.2,53.6 87.6,40.1 50,2.5" />
+        </svg>
+      </button>
+    </script>
+  {{/is~}}
+  {{~#is settings.back_to_top_link_style 'footer'}}
+    <script type="text/template" id="tmpl-back-to-top-link">
+      <div class="relative circle bg-primary -mt-4 mr-4 h-7 w-7 text-primary-inverse cursor-pointer hover:text-gray-300">
+        <button class="not-a-button">
+          <span class="sr-only">{{t 'return_to_top'}}</span>
+          <svg class="svg-icon fill-current absolute-center pointer-events-none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M24,0.229749535 C23.3,0.22 22.62,0.51 22.13,1 L0.68,22.45 L4.43,26.2 L21.35,9.28 L21.35,41.35 C21.35,42.64 21.34,43.71 21.34,44.38 L21.34,45.09 C21.35,46.78 22.7,47.79 24,47.79 C24.03,47.79 26.52,47.75 26.65,45.07 L26.65,44.98 C26.65,44.94 26.66,44.9 26.66,44.86 L26.66,9.28 L43.57,26.2 L47.32,22.45 L25.88,1 C25.38,0.5 24.7,0.229749535 24,0.229749535 Z" fill-rule="nonzero"></path>
+          </svg>
+        </button>
+      </div>
+    </script>
+  {{/is~}}
+{{/isnt~}}
+
+{{! SVG icons and shape dividers }}
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="icon-search">
+    <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
+    <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
+  </symbol>
+  <symbol id="icon-lock">
+    <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
+    <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
+  </symbol>
+  <symbol id="icon-star">
+    <path d="M46.3964491,92.79661 C20.8133517,92.79661 0,71.9823304 0,46.3964491 C0,20.8133517 20.8133517,0 46.3964491,0 C71.9823304,0 92.79661,20.8133517 92.79661,46.3964491 C92.79661,71.9823304 71.9823304,92.79661 46.3964491,92.79661 Z M46.3964491,8.43613982 C25.4652457,8.43613982 8.43613982,25.4652457 8.43613982,46.3964491 C8.43613982,67.3295084 25.4652457,84.3613982 46.3964491,84.3613982 C67.3295084,84.3613982 84.3613982,67.3295084 84.3613982,46.3964491 C84.3613982,25.4652457 67.3295084,8.43613982 46.3964491,8.43613982 Z"></path>
+    <path d="M27.0214449,72.7915168 L30.7221737,51.2200169 L15.0478983,35.9391991 L36.7094109,32.7906101 L46.3955211,13.1604152 L56.0834872,32.7906101 L77.7496397,35.9391991 L62.0716524,51.2200169 L65.7770211,72.7915168 L46.3964491,62.6061609 L27.0214449,72.7915168 Z M48.9388219,50.7448305 L34.1524959,48.5284577 L45.434589,22.5615256 L49.5611865,51.3070295 L45.1450339,41.3223007 C36.7354515,80.1366311 48.3492053,30.094825 46.3955211,25.8698389 C52.8295017,79.7415644 39.9200178,47.2464382 36.2062585,44.2874744 L47.4699277,30.9680466 L48.6276396,35.2733899 L43.8108219,43.443712 L48.9388219,50.7448305 Z"></path>
+  </symbol>
+  <symbol id="icon-chevron-down">
+    <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+  </symbol>
+  <symbol id="icon-agent">
+    <path fill="currentColor" d="M6 0C2.7 0 0 2.7 0 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm2.3 7H3.7c-.3 0-.4-.3-.3-.5C3.9 7.6 4.9 7 6 7s2.1.6 2.6 1.5c.1.2 0 .5-.3.5z"/>
+  </symbol>
+  {{! Shape dividers }}
+  {{~#isnt settings.hero_element_shape 'none'}}
+    <symbol id="shape-{{settings.hero_element_shape}}">
+      {{~#is settings.hero_element_shape 'book' ~}}
+        <path d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'curve'~}}
+        <path d="M0,0 C16.6666667,66 33.3333333,98 50,98 C66.6666667,98 83.3333333,66 100,0 L100,100 L0,100 L0,0 Z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'curves'~}}
+        <path fill-opacity="0.33" d="M240,24V0H0v24C0,24,47.861,5.107,119.849,5.107C191.855,5.107,240,24,240,24z"></path>
+        <path fill-opacity="0.33" d="M119.829,2.661c55.562,0,98.521,9.957,120.171,16.271V0H0v18.902 C21.582,12.598,64.37,2.65,119.829,2.661z"></path>
+        <path d="M119.81,0.117c50.737,0,92.456,6.89,120.19,13.271V0H0v13.34C27.651,6.979,69.17,0.117,119.81,0.117z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'diagonal'~}}
+        <path d="M0,6V0h1000v100L0,6z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'hills'~}}
+        <path fill-opacity="0.33" d="M240,24V0c-69.5,0-73.2,14.8-98,17.8c-24.7,3-49.9-4.3-69.8-4.2C53,13.8,50.3,18,30.2,20.9 C15.6,23.5,4.3,19.6,0,19v5H240z"></path>
+        <path fill-opacity="0.33" d="M240,24V3c-51.8,0-73.2,11.8-98,14.8c-24.7,3-49.9-2.3-69.8-2.2C53,15.8,50.3,18,30.2,20.9	C15.6,23.5,4.3,22.6,0,22v2H240z"></path>
+        <path d="M240,24V5c-51.8,0-73.2,10.8-98,13.8c-24.7,3-49.9-1.3-69.8-1.2C53,17.8,50.3,19,30.2,21.9 C15.6,24.5,4.3,23.6,0,23v1H240z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'mountains'~}}
+        <path opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+        <path opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+        <path d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'rays'~}}
+        <path d="M0 0L2600 0 2600 69.1 0 0z"></path>
+        <path opacity="0.5" d="M0 0L2600 0 2600 69.1 0 69.1z"></path>
+        <path opacity="0.25" d="M2600 0L0 0 0 130.1 2600 69.1z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'triangle'~}}
+        <path d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'wave'~}}
+        <path d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7  c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4  c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'waves'~}}
+        <path d="M283.5,9.7c0,0-7.3,4.3-14,4.6c-6.8,0.3-12.6,0-20.9-1.5c-11.3-2-33.1-10.1-44.7-5.7 s-12.1,4.6-18,7.4c-6.6,3.2-20,9.6-36.6,9.3C131.6,23.5,99.5,7.2,86.3,8c-1.4,0.1-6.6,0.8-10.5,2c-3.8,1.2-9.4,3.8-17,4.7 c-3.2,0.4-8.3,1.1-14.2,0.9c-1.5-0.1-6.3-0.4-12-1.6c-5.7-1.2-11-3.1-15.8-3.7C6.5,9.2,0,10.8,0,10.8V0h283.5V9.7z M260.8,11.3 c-0.7-1-2-0.4-4.3-0.4c-2.3,0-6.1-1.2-5.8-1.1c0.3,0.1,3.1,1.5,6,1.9C259.7,12.2,261.4,12.3,260.8,11.3z M242.4,8.6 c0,0-2.4-0.2-5.6-0.9c-3.2-0.8-10.3-2.8-15.1-3.5c-8.2-1.1-15.8,0-15.1,0.1c0.8,0.1,9.6-0.6,17.6,1.1c3.3,0.7,9.3,2.2,12.4,2.7 C239.9,8.7,242.4,8.6,242.4,8.6z M185.2,8.5c1.7-0.7-13.3,4.7-18.5,6.1c-2.1,0.6-6.2,1.6-10,2c-3.9,0.4-8.9,0.4-8.8,0.5 c0,0.2,5.8,0.8,11.2,0c5.4-0.8,5.2-1.1,7.6-1.6C170.5,14.7,183.5,9.2,185.2,8.5z M199.1,6.9c0.2,0-0.8-0.4-4.8,1.1 c-4,1.5-6.7,3.5-6.9,3.7c-0.2,0.1,3.5-1.8,6.6-3C197,7.5,199,6.9,199.1,6.9z M283,6c-0.1,0.1-1.9,1.1-4.8,2.5s-6.9,2.8-6.7,2.7 c0.2,0,3.5-0.6,7.4-2.5C282.8,6.8,283.1,5.9,283,6z M31.3,11.6c0.1-0.2-1.9-0.2-4.5-1.2s-5.4-1.6-7.8-2C15,7.6,7.3,8.5,7.7,8.6 C8,8.7,15.9,8.3,20.2,9.3c2.2,0.5,2.4,0.5,5.7,1.6S31.2,11.9,31.3,11.6z M73,9.2c0.4-0.1,3.5-1.6,8.4-2.6c4.9-1.1,8.9-0.5,8.9-0.8 c0-0.3-1-0.9-6.2-0.3S72.6,9.3,73,9.2z M71.6,6.7C71.8,6.8,75,5.4,77.3,5c2.3-0.3,1.9-0.5,1.9-0.6c0-0.1-1.1-0.2-2.7,0.2 C74.8,5.1,71.4,6.6,71.6,6.7z M93.6,4.4c0.1,0.2,3.5,0.8,5.6,1.8c2.1,1,1.8,0.6,1.9,0.5c0.1-0.1-0.8-0.8-2.4-1.3 C97.1,4.8,93.5,4.2,93.6,4.4z M65.4,11.1c-0.1,0.3,0.3,0.5,1.9-0.2s2.6-1.3,2.2-1.2s-0.9,0.4-2.5,0.8C65.3,10.9,65.5,10.8,65.4,11.1 z M34.5,12.4c-0.2,0,2.1,0.8,3.3,0.9c1.2,0.1,2,0.1,2-0.2c0-0.3-0.1-0.5-1.6-0.4C36.6,12.8,34.7,12.4,34.5,12.4z M152.2,21.1 c-0.1,0.1-2.4-0.3-7.5-0.3c-5,0-13.6-2.4-17.2-3.5c-3.6-1.1,10,3.9,16.5,4.1C150.5,21.6,152.3,21,152.2,21.1z"></path>
+        <path d="M269.6,18c-0.1-0.1-4.6,0.3-7.2,0c-7.3-0.7-17-3.2-16.6-2.9c0.4,0.3,13.7,3.1,17,3.3 C267.7,18.8,269.7,18,269.6,18z"></path>
+        <path d="M227.4,9.8c-0.2-0.1-4.5-1-9.5-1.2c-5-0.2-12.7,0.6-12.3,0.5c0.3-0.1,5.9-1.8,13.3-1.2 S227.6,9.9,227.4,9.8z"></path>
+        <path d="M204.5,13.4c-0.1-0.1,2-1,3.2-1.1c1.2-0.1,2,0,2,0.3c0,0.3-0.1,0.5-1.6,0.4 C206.4,12.9,204.6,13.5,204.5,13.4z"></path>
+        <path d="M201,10.6c0-0.1-4.4,1.2-6.3,2.2c-1.9,0.9-6.2,3.1-6.1,3.1c0.1,0.1,4.2-1.6,6.3-2.6 S201,10.7,201,10.6z"></path>
+        <path d="M154.5,26.7c-0.1-0.1-4.6,0.3-7.2,0c-7.3-0.7-17-3.2-16.6-2.9c0.4,0.3,13.7,3.1,17,3.3 C152.6,27.5,154.6,26.8,154.5,26.7z"></path>
+        <path d="M41.9,19.3c0,0,1.2-0.3,2.9-0.1c1.7,0.2,5.8,0.9,8.2,0.7c4.2-0.4,7.4-2.7,7-2.6 c-0.4,0-4.3,2.2-8.6,1.9c-1.8-0.1-5.1-0.5-6.7-0.4S41.9,19.3,41.9,19.3z"></path>
+        <path d="M75.5,12.6c0.2,0.1,2-0.8,4.3-1.1c2.3-0.2,2.1-0.3,2.1-0.5c0-0.1-1.8-0.4-3.4,0 C76.9,11.5,75.3,12.5,75.5,12.6z"></path>
+        <path d="M15.6,13.2c0-0.1,4.3,0,6.7,0.5c2.4,0.5,5,1.9,5,2c0,0.1-2.7-0.8-5.1-1.4 C19.9,13.7,15.7,13.3,15.6,13.2z"></path>
+      {{~/is~}}
+      {{~#is settings.hero_element_shape 'zigzag'~}}
+        <path d="M761.9,44.1L643.1,27.2L333.8,98L0,3.8V0l1000,0v3.9"></path>
+      {{~/is~}}
+    </symbol>
+  {{/isnt~}}
+  {{~#isnt settings.hero_element_shape settings.footer_shape}}
+    <symbol id="shape-{{settings.footer_shape}}">
+      {{~#is settings.footer_shape 'book' ~}}
+        <path d="M1200,0H0V120H281.94C572.9,116.24,602.45,3.86,602.45,3.86h0S632,116.24,923,120h277Z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'curve'~}}
+        <path d="M0,0 C16.6666667,66 33.3333333,98 50,98 C66.6666667,98 83.3333333,66 100,0 L100,100 L0,100 L0,0 Z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'curves'~}}
+        <path fill-opacity="0.33" d="M240,24V0H0v24C0,24,47.861,5.107,119.849,5.107C191.855,5.107,240,24,240,24z"></path>
+        <path fill-opacity="0.33" d="M119.829,2.661c55.562,0,98.521,9.957,120.171,16.271V0H0v18.902 C21.582,12.598,64.37,2.65,119.829,2.661z"></path>
+        <path d="M119.81,0.117c50.737,0,92.456,6.89,120.19,13.271V0H0v13.34C27.651,6.979,69.17,0.117,119.81,0.117z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'diagonal'~}}
+        <path d="M0,6V0h1000v100L0,6z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'hills'~}}
+        <path fill-opacity="0.33" d="M240,24V0c-69.5,0-73.2,14.8-98,17.8c-24.7,3-49.9-4.3-69.8-4.2C53,13.8,50.3,18,30.2,20.9 C15.6,23.5,4.3,19.6,0,19v5H240z"></path>
+        <path fill-opacity="0.33" d="M240,24V3c-51.8,0-73.2,11.8-98,14.8c-24.7,3-49.9-2.3-69.8-2.2C53,15.8,50.3,18,30.2,20.9	C15.6,23.5,4.3,22.6,0,22v2H240z"></path>
+        <path d="M240,24V5c-51.8,0-73.2,10.8-98,13.8c-24.7,3-49.9-1.3-69.8-1.2C53,17.8,50.3,19,30.2,21.9 C15.6,24.5,4.3,23.6,0,23v1H240z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'mountains'~}}
+        <path opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+        <path opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+        <path d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'rays'~}}
+        <path d="M0 0L2600 0 2600 69.1 0 0z"></path>
+        <path opacity="0.5" d="M0 0L2600 0 2600 69.1 0 69.1z"></path>
+        <path opacity="0.25" d="M2600 0L0 0 0 130.1 2600 69.1z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'triangle'~}}
+        <path d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'wave'~}}
+        <path d="M421.9,6.5c22.6-2.5,51.5,0.4,75.5,5.3c23.6,4.9,70.9,23.5,100.5,35.7c75.8,32.2,133.7,44.5,192.6,49.7 c23.6,2.1,48.7,3.5,103.4-2.5c54.7-6,106.2-25.6,106.2-25.6V0H0v30.3c0,0,72,32.6,158.4,30.5c39.2-0.7,92.8-6.7,134-22.4  c21.2-8.1,52.2-18.2,79.7-24.2C399.3,7.9,411.6,7.5,421.9,6.5z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'waves'~}}
+        <path d="M283.5,9.7c0,0-7.3,4.3-14,4.6c-6.8,0.3-12.6,0-20.9-1.5c-11.3-2-33.1-10.1-44.7-5.7 s-12.1,4.6-18,7.4c-6.6,3.2-20,9.6-36.6,9.3C131.6,23.5,99.5,7.2,86.3,8c-1.4,0.1-6.6,0.8-10.5,2c-3.8,1.2-9.4,3.8-17,4.7 c-3.2,0.4-8.3,1.1-14.2,0.9c-1.5-0.1-6.3-0.4-12-1.6c-5.7-1.2-11-3.1-15.8-3.7C6.5,9.2,0,10.8,0,10.8V0h283.5V9.7z M260.8,11.3 c-0.7-1-2-0.4-4.3-0.4c-2.3,0-6.1-1.2-5.8-1.1c0.3,0.1,3.1,1.5,6,1.9C259.7,12.2,261.4,12.3,260.8,11.3z M242.4,8.6 c0,0-2.4-0.2-5.6-0.9c-3.2-0.8-10.3-2.8-15.1-3.5c-8.2-1.1-15.8,0-15.1,0.1c0.8,0.1,9.6-0.6,17.6,1.1c3.3,0.7,9.3,2.2,12.4,2.7 C239.9,8.7,242.4,8.6,242.4,8.6z M185.2,8.5c1.7-0.7-13.3,4.7-18.5,6.1c-2.1,0.6-6.2,1.6-10,2c-3.9,0.4-8.9,0.4-8.8,0.5 c0,0.2,5.8,0.8,11.2,0c5.4-0.8,5.2-1.1,7.6-1.6C170.5,14.7,183.5,9.2,185.2,8.5z M199.1,6.9c0.2,0-0.8-0.4-4.8,1.1 c-4,1.5-6.7,3.5-6.9,3.7c-0.2,0.1,3.5-1.8,6.6-3C197,7.5,199,6.9,199.1,6.9z M283,6c-0.1,0.1-1.9,1.1-4.8,2.5s-6.9,2.8-6.7,2.7 c0.2,0,3.5-0.6,7.4-2.5C282.8,6.8,283.1,5.9,283,6z M31.3,11.6c0.1-0.2-1.9-0.2-4.5-1.2s-5.4-1.6-7.8-2C15,7.6,7.3,8.5,7.7,8.6 C8,8.7,15.9,8.3,20.2,9.3c2.2,0.5,2.4,0.5,5.7,1.6S31.2,11.9,31.3,11.6z M73,9.2c0.4-0.1,3.5-1.6,8.4-2.6c4.9-1.1,8.9-0.5,8.9-0.8 c0-0.3-1-0.9-6.2-0.3S72.6,9.3,73,9.2z M71.6,6.7C71.8,6.8,75,5.4,77.3,5c2.3-0.3,1.9-0.5,1.9-0.6c0-0.1-1.1-0.2-2.7,0.2 C74.8,5.1,71.4,6.6,71.6,6.7z M93.6,4.4c0.1,0.2,3.5,0.8,5.6,1.8c2.1,1,1.8,0.6,1.9,0.5c0.1-0.1-0.8-0.8-2.4-1.3 C97.1,4.8,93.5,4.2,93.6,4.4z M65.4,11.1c-0.1,0.3,0.3,0.5,1.9-0.2s2.6-1.3,2.2-1.2s-0.9,0.4-2.5,0.8C65.3,10.9,65.5,10.8,65.4,11.1 z M34.5,12.4c-0.2,0,2.1,0.8,3.3,0.9c1.2,0.1,2,0.1,2-0.2c0-0.3-0.1-0.5-1.6-0.4C36.6,12.8,34.7,12.4,34.5,12.4z M152.2,21.1 c-0.1,0.1-2.4-0.3-7.5-0.3c-5,0-13.6-2.4-17.2-3.5c-3.6-1.1,10,3.9,16.5,4.1C150.5,21.6,152.3,21,152.2,21.1z"></path>
+        <path d="M269.6,18c-0.1-0.1-4.6,0.3-7.2,0c-7.3-0.7-17-3.2-16.6-2.9c0.4,0.3,13.7,3.1,17,3.3 C267.7,18.8,269.7,18,269.6,18z"></path>
+        <path d="M227.4,9.8c-0.2-0.1-4.5-1-9.5-1.2c-5-0.2-12.7,0.6-12.3,0.5c0.3-0.1,5.9-1.8,13.3-1.2 S227.6,9.9,227.4,9.8z"></path>
+        <path d="M204.5,13.4c-0.1-0.1,2-1,3.2-1.1c1.2-0.1,2,0,2,0.3c0,0.3-0.1,0.5-1.6,0.4 C206.4,12.9,204.6,13.5,204.5,13.4z"></path>
+        <path d="M201,10.6c0-0.1-4.4,1.2-6.3,2.2c-1.9,0.9-6.2,3.1-6.1,3.1c0.1,0.1,4.2-1.6,6.3-2.6 S201,10.7,201,10.6z"></path>
+        <path d="M154.5,26.7c-0.1-0.1-4.6,0.3-7.2,0c-7.3-0.7-17-3.2-16.6-2.9c0.4,0.3,13.7,3.1,17,3.3 C152.6,27.5,154.6,26.8,154.5,26.7z"></path>
+        <path d="M41.9,19.3c0,0,1.2-0.3,2.9-0.1c1.7,0.2,5.8,0.9,8.2,0.7c4.2-0.4,7.4-2.7,7-2.6 c-0.4,0-4.3,2.2-8.6,1.9c-1.8-0.1-5.1-0.5-6.7-0.4S41.9,19.3,41.9,19.3z"></path>
+        <path d="M75.5,12.6c0.2,0.1,2-0.8,4.3-1.1c2.3-0.2,2.1-0.3,2.1-0.5c0-0.1-1.8-0.4-3.4,0 C76.9,11.5,75.3,12.5,75.5,12.6z"></path>
+        <path d="M15.6,13.2c0-0.1,4.3,0,6.7,0.5c2.4,0.5,5,1.9,5,2c0,0.1-2.7-0.8-5.1-1.4 C19.9,13.7,15.7,13.3,15.6,13.2z"></path>
+      {{~/is~}}
+      {{~#is settings.footer_shape 'zigzag'~}}
+        <path d="M761.9,44.1L643.1,27.2L333.8,98L0,3.8V0l1000,0v3.9"></path>
+      {{~/is~}}
+    </symbol>
+  {{/isnt~}}
+</svg>
+
+<script type="text/javascript">
+  {{! Custom block heading image }}
+  {{~#if (asset 'custom-blocks-heading.svg')~}} Theme.assets['custom-blocks-heading'] = "{{asset 'custom-blocks-heading.svg'}}";{{~/if~}}
+  {{~#if (asset 'custom-blocks-heading.png')~}} Theme.assets['custom-blocks-heading'] = "{{asset 'custom-blocks-heading.png'}}";{{~/if~}}
+  {{~#if (asset 'custom-blocks-heading.jpg')~}} Theme.assets['custom-blocks-heading'] = "{{asset 'custom-blocks-heading.jpg'}}";{{~/if~}}
+  {{~#if (asset 'custom-blocks-heading.jpeg')~}}Theme.assets['custom-blocks-heading'] = "{{asset 'custom-blocks-heading.jpeg'}}";{{~/if~}}
+
+  {{! Content block heading image }}
+  {{~#if (asset 'content-blocks-heading.svg')~}} Theme.assets['content-blocks-heading'] = "{{asset 'content-blocks-heading.svg'}}";{{~/if~}}
+  {{~#if (asset 'content-blocks-heading.png')~}} Theme.assets['content-blocks-heading'] = "{{asset 'content-blocks-heading.png'}}";{{~/if~}}
+  {{~#if (asset 'content-blocks-heading.jpg')~}} Theme.assets['content-blocks-heading'] = "{{asset 'content-blocks-heading.jpg'}}";{{~/if~}}
+  {{~#if (asset 'content-blocks-heading.jpeg')~}}Theme.assets['content-blocks-heading'] = "{{asset 'content-blocks-heading.jpeg'}}";{{~/if~}}
+
+  {{! Promoted articles heading image }}
+  {{~#if (asset 'promoted-articles-heading.svg')~}} Theme.assets['promoted-articles-heading'] = "{{asset 'promoted-articles-heading.svg'}}";{{~/if~}}
+  {{~#if (asset 'promoted-articles-heading.png')~}} Theme.assets['promoted-articles-heading'] = "{{asset 'promoted-articles-heading.png'}}";{{~/if~}}
+  {{~#if (asset 'promoted-articles-heading.jpg')~}} Theme.assets['promoted-articles-heading'] = "{{asset 'promoted-articles-heading.jpg'}}";{{~/if~}}
+  {{~#if (asset 'promoted-articles-heading.jpeg')~}}Theme.assets['promoted-articles-heading'] = "{{asset 'promoted-articles-heading.jpeg'}}";{{~/if~}}
+
+  {{! Contact block heading image }}
+  {{~#if (asset 'contact-blocks-heading.svg')~}} Theme.assets['contact-blocks-heading'] = "{{asset 'contact-blocks-heading.svg'}}";{{~/if~}}
+  {{~#if (asset 'contact-blocks-heading.png')~}} Theme.assets['contact-blocks-heading'] = "{{asset 'contact-blocks-heading.png'}}";{{~/if~}}
+  {{~#if (asset 'contact-blocks-heading.jpg')~}} Theme.assets['contact-blocks-heading'] = "{{asset 'contact-blocks-heading.jpg'}}";{{~/if~}}
+  {{~#if (asset 'contact-blocks-heading.jpeg')~}}Theme.assets['contact-blocks-heading'] = "{{asset 'contact-blocks-heading.jpeg'}}";{{~/if~}}
+
+  {{! Promoted videos heading image }}
+  {{~#if (asset 'promoted-videos-heading.svg')~}} Theme.assets['promoted-videos-heading'] = "{{asset 'promoted-videos-heading.svg'}}";{{~/if~}}
+  {{~#if (asset 'promoted-videos-heading.png')~}} Theme.assets['promoted-videos-heading'] = "{{asset 'promoted-videos-heading.png'}}";{{~/if~}}
+  {{~#if (asset 'promoted-videos-heading.jpg')~}} Theme.assets['promoted-videos-heading'] = "{{asset 'promoted-videos-heading.jpg'}}";{{~/if~}}
+  {{~#if (asset 'promoted-videos-heading.jpeg')~}}Theme.assets['promoted-videos-heading'] = "{{asset 'promoted-videos-heading.jpeg'}}";{{~/if~}}
+
+  {{! Notification icon image }}
+  {{~#if (asset 'notification.svg')~}} Theme.assets['notification'] = "{{asset 'notification.svg'}}";{{~/if~}}
+  {{~#if (asset 'notification.png')~}} Theme.assets['notification'] = "{{asset 'notification.png'}}";{{~/if~}}
+  {{~#if (asset 'notification.jpg')~}} Theme.assets['notification'] = "{{asset 'notification.jpg'}}";{{~/if~}}
+  {{~#if (asset 'notification.jpeg')~}}Theme.assets['notification'] = "{{asset 'notification.jpeg'}}";{{~/if~}}
+
+  {{! Section icon image }}
+  {{~#if (asset 'section.svg')~}} Theme.assets['section'] = "{{asset 'section.svg'}}";{{~/if~}}
+  {{~#if (asset 'section.png')~}} Theme.assets['section'] = "{{asset 'section.png'}}";{{~/if~}}
+  {{~#if (asset 'section.jpg')~}} Theme.assets['section'] = "{{asset 'section.jpg'}}";{{~/if~}}
+  {{~#if (asset 'section.jpeg')~}}Theme.assets['section'] = "{{asset 'section.jpeg'}}";{{~/if~}}
+
+  {{! Article icon image }}
+  {{~#if (asset 'article.svg')~}} Theme.assets['article'] = "{{asset 'article.svg'}}";{{~/if~}}
+  {{~#if (asset 'article.png')~}} Theme.assets['article'] = "{{asset 'article.png'}}";{{~/if~}}
+  {{~#if (asset 'article.jpg')~}} Theme.assets['article'] = "{{asset 'article.jpg'}}";{{~/if~}}
+  {{~#if (asset 'article.jpeg')~}}Theme.assets['article'] = "{{asset 'article.jpeg'}}";{{~/if~}}
+
+  {{! Locales }}
+  Theme.alternativeLocales = [{{~#each alternative_locales}}{ name: {{json_stringify name}}, url: {{json_stringify url}}, direction: {{json_stringify direction}} }{{#unless @last}},{{/unless}}{{/each~}}];
+
+  {{! Custom block data }}
+  {{~#isnt settings.custom_block_style 'none'}}
+  Theme.customBlocks = {
+    blocks: [{
+      name: {{#if settings.custom_block_1_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_1_title)}}{{else}}{{json_stringify settings.custom_block_1_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.custom_block_1_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_1_description)}}{{else}}{{json_stringify settings.custom_block_1_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.custom_block_1_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_1_url)}}{{else}}{{json_stringify settings.custom_block_1_url}}{{/if}}{{else}}""{{/if}}
+    }, {
+      name: {{#if settings.custom_block_2_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_2_title)}}{{else}}{{json_stringify settings.custom_block_2_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.custom_block_2_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_2_description)}}{{else}}{{json_stringify settings.custom_block_2_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.custom_block_2_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_2_url)}}{{else}}{{json_stringify settings.custom_block_2_url}}{{/if}}{{else}}""{{/if}}
+    }, {
+      name: {{#if settings.custom_block_3_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_3_title)}}{{else}}{{json_stringify settings.custom_block_3_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.custom_block_3_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_3_description)}}{{else}}{{json_stringify settings.custom_block_3_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.custom_block_3_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_3_url)}}{{else}}{{json_stringify settings.custom_block_3_url}}{{/if}}{{else}}""{{/if}}
+    }, {
+      name: {{#if settings.custom_block_4_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_4_title)}}{{else}}{{json_stringify settings.custom_block_4_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.custom_block_4_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_4_description)}}{{else}}{{json_stringify settings.custom_block_4_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.custom_block_4_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_block_4_url)}}{{else}}{{json_stringify settings.custom_block_4_url}}{{/if}}{{else}}""{{/if}}
+    }].slice(0, {{settings.number_custom_blocks}}),
+    heading: {{#if settings.custom_blocks_heading}}{{#if settings.use_translations}}{{json_stringify (dc settings.custom_blocks_heading)}}{{else}}{{json_stringify settings.custom_blocks_heading}}{{/if}}{{else}}""{{/if}},
+    images: [
+      "{{settings.custom_block_1_image}}", "{{settings.custom_block_2_image}}", "{{settings.custom_block_3_image}}", "{{settings.custom_block_4_image}}"
+    ],
+    imageHeight: "{{settings.custom_block_image_height}}",
+    numberColumns: {{settings.number_custom_block_columns}},
+    alignment: "{{settings.custom_block_alignment}}",
+    color: "{{settings.color_custom_blocks}}"
+  };
+  {{/isnt~}}
+
+  {{! Contact block data }}
+  {{~#isnt settings.contact_block_style 'none'}}
+  Theme.contactBlocks = {
+    blocks: [{
+      name: {{#if settings.contact_block_1_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_1_title)}}{{else}}{{json_stringify settings.contact_block_1_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.contact_block_1_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_1_description)}}{{else}}{{json_stringify settings.contact_block_1_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.contact_block_1_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_1_url)}}{{else}}{{json_stringify settings.contact_block_1_url}}{{/if}}{{else}}""{{/if}}
+    }, {
+      name: {{#if settings.contact_block_2_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_2_title)}}{{else}}{{json_stringify settings.contact_block_2_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.contact_block_2_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_2_description)}}{{else}}{{json_stringify settings.contact_block_2_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.contact_block_2_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_2_url)}}{{else}}{{json_stringify settings.contact_block_2_url}}{{/if}}{{else}}""{{/if}}
+    }, {
+      name: {{#if settings.contact_block_3_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_3_title)}}{{else}}{{json_stringify settings.contact_block_3_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.contact_block_3_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_3_description)}}{{else}}{{json_stringify settings.contact_block_3_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.contact_block_3_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_3_url)}}{{else}}{{json_stringify settings.contact_block_3_url}}{{/if}}{{else}}""{{/if}}
+    }, {
+      name: {{#if settings.contact_block_4_title}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_4_title)}}{{else}}{{json_stringify settings.contact_block_4_title}}{{/if}}{{else}}""{{/if}},
+      description: {{#if settings.contact_block_4_description}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_4_description)}}{{else}}{{json_stringify settings.contact_block_4_description}}{{/if}}{{else}}""{{/if}},
+      html_url: {{#if settings.contact_block_4_url}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_block_4_url)}}{{else}}{{json_stringify settings.contact_block_4_url}}{{/if}}{{else}}""{{/if}}
+    }].slice(0, {{settings.number_contact_blocks}}),
+    heading: {{#if settings.contact_blocks_heading}}{{#if settings.use_translations}}{{json_stringify (dc settings.contact_blocks_heading)}}{{else}}{{json_stringify settings.contact_blocks_heading}}{{/if}}{{else}}""{{/if}},
+    images: [
+      "{{settings.contact_block_1_image}}", "{{settings.contact_block_2_image}}", "{{settings.contact_block_3_image}}", "{{settings.contact_block_4_image}}"
+    ],
+    imageHeight: "{{settings.contact_block_image_height}}",
+    numberColumns: {{settings.number_contact_block_columns}},
+    color: "{{settings.color_contact_blocks}}"
+  };
+  {{/isnt~}}
+</script>
+
+{{!---------------
+   Micro-templates
+   ---------------}}
+
+{{! Add your own micro-templates after this line }}
+
+{{! Article list }}
+<script type="text/template" id="tmpl-article-list">
+  <div class="my-6 lg:py-4 lg:px-6 lg:border-radius lg:bg-gray-200 lg:shadow-md">
+    <div class="border-top border-bottom lg:border-transparent" x-data="toggle({ isOpen: false })" @collapse:show.stop="open" @collapse:hide.stop="close">
+
+      {{! Mobile toggle }}
+      <h3 class="flex align-items-center justify-content-between my-4 font-size-lg cursor-pointer lg:hidden" data-toggle="collapse" data-target="#sidebar-article-navigation" aria-controls="sidebar-article-navigation" aria-expanded="false">
+        {{t 'categories'}}
+        <svg class="fill-current pointer-events-none ml-3" :class="isOpen && 'rotate-180'" width="14px" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20,19.5 C19.4,19.5 18.9,19.3 18.4,18.9 L1.4,4.9 C0.3,4 0.2,2.4 1.1,1.4 C2,0.3 3.6,0.2 4.6,1.1 L20,13.8 L35.5,1.1 C36.6,0.2 38.1,0.4 39,1.4 C39.9,2.5 39.7,4 38.7,4.9 L21.7,18.9 C21.1,19.3 20.5,19.5 20,19.5 Z" fill-rule="nonzero"></path>
+        </svg>
+      </h3>
+
+      <div class="collapse lg:expand lg:flex-column" id="sidebar-article-navigation">
+        <ul class="list-unstyled font-size-lg w-full">
+          <% categories.forEach(function(category, index) { %>
+            <li x-data="toggle({ isOpen: <%= !!category.isActive %> })" @collapse:show.stop="open" @collapse:hide.stop="close">
+
+              {{! Category name and toggle }}
+              <div class="flex justify-content-between align-items-center">
+                <a class="flex-1 py-3 font-bold text-inherit" :class="{ 'text-inherit': !isOpen }" href="<%= category.html_url %>">
+                  <%= category.name %>
+                </a>
+                <button class="p-2 ml-1 not-a-button border-radius transition cursor-pointer hover:bg-gray-200 hidden lg:block" :class="{ 'is-active': isOpen }" :aria-expanded="isOpen" data-toggle="collapse" data-target="#category-<%= category.id %>">
+                  <svg class="text-inherit fill-current pointer-events-none" :class="{ 'rotate-180': isOpen }" width="12px" height="12px" viewBox="0 0 324 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M162,190 C156,190 150,187 146,183 L7,38 C-2,29 -2,15 7,7 C16,-2 30,-2 39,7 L162,135 L285,7 C293,-2 308,-2 317,7 C326,15 326,29 317,38 L178,183 C174,187 168,190 162,190 Z"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="hidden lg:block">
+                {{! Sections }}
+                <%= partial('partial-article-list-sections', {
+                  id: 'category-' + category.id,
+                  parentId: '#sidebar-article-navigation',
+                  sections: category.sections,
+                  activeCategoryId: activeCategoryId,
+                  activeSectionId: activeSectionId,
+                  activeArticleId: activeArticleId,
+                  partial: partial
+                }) %>
+              </div>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</script>
+
+{{! Section list }}
+<script type="text/template" id="tmpl-section-list">
+  <% var maxSections =  5 %>
+  <div class="my-6 lg:py-4 lg:px-6 lg:border-radius lg:bg-gray-200 lg:shadow-md">
+    <div class="border-top border-bottom lg:border-transparent" x-data="toggle({ isOpen: false })" @collapse:show.stop="open" @collapse:hide.stop="close">
+
+      {{! Mobile toggle }}
+      <h3 class="flex align-items-center justify-content-between my-4 font-size-lg cursor-pointer lg:hidden" data-toggle="collapse" data-target="#sidebar-section-navigation" aria-controls="sidebar-section-navigation" aria-expanded="false">
+        {{t 'toggle_navigation'}}
+        <svg class="fill-current pointer-events-none ml-3" :class="isOpen && 'rotate-180'" width="14px" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20,19.5 C19.4,19.5 18.9,19.3 18.4,18.9 L1.4,4.9 C0.3,4 0.2,2.4 1.1,1.4 C2,0.3 3.6,0.2 4.6,1.1 L20,13.8 L35.5,1.1 C36.6,0.2 38.1,0.4 39,1.4 C39.9,2.5 39.7,4 38.7,4.9 L21.7,18.9 C21.1,19.3 20.5,19.5 20,19.5 Z" fill-rule="nonzero"></path>
+        </svg>
+      </h3>
+
+      <div class="collapse lg:expand lg:flex-column" id="sidebar-section-navigation">
+        <ul class="list-unstyled m-0 py-2">
+          <% categories.forEach(function(category, index) { %>
+            <li>
+              <h3 class="<% if (index === 0) { %>mt-2<% } else { %>mt-6<% } %>">
+                <a class="text-inherit" href="<%= category.html_url %>">
+                  <%= category.name %>
+                </a>
+              </h3>
+              <%= partial('partial-section-list-sections', { parent: category, sections: category.sections, maxSections: maxSections, partial: partial }) %>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</script>
+
+{{! Category list }}
+<script type="text/template" id="tmpl-category-list">
+  <div class="border-radius bg-gray-200 py-4 px-6 my-6 lg:shadow-md">
+    <h3 class="my-4">
+      <a class="text-inherit" href="{{page_path 'help_center'}}">
+        {{t 'categories'}}
+      </a>
+    </h3>
+    <ul class="list-unstyled">
+      <% categories.forEach(function(category) { %>
+        <li>
+          <a class="block py-1 text-inherit<% if (category.isActive) { %> font-semibold<% } %>" href="<%= category.html_url %>">
+            <%= category.name %>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</script>
+
+{{!--------
+   Partials
+   --------}}
+
+{{! Article list - Subsections }}
+<script type="text/template" id="tmpl-partial-article-list-sections">
+  <% if (sections.length) { %>
+    <ul class="list-none pl-3 mb-0 font-size-base collapse" id="<%= id %>" :class="{ 'is-visible': isOpen }" data-parent="<%= parentId %>">
+      <% sections.forEach(function(section) { %>
+        <li class="font-medium" x-data="toggle({ isOpen: <%= !!section.isActive %> })" @collapse:show.stop="open" @collapse:hide.stop="close">
+
+          {{! Section name and toggle }}
+          <div class="flex justify-content-between align-items-center">
+            <a class="flex-1 py-2 text-inherit font-semibold" :class="{ 'text-inherit': !isOpen }" href="<%= section.html_url %>">
+              <%= section.name %>
+            </a>
+            <button class="p-2 ml-1 not-a-button border-radius transition cursor-pointer hover:bg-gray-200" :class="{ 'is-active': isOpen }" :aria-expanded="isOpen" data-toggle="collapse" data-target="#section-<%= section.id %>">
+              <svg class="text-inherit fill-current pointer-events-none" :class="{ 'rotate-180': isOpen }" width="12px" height="12px" viewBox="0 0 324 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M162,190 C156,190 150,187 146,183 L7,38 C-2,29 -2,15 7,7 C16,-2 30,-2 39,7 L162,135 L285,7 C293,-2 308,-2 317,7 C326,15 326,29 317,38 L178,183 C174,187 168,190 162,190 Z"></path>
+              </svg>
+            </button>
+          </div>
+
+          {{! Subsections }}
+          <%= partial('partial-article-list-sections', {
+            id: 'section-' + section.id,
+            parentId: '#' + id,
+            sections: section.sections,
+            activeCategoryId: activeCategoryId,
+            activeSectionId: activeSectionId,
+            activeArticleId: activeArticleId,
+            partial: partial
+          }) %>
+
+          {{! Articles }}
+          <% if (section.articles.length) { %>
+            <ul class="list-none font-size-md pl-0 mb-2 collapse" :class="{ 'is-visible': isOpen }" id="section-<%= section.id %>" data-parent="#<%= id %>">
+              <% section.articles.forEach(function(article) { %>
+                <li>
+                  <a class="block px-3 py-1 text-inherit border-radius transition<% if (article.isActive) { %> bg-gray-100<% } %>" href="<%= article.html_url %>">
+                    <%= article.title %>
+                  </a>
+                </li>
+              <% }); %>
+            </ul>
+          <% } %>
+
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+</script>
+
+{{! Section list - Subsections }}
+<script type="text/template" id="tmpl-partial-section-list-sections">
+  <% if (sections.length) { %>
+    <ul class="list-unstyled<% if (parent.hasOwnProperty('parent_section_id')) { %> pl-4 mb-0<% } %>">
+      <% sections.slice(0, maxSections).forEach(function(section) { %>
+        <li>
+          <a class="block py-1 text-inherit<% if (section.isActive) { %> font-semibold<% } %>" href="<%= section.html_url %>">
+            <%= section.name %>
+          </a>
+          <%= partial('partial-section-list-sections', { parent: section, sections: section.sections, maxSections: maxSections, partial: partial }) %>
+        </li>
+      <% }); %>
+      <% if (sections.length > maxSections) { %>
+        <li class="mt-2">
+          <a class="block py-1 text-inherit" href="<%= parent.html_url %>">
+            {{t 'see_more'}}
+          </a>
+        </li>
+      <% } %>
+    </ul>
+  <% } %>
+</script>

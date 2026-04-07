@@ -1,0 +1,157 @@
+{{! Subheader }}
+<div class="bg-gray-200 mb-4">
+  <div class="container">
+    <div class="row align-items-center pt-4">
+      <div class="col font-size-md">
+        {{breadcrumbs}}
+      </div>
+      {{~#is settings.header_search_style 'none'}}
+        <div class="md:col-4">
+          <div class="search mb-4">
+            <h2 class="sr-only">{{t 'search' }}</h2>
+            {{~#if settings.search_placeholder}}
+              {{#if settings.use_translations}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=(dc settings.search_placeholder)}}
+              {{else}}
+                {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false placeholder=settings.search_placeholder}}
+              {{/if}}
+            {{else}}
+              {{search class='form-field mb-0' instant=settings.instant_search scoped=settings.scoped_community_search submit=false}}
+            {{/if~}}
+            <svg class="search-icon fill-current transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <use xlink:href="#icon-search" />
+            </svg>
+          </div>
+        </div>
+      {{/is~}}
+    </div>
+  </div>
+</div>
+
+<div class="container" id="page-container">
+  <div class="row">
+    <div class="col">
+
+      {{! Topic header }}
+      <div class="mb-4">
+        <h1 class="xl:font-size-4xl">
+          {{topic.name}}
+          {{#if topic.internal}}
+            <svg class="svg-icon text-base font-size-xl ml-1 mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+              <title>{{t 'internal'}}</title>
+              <use xlink:href="#icon-lock" />
+            </svg>
+          {{/if}}
+        </h1>
+        {{#if topic.description}}
+          <p class="font-size-lg">
+            {{topic.description}}
+          </p>
+        {{/if}}
+      </div>
+
+      <div class="flex justify-content-between align-items-center border-bottom mt-6 py-2">
+
+        {{! Subscribe link }}
+        {{#if settings.show_follow_topic}}
+          <div class="subscribe-topic">
+            {{subscribe}}
+          </div>
+        {{/if}}
+
+        {{! Filters and sorters }}
+        <div class="dropdown ml-auto font-size-md" x-data="Widgets.dropdown" @click.away="close">
+          <button class="not-a-button py-2 cursor-pointer" id="filter" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+            {{current_filter.label}}
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+              <use xlink:href="#icon-chevron-down" />
+            </svg>
+          </button>
+          <div class="dropdown-menu" role="menu" x-ref="menu" aria-labelledby="filter" :aria-expanded="isExpanded">
+            {{#each filters}}
+              <a class="dropdown-item" href="{{url}}" aria-selected="{{selected}}" role="menuitem">
+                {{name}}
+              </a>
+            {{/each}}
+          </div>
+        </div>
+        <div class="dropdown ml-4 font-size-md" x-data="Widgets.dropdown" @click.away="close">
+          <button class="not-a-button py-2 cursor-pointer" id="sort" aria-haspopup="true" :aria-expanded="isExpanded" x-ref="toggle">
+            {{current_sorter.label}}
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true" :class="{ 'rotate-180': isExpanded }">
+              <use xlink:href="#icon-chevron-down" />
+            </svg>
+          </button>
+          <div class="dropdown-menu" role="menu" x-ref="menu" aria-labelledby="sort" :aria-expanded="isExpanded">
+            {{#each sorters}}
+              <a class="dropdown-item" href="{{url}}" aria-selected="{{selected}}" role="menuitem">
+                {{name}}
+              </a>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      {{! Post list }}
+      {{#if posts}}
+        <ul class="list-unstyled list-bordered">
+          {{#each posts}}
+            <li class="lg:flex align-items-center justify-content-between py-4">
+              <header class="flex-1">
+                <h3 class="h4 mt-0 mb-1">
+                  <a href="{{url}}" title="{{title}}">{{title}}</a>
+                  {{#if pinned}}<span class="badge ml-1">{{t 'pinned'}}</span>{{/if}}
+                  {{#if featured}}<span class="badge ml-1">{{t 'featured'}}</span>{{/if}}
+                  {{#isnt status 'none'}}<span class="badge badge-{{status_dasherized}} ml-1">{{status_name}}</span>{{/isnt}}
+                </h3>
+                <ul class="list-divider font-size-md text-gray-600 mb-0">
+                  <li>
+                    {{author.name}}
+                  </li>
+                  <li>
+                    {{#if editor}}
+                      {{t 'edited'}} {{date edited_at timeago=true}}
+                    {{else}}
+                      {{date created_at timeago=true}}
+                    {{/if}}
+                  </li>
+                </ul>
+              </header>
+              <ul class="list-divider font-size-md text-gray-600  mb-0">
+                <li class="meta-block inline-block lg:block lg:capitalize lg:text-center lg:mx-4">
+                  <span class="lg:block lg:text-base">
+                    {{vote_sum}}
+                  </span>
+                  {{t 'vote' count=vote_sum}}
+                </li>
+                <li class="meta-block inline-block lg:block lg:capitalize lg:text-center lg:mx-4">
+                  <span class="lg:block lg:text-base">
+                    {{comment_count}}
+                  </span>
+                  {{t 'comment' count=comment_count}}
+                </li>
+              </ul>
+            </li>
+          {{/each}}
+        </ul>
+        {{pagination}}
+      {{else}}
+        <p class="mt-4 text-gray-600">
+          {{t 'no_posts_with_filter'}}
+        </p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+{{! Call-to-action }}
+<div class="py-6 -mb-6">
+  <div class="container my-6 text-center max-w-md mx-auto">
+    <p class="font-size-xl mb-5">
+      {{t 'suggest_new_post'}}
+    </p>
+    {{link 'new_post' class='button button-primary button-lg' role='button'}}
+  </div>
+</div>
+
+<script type="text/javascript">document.documentElement.classList.add('topic-page', 'topic-' + {{topic.id}})</script>
