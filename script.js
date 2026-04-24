@@ -226,23 +226,15 @@
 
 	// 팝업 공지사항
 	function positionPopups(popups, centerX, centerY) {
-		if (window.innerWidth > 485) {
-			Array.from(popups)
-				.reverse()
-				.forEach((popup, index) => {
-					popup.style.left = `${Math.max(0, centerX - index * 30)}px`;
-					popup.style.top = `${Math.max(0, centerY - index * 30)}px`;
-					popup.style.transform = "translate(-50%, -50%) scale(1)";
-				});
-		} else {
-			Array.from(popups)
-				.reverse()
-				.forEach((popup, index) => {
-					popup.style.left = `${centerX}px`;
-					popup.style.top = `${centerY + index * -50}px`;
-					popup.style.transform = `translate(-50%, -50%) scale(${1 - index * 0.1})`;
-				});
-		}
+		let scaleValue = 1;
+		Array.from(popups)
+			.reverse()
+			.forEach((popup) => {
+				popup.style.left = `${centerX}px`;
+				popup.style.top = `${centerY}px`;
+				popup.style.transform = `translate(-50%, -50%) scale(${scaleValue})`;
+				scaleValue -= 0.1;
+			});
 	}
 
 	function initPopups(popupOverlay) {
@@ -312,16 +304,14 @@
 				console.log("[popup] 닫기 후 classList:", [...popup.classList]);
 				checkAllPopupClosed();
 
-				let offsetY = window.innerHeight / 2;
 				let scaleValue = 1;
 				Array.from(document.querySelectorAll(".popup"))
 					.reverse()
 					.forEach((p) => {
 						if (p.classList.contains("show")) {
 							p.style.left = `${centerX}px`;
-							p.style.top = `${offsetY}px`;
+							p.style.top = `${window.innerHeight / 2}px`;
 							p.style.transform = `translate(-50%, -50%) scale(${scaleValue})`;
-							offsetY -= 50;
 							scaleValue -= 0.1;
 						}
 					});

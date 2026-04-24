@@ -1,7 +1,7 @@
 {
 	"name": "[EZCOM] EZ Notifier 테스트용",
 	"author": "Zenplates",
-	"version": "2.3.0",
+	"version": "2.3.1",
 	"api_version": 3,
 	"default_locale": "en-us",
 	"settings": [
