@@ -227,13 +227,15 @@
 	// 팝업 공지사항
 	function positionPopups(popups, centerX, centerY) {
 		let scaleValue = 1;
+		let offsetY = 0;
 		Array.from(popups)
 			.reverse()
 			.forEach((popup) => {
 				popup.style.left = `${centerX}px`;
-				popup.style.top = `${centerY}px`;
+				popup.style.top = `${centerY - offsetY}px`;
 				popup.style.transform = `translate(-50%, -50%) scale(${scaleValue})`;
-				scaleValue -= 0.1;
+				scaleValue -= 0.05;
+				offsetY += 20;
 			});
 	}
 
@@ -305,14 +307,16 @@
 				checkAllPopupClosed();
 
 				let scaleValue = 1;
+				let offsetY = 0;
 				Array.from(document.querySelectorAll(".popup"))
 					.reverse()
 					.forEach((p) => {
 						if (p.classList.contains("show")) {
 							p.style.left = `${centerX}px`;
-							p.style.top = `${window.innerHeight / 2}px`;
+							p.style.top = `${window.innerHeight / 2 - offsetY}px`;
 							p.style.transform = `translate(-50%, -50%) scale(${scaleValue})`;
-							scaleValue -= 0.1;
+							scaleValue -= 0.05;
+							offsetY += 20;
 						}
 					});
 			});
