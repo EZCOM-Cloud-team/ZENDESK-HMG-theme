@@ -31,7 +31,7 @@
 		// Render Zendesk helper micro-templates
 		// @see https://developer.zendesk.com/documentation/help_center/help-center-templates/helpers/
 		var supportedHelpers = [
-			"breadcrumbs", 
+			"breadcrumbs",
 			"recent-articles",
 			"related-articles",
 			"recent-activity",
