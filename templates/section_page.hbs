@@ -115,23 +115,19 @@
                             {{~title~}}
                             {{#if promoted}}
                               <div class="promoted-badge">
-                               {{!-- asset 'icon-bell.svg --}}
-                               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M5.13403 10.5C5.2218 10.652 5.34804 10.7782 5.50006 10.866C5.65207 10.9538 5.82451 11 6.00003 11C6.17556 11 6.348 10.9538 6.50001 10.866C6.65203 10.7782 6.77826 10.652 6.86603 10.5" stroke="#CA3500" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M1.63088 7.663C1.56556 7.73459 1.52246 7.82362 1.50681 7.91926C1.49116 8.0149 1.50364 8.11302 1.54273 8.2017C1.58183 8.29037 1.64585 8.36578 1.72701 8.41874C1.80817 8.4717 1.90297 8.49993 1.99988 8.5H9.99988C10.0968 8.50003 10.1916 8.47191 10.2728 8.41905C10.354 8.36619 10.4181 8.29087 10.4573 8.20226C10.4965 8.11364 10.5091 8.01554 10.4936 7.91989C10.4781 7.82425 10.4351 7.73517 10.3699 7.6635C9.70488 6.978 8.99988 6.2495 8.99988 4C8.99988 3.20435 8.68381 2.44129 8.1212 1.87868C7.55859 1.31607 6.79553 1 5.99988 1C5.20423 1 4.44117 1.31607 3.87856 1.87868C3.31595 2.44129 2.99988 3.20435 2.99988 4C2.99988 6.2495 2.29438 6.978 1.63088 7.663Z" stroke="#CA3500" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
+                                 <img src="{{asset 'icon-bell.svg'}}" alt="" aria-hidden="true" />
                               <span>
                                 {{dc 'promoted_article'}}
                               </span>
                               </div>
                             {{/if}}
+                            {{~#if internal~}}
+                              <svg class="svg-icon ml-1 fill-current text-base" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                <title>{{t 'internal'}}</title>
+                                <use xlink:href="#icon-lock" />
+                              </svg>
+                            {{~/if~}}
                           </a>
-                          {{~#if internal~}}
-                            <svg class="svg-icon ml-1 fill-current text-base" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
-                              <title>{{t 'internal'}}</title>
-                              <use xlink:href="#icon-lock" />
-                            </svg>
-                          {{~/if~}}
                           {{~#isnt ../settings.article_list_excerpt 0}}
                             <p class="my-2 font-size-md break-words font-normal">
                               {{excerpt body characters=../settings.article_list_excerpt}}
@@ -140,26 +136,11 @@
                           <div class="popup-controller">
                             {{#if promoted}}
                               <div class="popup-off" data-article-id={{id}}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <path d="M8.55664 17.5C8.70293 17.7533 8.91332 17.9637 9.16668 18.11C9.42003 18.2563 9.70743 18.3333 9.99997 18.3333C10.2925 18.3333 10.5799 18.2563 10.8333 18.11C11.0866 17.9637 11.297 17.7533 11.4433 17.5" stroke="#F54900" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M2.71821 12.7715C2.60935 12.8908 2.53751 13.0392 2.51143 13.1986C2.48534 13.358 2.50615 13.5215 2.5713 13.6693C2.63646 13.8171 2.74316 13.9428 2.87843 14.0311C3.01369 14.1193 3.1717 14.1664 3.33321 14.1665H16.6665C16.828 14.1666 16.9861 14.1197 17.1214 14.0316C17.2568 13.9435 17.3636 13.818 17.429 13.6703C17.4943 13.5226 17.5153 13.3591 17.4894 13.1997C17.4635 13.0402 17.3919 12.8918 17.2832 12.7723C16.1749 11.6298 14.9999 10.4157 14.9999 6.6665C14.9999 5.34042 14.4731 4.06865 13.5354 3.13097C12.5977 2.19329 11.326 1.6665 9.99988 1.6665C8.6738 1.6665 7.40203 2.19329 6.46435 3.13097C5.52666 4.06865 4.99988 5.34042 4.99988 6.6665C4.99988 10.4157 3.82405 11.6298 2.71821 12.7715Z" stroke="#F54900" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-                              </div
+                                <img src="{{asset 'icon-bell-on.svg'}}" alt="" aria-hidden="true" />
+                              </div>
                             {{else}}
                               <div class="popup-on" data-article-id={{id}}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <g clip-path="url(#clip0_4083_166)">
-    <path d="M8.55664 17.5C8.70293 17.7533 8.91332 17.9637 9.16668 18.11C9.42003 18.2563 9.70743 18.3333 9.99997 18.3333C10.2925 18.3333 10.5799 18.2563 10.8333 18.11C11.0866 17.9637 11.297 17.7533 11.4433 17.5" stroke="#99A1AF" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M14.1667 14.1665H3.33339C3.17189 14.1666 3.01385 14.1197 2.8785 14.0316C2.74315 13.9435 2.63631 13.818 2.57098 13.6703C2.50565 13.5226 2.48465 13.3591 2.51052 13.1997C2.53639 13.0403 2.60803 12.8918 2.71672 12.7723C3.82505 11.6298 5.00005 10.4157 5.00005 6.66651C4.99993 6.17468 5.07238 5.68552 5.21505 5.21484" stroke="#99A1AF" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M1.66675 1.6665L18.3334 18.3332" stroke="#99A1AF" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M7.22339 2.50837C7.97629 2.0056 8.85158 1.71669 9.75583 1.67247C10.6601 1.62825 11.5594 1.83038 12.3578 2.25728C13.1561 2.68418 13.8236 3.31984 14.289 4.09642C14.7543 4.873 15.0001 5.76136 15.0001 6.6667C15.0001 8.90587 15.6417 10.5442 16.4226 11.7084" stroke="#99A1AF" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-  <defs>
-    <clipPath id="clip0_4083_166">
-      <rect width="20" height="20" fill="white"/>
-    </clipPath>
-  </defs>
-</svg>
+                                <img src="{{asset 'icon-bell-off.svg'}}" alt="" aria-hidden="true" />
                               </div>
                             {{/if}}
                           </div>
@@ -246,69 +227,58 @@
 <script>
 
 	const AUTHORIZED_SEGMENT_IDS = [12513489179791, 26978513566748];
-	const CSRF_CACHE_KEY = "hmg_csrf_token_cache";
-	let currentUserEmail = "";
-	const CSRF_TTL_MS = 2 * 60 * 1000;
+	const SIDEAPP_ID = 1241898;
+	const USER_CACHE_KEY = "hmg_user_cache";
+	const USER_TTL_MS = 2 * 60 * 1000;
+  let currentUserEmail = '';
 
-	function getCsrfToken() {
-		const cached = JSON.parse(localStorage.getItem(CSRF_CACHE_KEY) || "null");
-		if (cached && Date.now() - cached.fetchedAt < CSRF_TTL_MS) {
-			return Promise.resolve(cached.token);
+	async function fetchCurrentUser() {
+		const cached = JSON.parse(localStorage.getItem(USER_CACHE_KEY) || "null");
+		if (cached && Date.now() - cached.fetchedAt < USER_TTL_MS) {
+			return cached;
 		}
-		return fetch("/api/v2/users/me.json")
-			.then((res) => res.json())
-			.then((data) => {
-				const token =
-					data.authenticity_token ??
-					data.current_user?.authenticity_token ??
-					data.user?.authenticity_token;
-				if (!token) throw new Error("authenticity_token 없음 — 응답: " + JSON.stringify(data));
-				localStorage.setItem(CSRF_CACHE_KEY, JSON.stringify({ token, fetchedAt: Date.now() }));
-				return token;
-			});
+		const res = await fetch("/api/v2/users/me.json");
+		const data = await res.json();
+		const csrfToken =
+			data.authenticity_token ??
+			data.current_user?.authenticity_token ??
+			data.user?.authenticity_token;
+		if (!csrfToken) throw new Error("authenticity_token 없음 — 응답: " + JSON.stringify(data));
+		const user = { csrfToken, id: data.user?.id ?? null, fetchedAt: Date.now() };
+		localStorage.setItem(USER_CACHE_KEY, JSON.stringify(user));
+		currentUserEmail = data.user?.email ?? '';
+		return user;
 	}
 
-	function initPopupController() {
+	async function getCsrfToken() {
+		const { csrfToken } = await fetchCurrentUser();
+		return csrfToken;
+	}
+
+
+	async function initPopupController() {
 		const controllers = document.querySelectorAll(".popup-controller");
 		if (!controllers.length) {
 			console.warn("[popup-controller] .popup-controller 요소 없음 — 종료");
 			return;
 		}
-
-		fetch("/api/v2/users/me.json")
-			.then((res) => {
-				return res.json();
-			})
-			.then((data) => {
-				if (data.authenticity_token) {
-					localStorage.setItem(CSRF_CACHE_KEY, JSON.stringify({
-						token: data.authenticity_token,
-						fetchedAt: Date.now()
-					}));
-				}
-				const user = data.user;
-				if (!user?.id) {
-					console.warn("[popup-controller] user.id 없음 — 비로그인 상태");
-					return;
-				}
-				currentUserEmail = user.email || "";
-				return fetch(`/api/v2/help_center/users/${user.id}/user_segments`);
-			})
-			.then((res) => {
-				if (!res) return;
-				return res.json();
-			})
-			.then((data) => {
-				if (!data) return;
-				if (!data?.user_segments) return;
-				const hasAccess = data.user_segments.some((seg) =>
-					AUTHORIZED_SEGMENT_IDS.includes(seg.id)
-				);
-				if (hasAccess) {
-					controllers.forEach((el) => el.classList.add("is-authorized"));
-				}
-			})
-			.catch((err) => console.error("[popup-controller] 권한 확인 실패:", err));
+		try {
+			const { id: userId } = await fetchCurrentUser();
+			if (!userId) {
+				console.warn("[popup-controller] user.id 없음 — 비로그인 상태");
+				return;
+			}
+			const segRes = await fetch(`/api/v2/help_center/users/${userId}/user_segments`);
+			const segData = await segRes.json();
+			const hasAccess = segData.user_segments?.some((seg) =>
+				AUTHORIZED_SEGMENT_IDS.includes(seg.id)
+			);
+			if (hasAccess) {
+				controllers.forEach((el) => el.classList.add("is-authorized"));
+			}
+		} catch (err) {
+			console.error("[popup-controller] 권한 확인 실패:", err);
+		}
 	}
 	initPopupController();
 
@@ -317,66 +287,56 @@
 		return match ? Number(match[1]) : null;
 	}
 
-	function updateArticlePromoted(articleId, promoted) {
-		return getCsrfToken().then((token) =>
-			fetch(`/api/v2/help_center/articles/${articleId}`, {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-					"X-CSRF-Token": token
-				},
-				body: JSON.stringify({ article: { promoted } })
-			}).then((res) => {
-				if (!res.ok) throw new Error(`HTTP ${res.status}`);
-				return res.json();
-			})
-		);
+	async function updateArticlePromoted(articleId, promoted) {
+		const token = await getCsrfToken();
+		const res = await fetch(`/api/v2/help_center/articles/${articleId}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRF-Token": token
+			},
+			body: JSON.stringify({ article: { promoted } })
+		});
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+		return res.json();
 	}
 
-	function notifySideapp(articleId, sectionId, event) {
-		const appId = 1241898;
-		const NOTIFY_AUTH = btoa(`${currentUserEmail}/token:1SVKxsdkgUBBwiCeWWkycb3zYGE8eAlRxkwClQda`);
-
+	async function notifySideapp(articleId, sectionId, event) {
+		const csrfToken = await getCsrfToken();
 		const payload = {
-			app_id: appId,
+			app_id: SIDEAPP_ID,
 			event,
 			body: { article_id: articleId, section_id: sectionId }
 		};
-
-		return fetch("/api/v2/apps/notify", {
+		const res = await fetch("/api/v2/apps/notify", {
 			method: "POST",
-			credentials: "omit",
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": `Basic ${NOTIFY_AUTH}`
+				"X-CSRF-Token": csrfToken
 			},
 			body: JSON.stringify(payload)
-		}).then((res) => {
-			if (!res.ok) throw new Error(`HTTP ${res.status}`);
 		});
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
 	}
 
-	document.addEventListener("click", (e) => {
+	document.addEventListener("click", async (e) => {
 		const btn = e.target.closest(".popup-off, .popup-on");
 		if (!btn) return;
 
 		const controller = btn.closest(".popup-controller");
-		const isAuthorized = controller?.classList.contains("is-authorized");
-		if (!isAuthorized) return;
+		if (!controller?.classList.contains("is-authorized")) return;
 
 		const articleId = Number(btn.dataset.articleId);
 		const isOff = btn.classList.contains("popup-off");
-		const promoted = !isOff;
 		const sectionId = getSectionId();
 		const notifyEvent = isOff ? "article.unpublished" : "article.published";
 
-		updateArticlePromoted(articleId, promoted)
-			.then(() => {
-				return notifySideapp(articleId, sectionId, notifyEvent);
-			})
-			.then(() => {
-				window.location.reload();
-			})
-			.catch((err) => console.error("[popup-controller] 변경 실패:", err));
+		try {
+			await updateArticlePromoted(articleId, !isOff);
+			await notifySideapp(articleId, sectionId, notifyEvent);
+			window.location.reload();
+		} catch (err) {
+			console.error("[popup-controller] 변경 실패:", err);
+		}
 	});
 </script>
