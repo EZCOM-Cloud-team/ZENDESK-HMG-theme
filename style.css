@@ -15956,9 +15956,16 @@ a:hover .icon-circle {
 	margin: 0px;
 	padding: 0;
 	line-height: 1.42857;
-	color: rgb(47, 57, 65);
+	color: #49698d;
+	text-decoration: underline;
+	line-height: 1.5;
 	font-size: 16px;
 	font-weight: 600;
+	transition: 0.2s;
+}
+
+.popup h2:hover {
+	color: #002c5f;
 }
 
 .popup-body {
