@@ -617,6 +617,90 @@
   {{/isnt~}}
 {{/isnt~}}
 
+{{! 팝업 공지사항 }}
+{{#each categories}}
+  {{#each sections}}
+    {{! Section: KR}}
+    {{#is id 13546516314255}}
+    {{#each sections}}
+      {{#each articles}}
+        {{#if promoted}}
+          <div class="popup" id="popup-{{id}}">
+            <div class="popup-header">
+              <a href="{{url}}" target="_blank" title="원본 문서 페이지로 이동">
+              {{#each labels}}
+                {{#is identifier "notice_incident"}} 
+                  <span class="popup-badge popup-badge--incident">장애</span>
+                {{/is}}
+                {{#is identifier "notice_update"}} 
+                  <span class="popup-badge popup-badge--update">업데이트</span>
+                {{/is}}
+                {{#is identifier "event_notice"}} 
+                  <span class="popup-badge popup-badge--event">이벤트 공지</span>
+                {{/is}}
+                {{#is identifier "notice_operation"}} 
+                  <span class="popup-badge popup-badge--operation">운영 이슈</span>
+                {{/is}}
+                {{/each}}
+                <h2>{{title}}</h2>
+              </a>
+            </div>
+            <div class="popup-body">{{body}}</div>
+            <div class="popup-footer">
+              <label class="checkbox-container">
+                <input type="checkbox" class="popup-visible-checkbox" />
+                일주일간 표시하지 않기
+              </label>
+              <button type="button" class="btn-popup-check" data-popup-id="{{id}}">확인</button>
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+      {{/each}}
+    {{/is}}
+     {{! Section: EU}}
+    {{#is id 13546518200975}}
+      {{#each articles}}
+        {{#if promoted}}
+          <div class="popup" id="popup-{{id}}">
+            <div class="popup-header">
+              <a href="{{url}}" target="_blank"><h2>{{title}}</h2></a>
+            </div>
+            <div class="popup-body">{{body}}</div>
+            <div class="popup-footer">
+              <label class="checkbox-container">
+                <input type="checkbox" class="popup-visible-checkbox" />
+                일주일간 표시하지 않기
+              </label>
+              <button type="button" class="btn-popup-check" data-popup-id="{{id}}">확인</button>
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    {{/is}}
+    {{#is id 26370119435548}}
+      {{#each articles}}
+        {{#if promoted}}
+          <div class="popup" id="popup-{{id}}">
+            <div class="popup-header">
+              <a href="{{url}}" target="_blank"><h2>{{title}}</h2></a>
+            </div>
+            <div class="popup-body">{{body}}</div>
+            <div class="popup-footer">
+              <label class="checkbox-container">
+                <input type="checkbox" class="popup-visible-checkbox" />
+                일주일간 표시하지 않기
+              </label>
+              <button type="button" class="btn-popup-check" data-popup-id="{{id}}">확인</button>
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    {{/is}}
+  {{/each}}
+{{/each}}
+<div class="popup-overlay"></div>
+
 <script type="text/javascript">
   {{! Category, section and promoted article image assets }}
   {{~#each categories}}
