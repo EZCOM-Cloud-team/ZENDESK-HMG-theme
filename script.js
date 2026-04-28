@@ -235,13 +235,12 @@
 				popup.style.top = `${centerY - offsetY}px`;
 				popup.style.transform = `translate(-50%, -50%) scale(${scaleValue})`;
 				scaleValue -= 0.05;
-				offsetY += 20;
+				offsetY += 30;
 			});
 	}
 
 	function initPopups(popupOverlay) {
 		const popups = document.querySelectorAll(".popup");
-		console.log("[popup] initPopups 호출됨, .popup 개수:", popups.length);
 		if (!popups.length) return;
 
 		const userId = JSON.parse(localStorage.getItem("ajs_user_id"));
@@ -267,14 +266,6 @@
 		popups.forEach((popup) => {
 			const stored = popupVisibleObj.find((item) => item.id === popup.id);
 			const isExpired = stored && stored.exp_date < today;
-			console.log(
-				"[popup] popup.id:",
-				popup.id,
-				"/ stored:",
-				stored,
-				"/ isExpired:",
-				isExpired
-			);
 
 			if (!stored || isExpired) {
 				popup.classList.add("show");
@@ -283,27 +274,18 @@
 		});
 
 		const btns = document.querySelectorAll(".btn-popup-check");
-		console.log("[popup] .btn-popup-check 개수:", btns.length);
 
 		btns.forEach((btn) => {
 			btn.addEventListener("click", () => {
 				const popupId = btn.getAttribute("data-popup-id");
 				const popup = document.getElementById("popup-" + popupId);
-				console.log(
-					"[popup] 버튼 클릭 — data-popup-id:",
-					popupId,
-					"/ getElementById 결과:",
-					popup
-				);
 
 				if (!popup) {
 					console.warn("[popup] popup 요소를 찾지 못함. id 불일치 가능성");
 					return;
 				}
 
-				console.log("[popup] 닫기 전 classList:", [...popup.classList]);
 				popup.classList.remove("show");
-				console.log("[popup] 닫기 후 classList:", [...popup.classList]);
 				checkAllPopupClosed();
 
 				let scaleValue = 1;
@@ -316,7 +298,7 @@
 							p.style.top = `${window.innerHeight / 2 - offsetY}px`;
 							p.style.transform = `translate(-50%, -50%) scale(${scaleValue})`;
 							scaleValue -= 0.05;
-							offsetY += 20;
+							offsetY += 30;
 						}
 					});
 			});
