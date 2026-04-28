@@ -3110,11 +3110,14 @@ html[dir="rtl"] .notification-left-aligned {
 }
 
 .media-body {
+	flex: 1;
+	min-width: 0;
+}
+
+.section-page .media-body {
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
-	flex: 1;
-	min-width: 0;
 }
 
 .svg-shape {

@@ -244,8 +244,10 @@
 
 <script type="text/javascript">document.documentElement.classList.add('section-page', 'section-' + {{section.id}})</script>
 <script>
+
 	const AUTHORIZED_SEGMENT_IDS = [12513489179791, 26978513566748];
 	const CSRF_CACHE_KEY = "hmg_csrf_token_cache";
+	let currentUserEmail = "";
 	const CSRF_TTL_MS = 2 * 60 * 1000;
 
 	function getCsrfToken() {
@@ -256,7 +258,6 @@
 		return fetch("/api/v2/users/me.json")
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("[csrf] /users/me.json 응답 keys:", Object.keys(data));
 				const token =
 					data.authenticity_token ??
 					data.current_user?.authenticity_token ??
@@ -268,10 +269,7 @@
 	}
 
 	function initPopupController() {
-		console.log("[popup-controller] initPopupController 호출됨");
-
 		const controllers = document.querySelectorAll(".popup-controller");
-		console.log("[popup-controller] .popup-controller 요소 수:", controllers.length);
 		if (!controllers.length) {
 			console.warn("[popup-controller] .popup-controller 요소 없음 — 종료");
 			return;
@@ -279,7 +277,6 @@
 
 		fetch("/api/v2/users/me.json")
 			.then((res) => {
-				console.log("[popup-controller] /users/me 응답 status:", res.status);
 				return res.json();
 			})
 			.then((data) => {
@@ -290,39 +287,30 @@
 					}));
 				}
 				const user = data.user;
-				console.log("[popup-controller] user:", user);
 				if (!user?.id) {
 					console.warn("[popup-controller] user.id 없음 — 비로그인 상태");
 					return;
 				}
+				currentUserEmail = user.email || "";
 				return fetch(`/api/v2/help_center/users/${user.id}/user_segments`);
 			})
 			.then((res) => {
 				if (!res) return;
-				console.log("[popup-controller] /user_segments 응답 status:", res.status);
 				return res.json();
 			})
 			.then((data) => {
 				if (!data) return;
-				console.log("[popup-controller] user_segments:", data?.user_segments);
 				if (!data?.user_segments) return;
 				const hasAccess = data.user_segments.some((seg) =>
 					AUTHORIZED_SEGMENT_IDS.includes(seg.id)
 				);
-				console.log("[popup-controller] hasAccess:", hasAccess);
 				if (hasAccess) {
 					controllers.forEach((el) => el.classList.add("is-authorized"));
 				}
 			})
 			.catch((err) => console.error("[popup-controller] 권한 확인 실패:", err));
 	}
-
 	initPopupController();
-
-	const APP_ID_MAP = {
-		"pdi-ezcom1234": 1237497,
-		"hkmc-cci": 1235778
-	};
 
 	function getSectionId() {
 		const match = document.documentElement.className.match(/section-(\d+)/);
@@ -347,15 +335,13 @@
 
 	function notifySideapp(articleId, sectionId, event) {
 		const appId = 1241898;
-		const NOTIFY_AUTH = "a3JkZXZzYW5nQGV6Y29tLmNvLmtyL3Rva2VuOjFTVkt4c2RrZ1VCQndpQ2VXV2t5Y2IzellHRThlQWxSeGt3Q2xRZGE=";
-		console.log("[notifySideapp] 호출됨 — appId:", appId, "articleId:", articleId, "sectionId:", sectionId, "event:", event);
+		const NOTIFY_AUTH = btoa(`${currentUserEmail}/token:1SVKxsdkgUBBwiCeWWkycb3zYGE8eAlRxkwClQda`);
 
 		const payload = {
 			app_id: appId,
 			event,
 			body: { article_id: articleId, section_id: sectionId }
 		};
-		console.log("[notifySideapp] /api/v2/apps/notify 요청 payload:", payload);
 
 		return fetch("/api/v2/apps/notify", {
 			method: "POST",
@@ -366,19 +352,16 @@
 			},
 			body: JSON.stringify(payload)
 		}).then((res) => {
-			console.log("[notifySideapp] /api/v2/apps/notify 응답 status:", res.status);
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
 		});
 	}
 
 	document.addEventListener("click", (e) => {
 		const btn = e.target.closest(".popup-off, .popup-on");
-		console.log("[click] 클릭 감지 — e.target:", e.target, "/ btn:", btn);
 		if (!btn) return;
 
 		const controller = btn.closest(".popup-controller");
 		const isAuthorized = controller?.classList.contains("is-authorized");
-		console.log("[click] controller:", controller, "/ is-authorized:", isAuthorized);
 		if (!isAuthorized) return;
 
 		const articleId = Number(btn.dataset.articleId);
@@ -386,16 +369,12 @@
 		const promoted = !isOff;
 		const sectionId = getSectionId();
 		const notifyEvent = isOff ? "article.unpublished" : "article.published";
-		console.log("[click] articleId:", articleId, "/ promoted:", promoted, "/ sectionId:", sectionId, "/ event:", notifyEvent);
 
-		console.log("[click] updateArticlePromoted 시작");
 		updateArticlePromoted(articleId, promoted)
 			.then(() => {
-				console.log("[click] updateArticlePromoted 완료 → notifySideapp 호출");
 				return notifySideapp(articleId, sectionId, notifyEvent);
 			})
 			.then(() => {
-				console.log("[click] notifySideapp 완료 → reload");
 				window.location.reload();
 			})
 			.catch((err) => console.error("[popup-controller] 변경 실패:", err));
