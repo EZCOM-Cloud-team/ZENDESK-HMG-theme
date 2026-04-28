@@ -110,28 +110,40 @@
                         {{/is~}}
 
                         <div class="media-body">
-                          {{~#is ../settings.promoted_article_style 'icon'}}
-                            {{~#if promoted}}
-                              <svg class="svg-icon mr-1 fill-current text-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94 93" aria-hidden="true">
-                                <title>{{t 'promoted'}}</title>
-                                <use xlink:href="#icon-star" />
-                              </svg>
-                            {{/if~}}
-                          {{/is~}}
+
                           <a class="link-stretched text-inherit" href="{{url}}">
                             {{~title~}}
+                            {{#if promoted}}
+                              <div class="promoted-badge">
+                                 <img src="{{asset 'icon-bell.svg'}}" alt="" aria-hidden="true" />
+                              <span>
+                                {{dc 'promoted_article'}}
+                              </span>
+                              </div>
+                            {{/if}}
+                            {{~#if internal~}}
+                              <svg class="svg-icon ml-1 fill-current text-base" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                <title>{{t 'internal'}}</title>
+                                <use xlink:href="#icon-lock" />
+                              </svg>
+                            {{~/if~}}
                           </a>
-                          {{~#if internal~}}
-                            <svg class="svg-icon ml-1 fill-current text-base" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
-                              <title>{{t 'internal'}}</title>
-                              <use xlink:href="#icon-lock" />
-                            </svg>
-                          {{~/if~}}
                           {{~#isnt ../settings.article_list_excerpt 0}}
                             <p class="my-2 font-size-md break-words font-normal">
                               {{excerpt body characters=../settings.article_list_excerpt}}
                             </p>
                           {{/isnt~}}
+                          <div class="popup-controller">
+                            {{#if promoted}}
+                              <div class="popup-off" data-article-id={{id}}>
+                                <img src="{{asset 'icon-bell-on.svg'}}" alt="" aria-hidden="true" />
+                              </div>
+                            {{else}}
+                              <div class="popup-on" data-article-id={{id}}>
+                                <img src="{{asset 'icon-bell-off.svg'}}" alt="" aria-hidden="true" />
+                              </div>
+                            {{/if}}
+                          </div>
                         </div>
                       </div>
                     </li>
@@ -212,3 +224,119 @@
 {{/isnt~}}
 
 <script type="text/javascript">document.documentElement.classList.add('section-page', 'section-' + {{section.id}})</script>
+<script>
+	console.log('[HMG] script loaded');
+	const AUTHORIZED_SEGMENT_IDS = [12513489179791, 26978513566748];
+	const SIDEAPP_ID = 1241898;
+	const USER_CACHE_KEY = "hmg_user_cache";
+	const USER_TTL_MS = 2 * 60 * 1000;
+  let currentUserEmail = '';
+
+	async function fetchCurrentUser() {
+		const cached = JSON.parse(localStorage.getItem(USER_CACHE_KEY) || "null");
+		if (cached && Date.now() - cached.fetchedAt < USER_TTL_MS) {
+			return cached;
+		}
+		const res = await fetch("/api/v2/users/me.json");
+		const data = await res.json();
+		const csrfToken =
+			data.authenticity_token ??
+			data.current_user?.authenticity_token ??
+			data.user?.authenticity_token;
+		if (!csrfToken) throw new Error("authenticity_token 없음 — 응답: " + JSON.stringify(data));
+		const user = { csrfToken, id: data.user?.id ?? null, fetchedAt: Date.now() };
+		localStorage.setItem(USER_CACHE_KEY, JSON.stringify(user));
+		currentUserEmail = data.user?.email ?? '';
+		return user;
+	}
+
+	async function getCsrfToken() {
+		const { csrfToken } = await fetchCurrentUser();
+		return csrfToken;
+	}
+
+
+	async function initPopupController() {
+		const controllers = document.querySelectorAll(".popup-controller");
+		if (!controllers.length) {
+			console.warn("[popup-controller] .popup-controller 요소 없음 — 종료");
+			return;
+		}
+		try {
+			const { id: userId } = await fetchCurrentUser();
+			if (!userId) {
+				console.warn("[popup-controller] user.id 없음 — 비로그인 상태");
+				return;
+			}
+			const segRes = await fetch(`/api/v2/help_center/users/${userId}/user_segments`);
+			const segData = await segRes.json();
+			const hasAccess = segData.user_segments?.some((seg) =>
+				AUTHORIZED_SEGMENT_IDS.includes(seg.id)
+			);
+			if (hasAccess) {
+				controllers.forEach((el) => el.classList.add("is-authorized"));
+			}
+		} catch (err) {
+			console.error("[popup-controller] 권한 확인 실패:", err);
+		}
+	}
+	initPopupController();
+
+	function getSectionId() {
+		const match = document.documentElement.className.match(/section-(\d+)/);
+		return match ? Number(match[1]) : null;
+	}
+
+	async function updateArticlePromoted(articleId, promoted) {
+		const token = await getCsrfToken();
+		const res = await fetch(`/api/v2/help_center/articles/${articleId}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRF-Token": token
+			},
+			body: JSON.stringify({ article: { promoted } })
+		});
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+		return res.json();
+	}
+
+	async function notifySideapp(articleId, sectionId, event) {
+		const csrfToken = await getCsrfToken();
+		const payload = {
+			app_id: SIDEAPP_ID,
+			event,
+			body: { article_id: articleId, section_id: sectionId }
+		};
+		const res = await fetch("/api/v2/apps/notify", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"X-CSRF-Token": csrfToken
+			},
+			body: JSON.stringify(payload)
+		});
+		if (!res.ok) throw new Error(`HTTP ${res.status}`);
+	}
+
+	document.addEventListener("click", async (e) => {
+		const btn = e.target.closest(".popup-off, .popup-on");
+		if (!btn) return;
+
+		const controller = btn.closest(".popup-controller");
+		if (!controller?.classList.contains("is-authorized")) return;
+
+		const articleId = Number(btn.dataset.articleId);
+		const isOff = btn.classList.contains("popup-off");
+		const sectionId = getSectionId();
+		const notifyEvent = isOff ? "article.unpublished" : "article.published";
+
+		try {
+			await updateArticlePromoted(articleId, !isOff);
+			await notifySideapp(articleId, sectionId, notifyEvent);
+			window.location.reload();
+		} catch (err) {
+			console.error("[popup-controller] 변경 실패:", err);
+		}
+	});
+</script>
