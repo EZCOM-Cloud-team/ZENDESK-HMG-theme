@@ -1,7 +1,7 @@
 {
-  "name": "HMG Help Center Theme",
+  "name": "Hyundai Help Center Theme",
   "author": "Zenplates",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "api_version": 3,
   "default_locale": "en-us",
   "settings": [
@@ -13,7 +13,7 @@
           "type": "color",
           "description": "color_primary_description",
           "label": "color_primary_label",
-          "value": "rgba(5, 20, 31, 1)"
+          "value": "rgba(0, 48, 104, 1)"
         },
         {
           "identifier": "color_primary_inverse",
@@ -27,7 +27,7 @@
           "type": "color",
           "description": "color_secondary_description",
           "label": "color_secondary_label",
-          "value": "rgba(5, 20, 31, 1)"
+          "value": "rgba(0, 0, 0, 1)"
         },
         {
           "identifier": "color_secondary_inverse",
@@ -69,42 +69,42 @@
           "type": "color",
           "description": "link_color_description",
           "label": "link_color_label",
-          "value": "rgba(9, 47, 75, 1)"
+          "value": "rgba(0, 48, 104, 1)"
         },
         {
           "identifier": "color_border",
           "type": "color",
           "description": "color_border_description",
           "label": "color_border_label",
-          "value": "rgba(230, 234, 237, 1)"
+          "value": "#e2e8f0"
         },
         {
           "identifier": "color_outline",
           "type": "color",
           "description": "outline_color_description",
           "label": "outline_color_label",
-          "value": "rgba(230, 234, 237, 0.25)"
+          "value": "rgba(226, 232, 240, 0.25)"
         },
         {
           "identifier": "color_gray_100",
           "type": "color",
           "description": "color_gray_100_description",
           "label": "color_gray_100_label",
-          "value": "rgba(230, 234, 237, 1)"
+          "value": "rgba(239, 241, 244, 1)"
         },
         {
           "identifier": "color_gray_200",
           "type": "color",
           "description": "color_gray_200_description",
           "label": "color_gray_200_label",
-          "value": "rgba(230, 234, 237, 1)"
+          "value": "rgba(239, 241, 244, 1)"
         },
         {
           "identifier": "color_gray_600",
           "type": "color",
           "description": "color_gray_600_description",
           "label": "color_gray_600_label",
-          "value": "#718096"
+          "value": "rgba(113, 128, 150, 1)"
         },
         {
           "identifier": "bg_color",
@@ -888,7 +888,7 @@
           "type": "color",
           "description": "bg_color_header_description",
           "label": "bg_color_header_label",
-          "value": "rgba(5, 20, 31, 1)"
+          "value": "rgba(0, 48, 104, 1)"
         },
         {
           "identifier": "header_link_1_text",
@@ -1048,7 +1048,7 @@
           "type": "text",
           "description": "hero_heading_description",
           "label": "hero_heading_label",
-          "value": "HKMC Knowledge Base"
+          "value": "Hyundai Knowledge Base"
         },
         {
           "identifier": "color_hero_heading",
@@ -1101,14 +1101,14 @@
           "type": "color",
           "description": "bg_color_hero_description",
           "label": "bg_color_hero_label",
-          "value": "rgba(5, 20, 31, 1)"
+          "value": "rgba(0, 48, 104, 1)"
         },
         {
           "identifier": "bg_color_secondary_hero",
           "type": "color",
           "description": "bg_color_secondary_hero_description",
           "label": "bg_color_secondary_hero_label",
-          "value": "rgba(5, 20, 31, 0.9)"
+          "value": "rgba(0, 48, 104, 0.9)"
         },
         {
           "identifier": "bg_gradient_hero",
@@ -1346,7 +1346,7 @@
           "type": "text",
           "description": "custom_blocks_heading_description",
           "label": "custom_blocks_heading_label",
-          "value": "Helpful links"
+          "value": "Heplful Links"
         },
         {
           "identifier": "number_custom_blocks",
@@ -1578,7 +1578,7 @@
           "type": "color",
           "description": "bg_color_content_blocks_description",
           "label": "bg_color_content_blocks_label",
-          "value": "#fff"
+          "value": "rgba(255, 255, 255, 1)"
         },
         {
           "identifier": "content_blocks_heading",
@@ -1634,7 +1634,7 @@
           "type": "text",
           "description": "content_block_image_height_description",
           "label": "content_block_image_height_label",
-          "value": "40px"
+          "value": "0"
         }
       ]
     },
@@ -2469,7 +2469,7 @@
           "type": "list",
           "description": "form_list_style_description",
           "label": "form_list_style_label",
-          "value": "standard",
+          "value": "list",
           "options": [
             {
               "label": "Standard",
@@ -2552,7 +2552,7 @@
           "type": "checkbox",
           "description": "post_sharing_description",
           "label": "post_sharing_label",
-          "value": true
+          "value": false
         }
       ]
     },
@@ -2649,7 +2649,7 @@
           "type": "color",
           "description": "bg_color_footer_description",
           "label": "bg_color_footer_label",
-          "value": "rgba(230, 234, 237, 1)"
+          "value": "rgba(239, 241, 244, 1)"
         },
         {
           "identifier": "footer_link_1_text",
