@@ -225,6 +225,7 @@
 
 <script type="text/javascript">document.documentElement.classList.add('section-page', 'section-' + {{section.id}})</script>
 <script>
+
 	const AUTHORIZED_SEGMENT_IDS = [12513489179791, 26978513566748];
 	const SIDEAPP_ID = 1241898;
 	const USER_CACHE_KEY = "hmg_user_cache";
@@ -300,12 +301,18 @@
 		return res.json();
 	}
 
-	async function notifySideapp(articleId, sectionId, event) {
+	async function notifySideapp(articleId, sectionId, event, { userSegmentId, promoted, draft }) {
 		const csrfToken = await getCsrfToken();
 		const payload = {
 			app_id: SIDEAPP_ID,
 			event,
-			body: { article_id: articleId, section_id: sectionId }
+			body: {
+				article_id: articleId,
+				section_id: sectionId,
+				user_segment_id: userSegmentId ?? null,
+				promoted: promoted ?? false,
+				draft: draft ?? false
+			}
 		};
 		const res = await fetch("/api/v2/apps/notify", {
 			method: "POST",
@@ -331,8 +338,9 @@
 		const notifyEvent = isOff ? "article.unpublished" : "article.published";
 
 		try {
-			await updateArticlePromoted(articleId, !isOff);
-			await notifySideapp(articleId, sectionId, notifyEvent);
+			const result = await updateArticlePromoted(articleId, !isOff);
+			const { user_segment_id: userSegmentId, promoted, draft } = result.article;
+			await notifySideapp(articleId, sectionId, notifyEvent, { userSegmentId, promoted, draft });
 			window.location.reload();
 		} catch (err) {
 			console.error("[popup-controller] 변경 실패:", err);
