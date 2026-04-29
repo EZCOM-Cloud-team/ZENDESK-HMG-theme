@@ -167,62 +167,195 @@
 		if (popupOverlay) initPopups(popupOverlay);
 	});
 
-	const url = window.location.href;
-	let language;
+	try {
+		const url = window.location.href;
+		let language;
 
-	Object.keys(footerTranslateTopRight).forEach((key) => {
-		if (url.includes(`hc/${key}`)) {
-			language = key;
-		}
-	});
-	const ftrData = footerTranslateTopRight[language];
-
-	const newsLetterTitle = document.querySelector(".newsletter_title");
-	newsLetterTitle.innerHTML = ftrData.leftbox.title;
-
-	const formControl = document.querySelector(".newletter_input");
-	formControl.placeholder = ftrData.leftbox.placeHolder;
-	formControl.classList.add("footer_form_control");
-
-	const formControlDescription = document.querySelector(".newsletter_button_description");
-
-	if (ftrData.leftbox.description) {
-		formControlDescription.innerHTML = ftrData.leftbox.description;
-	}
-
-	const newletterButton = document.querySelector(".newsletter_button_describe");
-	newletterButton.innerHTML = ftrData.leftbox.subscribeButton;
-
-	const companyProfileTitle = document.querySelector(".company_profile_title");
-	companyProfileTitle.innerHTML = ftrData.rightbox.title;
-
-	const profileHref = document.querySelector(".profile_href");
-	profileHref.href = ftrData.rightbox.url;
-
-	const footerLogo = document.querySelector(".footer_logo");
-	footerLogo.src = ftrData.logo;
-
-	const footerAddress = document.querySelector(".footer_address");
-	footerAddress.innerHTML = ftrData.address;
-
-	const footerCompany = document.querySelector(".footer_company");
-	if (ftrData.raw) {
-		ftrData.raw.forEach((item) => {
-			const footerName = document.createElement("div");
-			const footerHref = document.createElement("a");
-
-			if (item.tag) {
-				footerName.classList.add("orange");
+		Object.keys(footerTranslateTopRight).forEach((key) => {
+			if (url.includes(`hc/${key}`)) {
+				language = key;
 			}
-
-			footerName.innerHTML = item.title;
-			footerName.style.fontSize = "14px";
-			footerHref.href = item.url;
-
-			footerHref.appendChild(footerName);
-			footerCompany.appendChild(footerHref);
 		});
+		const ftrData = footerTranslateTopRight[language];
+
+		const newsLetterTitle = document.querySelector(".newsletter_title");
+		newsLetterTitle.innerHTML = ftrData.leftbox.title;
+
+		const formControl = document.querySelector(".newletter_input");
+		formControl.placeholder = ftrData.leftbox.placeHolder;
+		formControl.classList.add("footer_form_control");
+
+		const formControlDescription = document.querySelector(".newsletter_button_description");
+
+		if (ftrData.leftbox.description) {
+			formControlDescription.innerHTML = ftrData.leftbox.description;
+		}
+
+		const newletterButton = document.querySelector(".newsletter_button_describe");
+		newletterButton.innerHTML = ftrData.leftbox.subscribeButton;
+
+		const companyProfileTitle = document.querySelector(".company_profile_title");
+		companyProfileTitle.innerHTML = ftrData.rightbox.title;
+
+		const profileHref = document.querySelector(".profile_href");
+		profileHref.href = ftrData.rightbox.url;
+
+		const footerLogo = document.querySelector(".footer_logo");
+		footerLogo.src = ftrData.logo;
+
+		const footerAddress = document.querySelector(".footer_address");
+		footerAddress.innerHTML = ftrData.address;
+
+		const footerCompany = document.querySelector(".footer_company");
+		if (ftrData.raw) {
+			ftrData.raw.forEach((item) => {
+				const footerName = document.createElement("div");
+				const footerHref = document.createElement("a");
+
+				if (item.tag) {
+					footerName.classList.add("orange");
+				}
+
+				footerName.innerHTML = item.title;
+				footerName.style.fontSize = "14px";
+				footerHref.href = item.url;
+
+				footerHref.appendChild(footerName);
+				footerCompany.appendChild(footerHref);
+			});
+		}
+	} catch (e) {
+		// footer 번역 초기화 실패 (해당 페이지에 footer 요소 없음)
 	}
+
+	ready(function () {
+		const titleElements = document.querySelectorAll(
+			".link-stretched.text-inherit, h1.article-title, .article-list-item a, .promoted-articles-item a"
+		);
+
+		titleElements.forEach(function (el) {
+			const originalText = el.innerText.trim();
+
+			// 1. 모든 상태값을 한 번에 찾는 정규식 (Open, In Progress, Solved -> Investigating, Scheduled, Fixed 및 한국어 추가)
+			const match = originalText.match(
+				/^\[\s*(Investigating|Scheduled|Fixed|확인\s*중|예정됨|해결됨|장애\s*발생|장애\s*종료|Incident|Resolved|배포\s*전|배포\s*완료|Pre-Release|Pre\s*Release|Released|예정|진행\s*중|종료|Upcoming|Ongoing|Ended)\s*\]/i
+			);
+
+			if (match) {
+				// 2. 매칭된 텍스트에서 공백을 모두 제거하고 소문자로 변환
+				const rawStatus = match[1].replace(/\s+/g, "").toLowerCase();
+				let badgeClass = "";
+				let displayText = "";
+
+				// 3. 공백이 제거된 상태값(rawStatus)을 기준으로 분기 처리
+				switch (rawStatus) {
+					// --- [1] 기본 상태값 (수정됨) ---
+					case "investigating":
+						badgeClass = "investigating-en";
+						displayText = "INVESTIGATING";
+						break;
+					case "확인중":
+						badgeClass = "investigating-kr";
+						displayText = "확인 중";
+						break;
+					case "scheduled":
+						badgeClass = "scheduled-en";
+						displayText = "SCHEDULED";
+						break;
+					case "예정됨":
+						badgeClass = "scheduled-kr";
+						displayText = "예정됨";
+						break;
+					case "fixed":
+						badgeClass = "fixed-en";
+						displayText = "FIXED";
+						break;
+					case "해결됨":
+						badgeClass = "fixed-kr";
+						displayText = "해결됨";
+						break;
+
+					// --- [2] 장애 관련 상태값 ---
+					case "장애발생":
+						badgeClass = "incident-kr";
+						displayText = "장애 발생";
+						break;
+					case "장애종료":
+						badgeClass = "resolved-kr";
+						displayText = "장애 종료";
+						break;
+					case "incident":
+						badgeClass = "incident-en";
+						displayText = "INCIDENT";
+						break;
+					case "resolved":
+						badgeClass = "resolved-en";
+						displayText = "RESOLVED";
+						break;
+
+					// --- [3] 배포 관련 상태값 ---
+					case "배포전":
+						badgeClass = "prerelease-kr";
+						displayText = "배포 전";
+						break;
+					case "배포완료":
+						badgeClass = "released-kr";
+						displayText = "배포 완료";
+						break;
+					case "pre-release":
+					case "prerelease":
+						badgeClass = "prerelease-en";
+						displayText = "PRE-RELEASE";
+						break;
+					case "released":
+						badgeClass = "released-en";
+						displayText = "RELEASED";
+						break;
+
+					// --- [4] 이벤트 관련 상태값 ---
+					case "예정":
+						badgeClass = "event-upcoming-kr";
+						displayText = "예정";
+						break;
+					case "진행중":
+						badgeClass = "event-ongoing-kr";
+						displayText = "진행 중";
+						break;
+					case "종료":
+						badgeClass = "event-ended-kr";
+						displayText = "종료";
+						break;
+					case "upcoming":
+						badgeClass = "event-upcoming-en";
+						displayText = "UPCOMING";
+						break;
+					case "ongoing":
+						badgeClass = "event-ongoing-en";
+						displayText = "ONGOING";
+						break;
+					case "ended":
+						badgeClass = "event-ended-en";
+						displayText = "ENDED";
+						break;
+				}
+
+				// 4. 뱃지 생성 및 적용
+				if (badgeClass !== "") {
+					const badge = document.createElement("span");
+					badge.className = `status-badge badge-${badgeClass}`;
+					badge.innerText = displayText;
+
+					// 기존 제목에서 [상태값] 텍스트 제거
+					const newText = originalText.replace(/^\[.*?\]\s*/, "");
+
+					// 요소 업데이트
+					el.innerHTML = "";
+					el.appendChild(badge);
+					el.appendChild(document.createTextNode(" " + newText));
+				}
+			}
+		});
+	});
 
 	// 팝업 공지사항
 	function positionPopups(popups, centerX, centerY) {
@@ -305,132 +438,3 @@
 		});
 	}
 })();
-
-document.addEventListener("DOMContentLoaded", function () {
-	const titleElements = document.querySelectorAll(
-		".link-stretched.text-inherit, h1.article-title, .article-list-item a, .promoted-articles-item a"
-	);
-
-	titleElements.forEach(function (el) {
-		const originalText = el.innerText.trim();
-
-		// 1. 모든 상태값을 한 번에 찾는 정규식 (Open, In Progress, Solved -> Investigating, Scheduled, Fixed 및 한국어 추가)
-		const match = originalText.match(
-			/^\[\s*(Investigating|Scheduled|Fixed|확인\s*중|예정됨|해결됨|장애\s*발생|장애\s*종료|Incident|Resolved|배포\s*전|배포\s*완료|Pre-Release|Pre\s*Release|Released|예정|진행\s*중|종료|Upcoming|Ongoing|Ended)\s*\]/i
-		);
-
-		if (match) {
-			// 2. 매칭된 텍스트에서 공백을 모두 제거하고 소문자로 변환
-			const rawStatus = match[1].replace(/\s+/g, "").toLowerCase();
-			let badgeClass = "";
-			let displayText = "";
-
-			// 3. 공백이 제거된 상태값(rawStatus)을 기준으로 분기 처리
-			switch (rawStatus) {
-				// --- [1] 기본 상태값 (수정됨) ---
-				case "investigating":
-					badgeClass = "investigating-en";
-					displayText = "INVESTIGATING";
-					break;
-				case "확인중":
-					badgeClass = "investigating-kr";
-					displayText = "확인 중";
-					break;
-				case "scheduled":
-					badgeClass = "scheduled-en";
-					displayText = "SCHEDULED";
-					break;
-				case "예정됨":
-					badgeClass = "scheduled-kr";
-					displayText = "예정됨";
-					break;
-				case "fixed":
-					badgeClass = "fixed-en";
-					displayText = "FIXED";
-					break;
-				case "해결됨":
-					badgeClass = "fixed-kr";
-					displayText = "해결됨";
-					break;
-
-				// --- [2] 장애 관련 상태값 ---
-				case "장애발생":
-					badgeClass = "incident-kr";
-					displayText = "장애 발생";
-					break;
-				case "장애종료":
-					badgeClass = "resolved-kr";
-					displayText = "장애 종료";
-					break;
-				case "incident":
-					badgeClass = "incident-en";
-					displayText = "INCIDENT";
-					break;
-				case "resolved":
-					badgeClass = "resolved-en";
-					displayText = "RESOLVED";
-					break;
-
-				// --- [3] 배포 관련 상태값 ---
-				case "배포전":
-					badgeClass = "prerelease-kr";
-					displayText = "배포 전";
-					break;
-				case "배포완료":
-					badgeClass = "released-kr";
-					displayText = "배포 완료";
-					break;
-				case "pre-release":
-				case "prerelease":
-					badgeClass = "prerelease-en";
-					displayText = "PRE-RELEASE";
-					break;
-				case "released":
-					badgeClass = "released-en";
-					displayText = "RELEASED";
-					break;
-
-				// --- [4] 이벤트 관련 상태값 ---
-				case "예정":
-					badgeClass = "event-upcoming-kr";
-					displayText = "예정";
-					break;
-				case "진행중":
-					badgeClass = "event-ongoing-kr";
-					displayText = "진행 중";
-					break;
-				case "종료":
-					badgeClass = "event-ended-kr";
-					displayText = "종료";
-					break;
-				case "upcoming":
-					badgeClass = "event-upcoming-en";
-					displayText = "UPCOMING";
-					break;
-				case "ongoing":
-					badgeClass = "event-ongoing-en";
-					displayText = "ONGOING";
-					break;
-				case "ended":
-					badgeClass = "event-ended-en";
-					displayText = "ENDED";
-					break;
-			}
-
-			// 4. 뱃지 생성 및 적용
-			if (badgeClass !== "") {
-				const badge = document.createElement("span");
-				badge.className = `status-badge badge-${badgeClass}`;
-				badge.innerText = displayText;
-
-				// 기존 제목에서 [상태값] 텍스트 제거
-				const newText = originalText.replace(/^\[.*?\]\s*/, "");
-
-				// 요소 업데이트
-				el.innerHTML = "";
-				el.appendChild(badge);
-				el.appendChild(document.createTextNode(" " + newText));
-			}
-		}
-	});
-});
