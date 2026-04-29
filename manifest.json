@@ -1,2753 +1,2753 @@
 {
-	"name": "HMG Help Center Theme",
-	"author": "Zenplates",
-	"version": "1.0.0",
-	"api_version": 3,
-	"default_locale": "en-us",
-	"settings": [
-		{
-			"label": "colors_group_label",
-			"variables": [
-				{
-					"identifier": "color_primary",
-					"type": "color",
-					"description": "color_primary_description",
-					"label": "color_primary_label",
-					"value": "rgba(5, 20, 31, 1)"
-				},
-				{
-					"identifier": "color_primary_inverse",
-					"type": "color",
-					"description": "color_primary_inverse_description",
-					"label": "color_primary_inverse_label",
-					"value": "#fff"
-				},
-				{
-					"identifier": "color_secondary",
-					"type": "color",
-					"description": "color_secondary_description",
-					"label": "color_secondary_label",
-					"value": "rgba(5, 20, 31, 1)"
-				},
-				{
-					"identifier": "color_secondary_inverse",
-					"type": "color",
-					"description": "color_secondary_inverse_description",
-					"label": "color_secondary_inverse_label",
-					"value": "#fff"
-				},
-				{
-					"identifier": "color_tertiary",
-					"type": "color",
-					"description": "color_tertiary_description",
-					"label": "color_tertiary_label",
-					"value": "#bb4290"
-				},
-				{
-					"identifier": "color_tertiary_inverse",
-					"type": "color",
-					"description": "color_tertiary_inverse_description",
-					"label": "color_tertiary_inverse_label",
-					"value": "#fff"
-				},
-				{
-					"identifier": "color_heading",
-					"type": "color",
-					"description": "heading_color_description",
-					"label": "heading_color_label",
-					"value": "#323232"
-				},
-				{
-					"identifier": "color_text",
-					"type": "color",
-					"description": "text_color_description",
-					"label": "text_color_label",
-					"value": "#555"
-				},
-				{
-					"identifier": "color_link",
-					"type": "color",
-					"description": "link_color_description",
-					"label": "link_color_label",
-					"value": "rgba(5, 20, 31, 1)"
-				},
-				{
-					"identifier": "color_border",
-					"type": "color",
-					"description": "color_border_description",
-					"label": "color_border_label",
-					"value": "rgba(230, 234, 237, 1)"
-				},
-				{
-					"identifier": "color_outline",
-					"type": "color",
-					"description": "outline_color_description",
-					"label": "outline_color_label",
-					"value": "rgba(230, 234, 237, 0.25)"
-				},
-				{
-					"identifier": "color_gray_100",
-					"type": "color",
-					"description": "color_gray_100_description",
-					"label": "color_gray_100_label",
-					"value": "rgba(230, 234, 237, 1)"
-				},
-				{
-					"identifier": "color_gray_200",
-					"type": "color",
-					"description": "color_gray_200_description",
-					"label": "color_gray_200_label",
-					"value": "rgba(230, 234, 237, 1)"
-				},
-				{
-					"identifier": "color_gray_600",
-					"type": "color",
-					"description": "color_gray_600_description",
-					"label": "color_gray_600_label",
-					"value": "#718096"
-				},
-				{
-					"identifier": "bg_color",
-					"type": "color",
-					"description": "background_color_description",
-					"label": "background_color_label",
-					"value": "#fff"
-				}
-			]
-		},
-		{
-			"label": "fonts_group_label",
-			"variables": [
-				{
-					"identifier": "heading_font",
-					"type": "list",
-					"description": "heading_font_description",
-					"label": "heading_font_label",
-					"value": "Helvetica, Arial, sans-serif",
-					"options": [
-						{
-							"label": "Arimo (Google)",
-							"value": "'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Bitter (Google)",
-							"value": "'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Catamaran (Google)",
-							"value": "'Catamaran', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Crimson Text (Google)",
-							"value": "'Crimson Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "DM Sans (Google)",
-							"value": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "EB Garamond (Google)",
-							"value": "'EB Garamond', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Faustina (Google)",
-							"value": "'Faustina', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Fira Sans (Google)",
-							"value": "'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Inter (Google)",
-							"value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Jost (Google)",
-							"value": "'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Lato (Google)",
-							"value": "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Libre Franklin (Google)",
-							"value": "'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Lora (Google)",
-							"value": "'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Manrope (Google)",
-							"value": "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Merriweather (Google)",
-							"value": "'Merriweather', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Montserrat (Google)",
-							"value": "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Mukta (Google)",
-							"value": "'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Mulish (Google)",
-							"value": "'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Nunito Sans (Google)",
-							"value": "'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Noto Sans Display (Google)",
-							"value": "'Noto Sans Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Noto Serif (Google)",
-							"value": "'Noto Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Oswald (Google)",
-							"value": "'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Roboto (Google)",
-							"value": "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Rubik (Google)",
-							"value": "'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Open Sans (Google)",
-							"value": "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Poppins (Google)",
-							"value": "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Prata (Google)",
-							"value": "'Prata', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "PT Sans (Google)",
-							"value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "PT Serif (Google)",
-							"value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Public Sans (Google)",
-							"value": "'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Raleway (Google)",
-							"value": "'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Signika (Google)",
-							"value": "'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Source Sans Pro (Google)",
-							"value": "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Ubuntu (Google)",
-							"value": "'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Work Sans (Google)",
-							"value": "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "System",
-							"value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Arial",
-							"value": "Arial, 'Helvetica Neue', Helvetica, sans-serif"
-						},
-						{
-							"label": "Arial Black",
-							"value": "'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif"
-						},
-						{
-							"label": "Baskerville",
-							"value": "Baskerville, 'Times New Roman', Times, serif"
-						},
-						{
-							"label": "Century Gothic",
-							"value": "'Century Gothic', AppleGothic, sans-serif"
-						},
-						{
-							"label": "Copperplate Light",
-							"value": "'Copperplate Light', 'Copperplate Gothic Light', serif"
-						},
-						{
-							"label": "Courier New",
-							"value": "'Courier New', Courier, monospace"
-						},
-						{
-							"label": "Futura",
-							"value": "Futura, 'Century Gothic', AppleGothic, sans-serif"
-						},
-						{
-							"label": "Garamond",
-							"value": "Garamond, 'Hoefler Text', 'Times New Roman', Times, serif"
-						},
-						{
-							"label": "Geneva",
-							"value": "Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif"
-						},
-						{
-							"label": "Georgia",
-							"value": "Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif"
-						},
-						{
-							"label": "Helvetica",
-							"value": "Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Helvetica Neue",
-							"value": "'Helvetica Neue', Arial, Helvetica, sans-serif"
-						},
-						{
-							"label": "Impact",
-							"value": "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
-						},
-						{
-							"label": "Lucida Grande",
-							"value": "'Lucida Grande', 'Lucida Sans', 'Lucida Sans Unicode', sans-serif"
-						},
-						{
-							"label": "Trebuchet MS",
-							"value": "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-						}
-					]
-				},
-				{
-					"identifier": "text_font",
-					"type": "list",
-					"description": "text_font_description",
-					"label": "text_font_label",
-					"value": "Helvetica, Arial, sans-serif",
-					"options": [
-						{
-							"label": "Arimo (Google)",
-							"value": "'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Bitter (Google)",
-							"value": "'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Catamaran (Google)",
-							"value": "'Catamaran', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Crimson Text (Google)",
-							"value": "'Crimson Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "DM Sans (Google)",
-							"value": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "EB Garamond (Google)",
-							"value": "'EB Garamond', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Fira Sans (Google)",
-							"value": "'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Inter (Google)",
-							"value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Jost (Google)",
-							"value": "'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Lato (Google)",
-							"value": "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Libre Franklin (Google)",
-							"value": "'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Lora (Google)",
-							"value": "'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Merriweather (Google)",
-							"value": "'Merriweather', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Montserrat (Google)",
-							"value": "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Mukta (Google)",
-							"value": "'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Mulish (Google)",
-							"value": "'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Nunito Sans (Google)",
-							"value": "'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Noto Sans (Google)",
-							"value": "'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Noto Serif (Google)",
-							"value": "'Noto Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Roboto (Google)",
-							"value": "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Rubik (Google)",
-							"value": "'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Open Sans (Google)",
-							"value": "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Poppins (Google)",
-							"value": "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Prata (Google)",
-							"value": "'Prata', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "PT Sans (Google)",
-							"value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "PT Serif (Google)",
-							"value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Public Sans (Google)",
-							"value": "'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Raleway (Google)",
-							"value": "'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Slabo 27px (Google)",
-							"value": "'Slabo 27px', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, serif"
-						},
-						{
-							"label": "Signika (Google)",
-							"value": "'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Source Sans Pro (Google)",
-							"value": "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Ubuntu (Google)",
-							"value": "'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Work Sans (Google)",
-							"value": "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "System",
-							"value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Arial",
-							"value": "Arial, 'Helvetica Neue', Helvetica, sans-serif"
-						},
-						{
-							"label": "Arial Black",
-							"value": "'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif"
-						},
-						{
-							"label": "Baskerville",
-							"value": "Baskerville, 'Times New Roman', Times, serif"
-						},
-						{
-							"label": "Century Gothic",
-							"value": "'Century Gothic', AppleGothic, sans-serif"
-						},
-						{
-							"label": "Copperplate Light",
-							"value": "'Copperplate Light', 'Copperplate Gothic Light', serif"
-						},
-						{
-							"label": "Courier New",
-							"value": "'Courier New', Courier, monospace"
-						},
-						{
-							"label": "Futura",
-							"value": "Futura, 'Century Gothic', AppleGothic, sans-serif"
-						},
-						{
-							"label": "Garamond",
-							"value": "Garamond, 'Hoefler Text', 'Times New Roman', Times, serif"
-						},
-						{
-							"label": "Geneva",
-							"value": "Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif"
-						},
-						{
-							"label": "Georgia",
-							"value": "Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif"
-						},
-						{
-							"label": "Helvetica",
-							"value": "Helvetica, Arial, sans-serif"
-						},
-						{
-							"label": "Helvetica Neue",
-							"value": "'Helvetica Neue', Arial, Helvetica, sans-serif"
-						},
-						{
-							"label": "Impact",
-							"value": "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
-						},
-						{
-							"label": "Lucida Grande",
-							"value": "'Lucida Grande', 'Lucida Sans', 'Lucida Sans Unicode', sans-serif"
-						},
-						{
-							"label": "Trebuchet MS",
-							"value": "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-						}
-					]
-				},
-				{
-					"identifier": "base_font_size",
-					"type": "text",
-					"description": "base_font_size_description",
-					"label": "base_font_size_label",
-					"value": "16px"
-				}
-			]
-		},
-		{
-			"label": "brand_group_label",
-			"variables": [
-				{
-					"identifier": "favicon",
-					"type": "file",
-					"description": "favicon_description",
-					"label": "favicon_label"
-				},
-				{
-					"identifier": "logo",
-					"type": "file",
-					"description": "logo_description",
-					"label": "logo_label"
-				},
-				{
-					"identifier": "logo_height",
-					"type": "text",
-					"description": "logo_height_description",
-					"label": "logo_height_label",
-					"value": "60px"
-				},
-				{
-					"identifier": "tagline",
-					"type": "text",
-					"description": "tagline_description",
-					"label": "tagline_label",
-					"value": ""
-				}
-			]
-		},
-		{
-			"label": "images_group_label",
-			"variables": [
-				{
-					"identifier": "homepage_background_image",
-					"type": "file",
-					"description": "homepage_background_image_description",
-					"label": "homepage_background_image_label"
-				},
-				{
-					"identifier": "community_background_image",
-					"type": "file",
-					"description": "community_background_image_description",
-					"label": "community_background_image_label"
-				},
-				{
-					"identifier": "content_block_1_image",
-					"type": "file",
-					"description": "content_block_1_image_description",
-					"label": "content_block_1_image_label"
-				},
-				{
-					"identifier": "content_block_2_image",
-					"type": "file",
-					"description": "content_block_2_image_description",
-					"label": "content_block_2_image_label"
-				},
-				{
-					"identifier": "content_block_3_image",
-					"type": "file",
-					"description": "content_block_3_image_description",
-					"label": "content_block_3_image_label"
-				},
-				{
-					"identifier": "content_block_4_image",
-					"type": "file",
-					"description": "content_block_4_image_description",
-					"label": "content_block_4_image_label"
-				},
-				{
-					"identifier": "content_block_5_image",
-					"type": "file",
-					"description": "content_block_5_image_description",
-					"label": "content_block_5_image_label"
-				},
-				{
-					"identifier": "content_block_6_image",
-					"type": "file",
-					"description": "content_block_6_image_description",
-					"label": "content_block_6_image_label"
-				},
-				{
-					"identifier": "content_block_7_image",
-					"type": "file",
-					"description": "content_block_7_image_description",
-					"label": "content_block_7_image_label"
-				},
-				{
-					"identifier": "content_block_8_image",
-					"type": "file",
-					"description": "content_block_8_image_description",
-					"label": "content_block_8_image_label"
-				},
-				{
-					"identifier": "custom_block_1_image",
-					"type": "file",
-					"description": "custom_block_1_image_description",
-					"label": "custom_block_1_image_label"
-				},
-				{
-					"identifier": "custom_block_2_image",
-					"type": "file",
-					"description": "custom_block_2_image_description",
-					"label": "custom_block_2_image_label"
-				},
-				{
-					"identifier": "custom_block_3_image",
-					"type": "file",
-					"description": "custom_block_3_image_description",
-					"label": "custom_block_3_image_label"
-				},
-				{
-					"identifier": "custom_block_4_image",
-					"type": "file",
-					"description": "custom_block_4_image_description",
-					"label": "custom_block_4_image_label"
-				},
-				{
-					"identifier": "contact_block_1_image",
-					"type": "file",
-					"description": "contact_block_1_image_description",
-					"label": "contact_block_1_image_label"
-				},
-				{
-					"identifier": "contact_block_2_image",
-					"type": "file",
-					"description": "contact_block_2_image_description",
-					"label": "contact_block_2_image_label"
-				},
-				{
-					"identifier": "contact_block_3_image",
-					"type": "file",
-					"description": "contact_block_3_image_description",
-					"label": "contact_block_3_image_label"
-				},
-				{
-					"identifier": "contact_block_4_image",
-					"type": "file",
-					"description": "contact_block_4_image_description",
-					"label": "contact_block_4_image_label"
-				},
-				{
-					"identifier": "cta_block_image",
-					"type": "file",
-					"description": "cta_block_image_description",
-					"label": "cta_block_image_label"
-				}
-			]
-		},
-		{
-			"label": "search_group_label",
-			"variables": [
-				{
-					"identifier": "header_search_style",
-					"type": "list",
-					"description": "header_search_style_description",
-					"label": "header_search_style_label",
-					"value": "inline",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Inline",
-							"value": "inline"
-						},
-						{
-							"label": "Collapsible",
-							"value": "collapsible"
-						},
-						{
-							"label": "Slide down",
-							"value": "slide-down"
-						}
-					]
-				},
-				{
-					"identifier": "instant_search",
-					"type": "checkbox",
-					"description": "instant_search_description",
-					"label": "instant_search_label",
-					"value": true
-				},
-				{
-					"identifier": "scoped_kb_search",
-					"type": "checkbox",
-					"description": "scoped_knowledge_base_search_description",
-					"label": "scoped_knowledge_base_search_label",
-					"value": true
-				},
-				{
-					"identifier": "scoped_community_search",
-					"type": "checkbox",
-					"description": "scoped_community_search_description",
-					"label": "scoped_community_search_label",
-					"value": true
-				},
-				{
-					"identifier": "search_placeholder",
-					"type": "text",
-					"description": "search_placeholder_description",
-					"label": "search_placeholder_label",
-					"value": ""
-				},
-				{
-					"identifier": "search_translucent",
-					"type": "checkbox",
-					"description": "search_translucent_description",
-					"label": "search_translucent_label",
-					"value": true
-				},
-				{
-					"identifier": "show_search_button",
-					"type": "checkbox",
-					"description": "show_search_button_description",
-					"label": "show_search_button_label",
-					"value": true
-				}
-			]
-		},
-		{
-			"label": "header_group_label",
-			"variables": [
-				{
-					"identifier": "header_layout",
-					"type": "list",
-					"description": "header_layout_description",
-					"label": "header_layout_label",
-					"value": "links-right",
-					"options": [
-						{
-							"label": "Links on left",
-							"value": "links-left"
-						},
-						{
-							"label": "Links in center",
-							"value": "links-center"
-						},
-						{
-							"label": "Links on right",
-							"value": "links-right"
-						},
-						{
-							"label": "Links in top bar",
-							"value": "links-topbar"
-						}
-					]
-				},
-				{
-					"identifier": "fixed_header",
-					"type": "checkbox",
-					"description": "fixed_header_description",
-					"label": "fixed_header_label",
-					"value": true
-				},
-				{
-					"identifier": "sticky_header",
-					"type": "checkbox",
-					"description": "sticky_header_description",
-					"label": "sticky_header_label",
-					"value": true
-				},
-				{
-					"identifier": "nav_style",
-					"type": "list",
-					"description": "nav_style_description",
-					"label": "nav_style_label",
-					"value": "standard",
-					"options": [
-						{
-							"label": "Standard",
-							"value": "standard"
-						},
-						{
-							"label": "Slide in",
-							"value": "slide-in"
-						}
-					]
-				},
-				{
-					"identifier": "nav_breakpoint",
-					"type": "list",
-					"description": "nav_breakpoint_description",
-					"label": "nav_breakpoint_label",
-					"value": "xl",
-					"options": [
-						{
-							"label": "Small",
-							"value": "sm"
-						},
-						{
-							"label": "Medium",
-							"value": "md"
-						},
-						{
-							"label": "Large",
-							"value": "lg"
-						},
-						{
-							"label": "Extra large",
-							"value": "xl"
-						},
-						{
-							"label": "None",
-							"value": "none"
-						}
-					]
-				},
-				{
-					"identifier": "full_width_header",
-					"type": "checkbox",
-					"description": "full_width_header_description",
-					"label": "full_width_header_label",
-					"value": false
-				},
-				{
-					"identifier": "header_height",
-					"type": "text",
-					"description": "header_height_description",
-					"label": "header_height_label",
-					"value": "72px"
-				},
-				{
-					"identifier": "color_header_link",
-					"type": "color",
-					"description": "color_header_link_description",
-					"label": "color_header_link_label",
-					"value": "#fefefe"
-				},
-				{
-					"identifier": "color_header_link_fixed",
-					"type": "color",
-					"description": "color_header_link_fixed_description",
-					"label": "color_header_link_fixed_label",
-					"value": "#fefefe"
-				},
-				{
-					"identifier": "bg_color_header",
-					"type": "color",
-					"description": "bg_color_header_description",
-					"label": "bg_color_header_label",
-					"value": "rgba(5, 20, 31, 1)"
-				},
-				{
-					"identifier": "header_link_1_text",
-					"type": "text",
-					"description": "header_link_1_text_description",
-					"label": "header_link_1_text_label",
-					"value": ""
-				},
-				{
-					"identifier": "header_link_1_url",
-					"type": "text",
-					"description": "header_link_1_url_description",
-					"label": "header_link_1_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "header_link_2_text",
-					"type": "text",
-					"description": "header_link_2_text_description",
-					"label": "header_link_2_text_label",
-					"value": ""
-				},
-				{
-					"identifier": "header_link_2_url",
-					"type": "text",
-					"description": "header_link_2_url_description",
-					"label": "header_link_2_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "header_link_3_text",
-					"type": "text",
-					"description": "header_link_3_text_description",
-					"label": "header_link_3_text_label",
-					"value": ""
-				},
-				{
-					"identifier": "header_link_3_url",
-					"type": "text",
-					"description": "header_link_3_url_description",
-					"label": "header_link_3_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "show_submit_a_request_link",
-					"type": "checkbox",
-					"description": "show_submit_a_request_link_description",
-					"label": "show_submit_a_request_link_label",
-					"value": true
-				},
-				{
-					"identifier": "category_dropdown_style",
-					"type": "list",
-					"description": "category_dropdown_style_description",
-					"label": "category_dropdown_style_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Dropdown menu",
-							"value": "dropdown"
-						}
-					]
-				}
-			]
-		},
-		{
-			"label": "general_page_group_label",
-			"variables": [
-				{
-					"identifier": "notification_location",
-					"type": "list",
-					"description": "notification_location_description",
-					"label": "notification_location_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Header",
-							"value": "header"
-						},
-						{
-							"label": "Home page",
-							"value": "home"
-						}
-					]
-				},
-				{
-					"identifier": "notification_content",
-					"type": "text",
-					"description": "notification_content_description",
-					"label": "notification_content_label",
-					"value": "notification_content"
-				},
-				{
-					"identifier": "color_notification",
-					"type": "color",
-					"description": "color_notification_description",
-					"label": "color_notification_label",
-					"value": "#fff"
-				},
-				{
-					"identifier": "bg_color_notification",
-					"type": "color",
-					"description": "bg_color_notification_description",
-					"label": "bg_color_notification_label",
-					"value": "#ef526e"
-				},
-				{
-					"identifier": "back_to_top_link_style",
-					"type": "list",
-					"description": "back_to_top_link_style_description",
-					"label": "back_to_top_link_style_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Standard",
-							"value": "standard"
-						},
-						{
-							"label": "In footer",
-							"value": "footer"
-						}
-					]
-				},
-				{
-					"identifier": "boxed_layout",
-					"type": "checkbox",
-					"description": "boxed_layout_description",
-					"label": "boxed_layout_label",
-					"value": false
-				},
-				{
-					"identifier": "bg_color_boxed",
-					"type": "color",
-					"description": "bg_color_boxed_description",
-					"label": "bg_color_boxed_label",
-					"value": "#F7F7F7"
-				}
-			]
-		},
-		{
-			"label": "home_page_group_label",
-			"variables": [
-				{
-					"identifier": "hero_heading",
-					"type": "text",
-					"description": "hero_heading_description",
-					"label": "hero_heading_label",
-					"value": "Kia Knowledge Base"
-				},
-				{
-					"identifier": "color_hero_heading",
-					"type": "color",
-					"description": "color_hero_heading_description",
-					"label": "color_hero_heading_label",
-					"value": "rgba(254, 254, 254, 1)"
-				},
-				{
-					"identifier": "hero_text",
-					"type": "text",
-					"description": "hero_text_description",
-					"label": "hero_text_label",
-					"value": ""
-				},
-				{
-					"identifier": "color_hero_text",
-					"type": "color",
-					"description": "color_hero_text_description",
-					"label": "color_hero_text_label",
-					"value": "#fdfdfd"
-				},
-				{
-					"identifier": "hero_image_style",
-					"type": "list",
-					"description": "hero_image_style_description",
-					"label": "hero_image_style_label",
-					"value": "parallax",
-					"options": [
-						{
-							"label": "Behind background",
-							"value": "standard"
-						},
-						{
-							"label": "Overlay",
-							"value": "overlay"
-						},
-						{
-							"label": "Overlay (pattern)",
-							"value": "overlay-pattern"
-						},
-						{
-							"label": "Parallax effect",
-							"value": "parallax"
-						}
-					]
-				},
-				{
-					"identifier": "bg_color_hero",
-					"type": "color",
-					"description": "bg_color_hero_description",
-					"label": "bg_color_hero_label",
-					"value": "rgba(5, 20, 31, 1)"
-				},
-				{
-					"identifier": "bg_color_secondary_hero",
-					"type": "color",
-					"description": "bg_color_secondary_hero_description",
-					"label": "bg_color_secondary_hero_label",
-					"value": "rgba(5, 20, 31, 0.9)"
-				},
-				{
-					"identifier": "bg_gradient_hero",
-					"type": "list",
-					"description": "bg_gradient_hero_description",
-					"label": "bg_gradient_hero_label",
-					"value": "linear",
-					"options": [
-						{
-							"label": "Conic",
-							"value": "conic"
-						},
-						{
-							"label": "Linear",
-							"value": "linear"
-						},
-						{
-							"label": "Radial",
-							"value": "radial"
-						}
-					]
-				},
-				{
-					"identifier": "hero_content_alignment",
-					"type": "list",
-					"description": "hero_content_alignment_description",
-					"label": "hero_content_alignment_label",
-					"value": "left",
-					"options": [
-						{
-							"label": "Left",
-							"value": "left"
-						},
-						{
-							"label": "Center",
-							"value": "center"
-						}
-					]
-				},
-				{
-					"identifier": "hero_element_shape",
-					"type": "list",
-					"description": "hero_element_shape_description",
-					"label": "hero_element_shape_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Book",
-							"value": "book"
-						},
-						{
-							"label": "Curve",
-							"value": "curve"
-						},
-						{
-							"label": "Diagonal",
-							"value": "diagonal"
-						},
-						{
-							"label": "Hills",
-							"value": "hills"
-						},
-						{
-							"label": "Mountains",
-							"value": "mountains"
-						},
-						{
-							"label": "Rays",
-							"value": "rays"
-						},
-						{
-							"label": "Triangle",
-							"value": "triangle"
-						},
-						{
-							"label": "Wave",
-							"value": "wave"
-						},
-						{
-							"label": "Waves",
-							"value": "waves"
-						},
-						{
-							"label": "Zig zag",
-							"value": "zigzag"
-						}
-					]
-				},
-				{
-					"identifier": "popular_keywords_style",
-					"type": "list",
-					"description": "popular_keywords_style_description",
-					"label": "popular_keywords_style_label",
-					"value": "badges",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Badges",
-							"value": "badges"
-						},
-						{
-							"label": "Links",
-							"value": "links"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "popular_keywords_heading",
-					"type": "text",
-					"description": "popular_keywords_heading_description",
-					"label": "popular_keywords_heading_label",
-					"value": ""
-				},
-				{
-					"identifier": "popular_keywords",
-					"type": "text",
-					"description": "popular_keywords_description",
-					"label": "popular_keywords_label",
-					"value": ""
-				},
-				{
-					"identifier": "promoted_videos_heading",
-					"type": "text",
-					"description": "promoted_videos_heading_description",
-					"label": "promoted_videos_heading_label",
-					"value": ""
-				},
-				{
-					"identifier": "promoted_video_ids",
-					"type": "text",
-					"description": "promoted_video_ids_description",
-					"label": "promoted_video_ids_label",
-					"value": ""
-				},
-				{
-					"identifier": "recent_activity",
-					"type": "list",
-					"description": "recent_activity_description",
-					"label": "recent_activity_label",
-					"value": "all",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Community only",
-							"value": "community"
-						},
-						{
-							"label": "All activity",
-							"value": "all"
-						}
-					]
-				}
-			]
-		},
-		{
-			"label": "custom_block_group_label",
-			"variables": [
-				{
-					"identifier": "custom_block_style",
-					"type": "list",
-					"description": "custom_block_style_description",
-					"label": "custom_block_style_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Boxes",
-							"value": "boxes"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "color_custom_blocks",
-					"type": "list",
-					"description": "color_custom_blocks_description",
-					"label": "color_custom_blocks_label",
-					"value": "gray-100",
-					"options": [
-						{
-							"label": "White",
-							"value": "white"
-						},
-						{
-							"label": "Gray lightest",
-							"value": "gray-100"
-						},
-						{
-							"label": "Gray light",
-							"value": "gray-200"
-						},
-						{
-							"label": "Primary",
-							"value": "primary"
-						},
-						{
-							"label": "Secondary",
-							"value": "secondary"
-						},
-						{
-							"label": "Tertiary",
-							"value": "tertiary"
-						}
-					]
-				},
-				{
-					"identifier": "bg_color_custom_blocks",
-					"type": "color",
-					"description": "bg_color_custom_blocks_description",
-					"label": "bg_color_custom_blocks_label",
-					"value": "#fff"
-				},
-				{
-					"identifier": "custom_blocks_heading",
-					"type": "text",
-					"description": "custom_blocks_heading_description",
-					"label": "custom_blocks_heading_label",
-					"value": "Helpful links"
-				},
-				{
-					"identifier": "number_custom_blocks",
-					"type": "list",
-					"description": "number_custom_blocks_description",
-					"label": "number_custom_blocks_label",
-					"value": "2",
-					"options": [
-						{
-							"label": "1",
-							"value": "1"
-						},
-						{
-							"label": "2",
-							"value": "2"
-						},
-						{
-							"label": "3",
-							"value": "3"
-						},
-						{
-							"label": "4",
-							"value": "4"
-						}
-					]
-				},
-				{
-					"identifier": "number_custom_block_columns",
-					"type": "list",
-					"description": "number_custom_block_columns_description",
-					"label": "number_custom_block_columns_label",
-					"value": "2",
-					"options": [
-						{
-							"label": "1",
-							"value": "1"
-						},
-						{
-							"label": "2",
-							"value": "2"
-						},
-						{
-							"label": "3",
-							"value": "3"
-						},
-						{
-							"label": "4",
-							"value": "4"
-						}
-					]
-				},
-				{
-					"identifier": "custom_block_alignment",
-					"type": "list",
-					"description": "custom_block_alignment_description",
-					"label": "custom_block_alignment_label",
-					"value": "left",
-					"options": [
-						{
-							"label": "Left",
-							"value": "left"
-						},
-						{
-							"label": "Center",
-							"value": "center"
-						}
-					]
-				},
-				{
-					"identifier": "custom_block_image_height",
-					"type": "text",
-					"description": "custom_block_image_height_description",
-					"label": "custom_block_image_height_label",
-					"value": "40px"
-				},
-				{
-					"identifier": "custom_block_1_title",
-					"type": "text",
-					"description": "custom_block_1_title_description",
-					"label": "custom_block_1_title_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_1_description",
-					"type": "text",
-					"description": "custom_block_1_description_description",
-					"label": "custom_block_1_description_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_1_url",
-					"type": "text",
-					"description": "custom_block_1_url_description",
-					"label": "custom_block_1_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_2_title",
-					"type": "text",
-					"description": "custom_block_2_title_description",
-					"label": "custom_block_2_title_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_2_description",
-					"type": "text",
-					"description": "custom_block_2_description_description",
-					"label": "custom_block_2_description_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_2_url",
-					"type": "text",
-					"description": "custom_block_2_url_description",
-					"label": "custom_block_2_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_3_title",
-					"type": "text",
-					"description": "custom_block_3_title_description",
-					"label": "custom_block_3_title_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_3_description",
-					"type": "text",
-					"description": "custom_block_3_description_description",
-					"label": "custom_block_3_description_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_3_url",
-					"type": "text",
-					"description": "custom_block_3_url_description",
-					"label": "custom_block_3_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_4_title",
-					"type": "text",
-					"description": "custom_block_4_title_description",
-					"label": "custom_block_4_title_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_4_description",
-					"type": "text",
-					"description": "custom_block_4_description_description",
-					"label": "custom_block_4_description_label",
-					"value": ""
-				},
-				{
-					"identifier": "custom_block_4_url",
-					"type": "text",
-					"description": "custom_block_4_url_description",
-					"label": "custom_block_4_url_label",
-					"value": ""
-				}
-			]
-		},
-		{
-			"label": "content_block_group_label",
-			"variables": [
-				{
-					"identifier": "content_block_style",
-					"type": "list",
-					"description": "content_block_style_description",
-					"label": "content_block_style_label",
-					"value": "1-boxes",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Boxes",
-							"value": "1-boxes"
-						},
-						{
-							"label": "Tree",
-							"value": "2-tree"
-						},
-						{
-							"label": "Toggles",
-							"value": "toggles"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "color_content_blocks",
-					"type": "list",
-					"description": "color_content_blocks_description",
-					"label": "color_content_blocks_label",
-					"value": "primary",
-					"options": [
-						{
-							"label": "White",
-							"value": "white"
-						},
-						{
-							"label": "Gray lightest",
-							"value": "gray-100"
-						},
-						{
-							"label": "Gray light",
-							"value": "gray-200"
-						},
-						{
-							"label": "Primary",
-							"value": "primary"
-						},
-						{
-							"label": "Secondary",
-							"value": "secondary"
-						},
-						{
-							"label": "Tertiary",
-							"value": "tertiary"
-						}
-					]
-				},
-				{
-					"identifier": "bg_color_content_blocks",
-					"type": "color",
-					"description": "bg_color_content_blocks_description",
-					"label": "bg_color_content_blocks_label",
-					"value": "#fff"
-				},
-				{
-					"identifier": "content_blocks_heading",
-					"type": "text",
-					"description": "content_blocks_heading_description",
-					"label": "content_blocks_heading_label",
-					"value": "Browse topics"
-				},
-				{
-					"identifier": "number_content_block_columns",
-					"type": "list",
-					"description": "number_content_block_columns_description",
-					"label": "number_content_block_columns_label",
-					"value": "2",
-					"options": [
-						{
-							"label": "1",
-							"value": "1"
-						},
-						{
-							"label": "2",
-							"value": "2"
-						},
-						{
-							"label": "3",
-							"value": "3"
-						},
-						{
-							"label": "4",
-							"value": "4"
-						}
-					]
-				},
-				{
-					"identifier": "content_block_alignment",
-					"type": "list",
-					"description": "content_block_alignment_description",
-					"label": "content_block_alignment_label",
-					"value": "left",
-					"options": [
-						{
-							"label": "Left",
-							"value": "left"
-						},
-						{
-							"label": "Center",
-							"value": "center"
-						}
-					]
-				},
-				{
-					"identifier": "content_block_image_height",
-					"type": "text",
-					"description": "content_block_image_height_description",
-					"label": "content_block_image_height_label",
-					"value": "0"
-				}
-			]
-		},
-		{
-			"label": "article_list_group_label",
-			"variables": [
-				{
-					"identifier": "article_list_style",
-					"type": "list",
-					"description": "article_list_style_description",
-					"label": "article_list_style_label",
-					"value": "3-bordered",
-					"options": [
-						{
-							"label": "Bullet list",
-							"value": "1-bullet"
-						},
-						{
-							"label": "Unstyled list",
-							"value": "2-unstyled"
-						},
-						{
-							"label": "Bordered list",
-							"value": "3-bordered"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "article_list_columns",
-					"type": "list",
-					"description": "article_list_columns_description",
-					"label": "article_list_columns_label",
-					"value": "1",
-					"options": [
-						{
-							"label": "1",
-							"value": "1"
-						},
-						{
-							"label": "2",
-							"value": "2"
-						},
-						{
-							"label": "3",
-							"value": "3"
-						}
-					]
-				},
-				{
-					"identifier": "article_list_excerpt",
-					"type": "range",
-					"description": "article_list_excerpt_description",
-					"label": "article_list_excerpt_label",
-					"value": 0,
-					"min": 0,
-					"max": 256
-				},
-				{
-					"identifier": "promoted_article_style",
-					"type": "list",
-					"description": "promoted_article_style_description",
-					"label": "promoted_article_style_label",
-					"value": "bold",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Highlight as bold",
-							"value": "bold"
-						},
-						{
-							"label": "Highlight with icon",
-							"value": "icon"
-						}
-					]
-				}
-			]
-		},
-		{
-			"label": "promoted_article_list_group_label",
-			"variables": [
-				{
-					"identifier": "promoted_article_list_style",
-					"type": "list",
-					"description": "promoted_article_list_style_description",
-					"label": "promoted_article_list_style_label",
-					"value": "3-bordered",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Bullet list",
-							"value": "1-bullet"
-						},
-						{
-							"label": "Unstyled list",
-							"value": "2-unstyled"
-						},
-						{
-							"label": "Bordered list",
-							"value": "3-bordered"
-						},
-						{
-							"label": "Toggles",
-							"value": "toggles"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "promoted_article_list_position",
-					"type": "list",
-					"description": "promoted_article_list_position_description",
-					"label": "promoted_article_list_position_label",
-					"value": "sidebar",
-					"options": [
-						{
-							"label": "Before",
-							"value": "before"
-						},
-						{
-							"label": "After",
-							"value": "after"
-						},
-						{
-							"label": "Sidebar",
-							"value": "sidebar"
-						}
-					]
-				},
-				{
-					"identifier": "promoted_articles_heading",
-					"type": "text",
-					"description": "promoted_articles_heading_description",
-					"label": "promoted_articles_heading_label",
-					"value": "Popular articles"
-				},
-				{
-					"identifier": "promoted_article_list_columns",
-					"type": "list",
-					"description": "promoted_article_list_columns_description",
-					"label": "promoted_article_list_columns_label",
-					"value": "1",
-					"options": [
-						{
-							"label": "1",
-							"value": "1"
-						},
-						{
-							"label": "2",
-							"value": "2"
-						},
-						{
-							"label": "3",
-							"value": "3"
-						}
-					]
-				},
-				{
-					"identifier": "promoted_articles_alignment",
-					"type": "list",
-					"description": "promoted_article_list_alignment_description",
-					"label": "promoted_article_list_alignment_label",
-					"value": "left",
-					"options": [
-						{
-							"label": "Left",
-							"value": "left"
-						},
-						{
-							"label": "Center",
-							"value": "center"
-						}
-					]
-				},
-				{
-					"identifier": "promoted_article_list_excerpt",
-					"type": "range",
-					"description": "promoted_article_list_excerpt_description",
-					"label": "promoted_article_list_excerpt_label",
-					"value": 0,
-					"min": 0,
-					"max": 256
-				}
-			]
-		},
-		{
-			"label": "contact_block_group_label",
-			"variables": [
-				{
-					"identifier": "contact_block_style",
-					"type": "list",
-					"description": "contact_block_style_description",
-					"label": "contact_block_style_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Boxes",
-							"value": "boxes"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "color_contact_blocks",
-					"type": "list",
-					"description": "color_contact_blocks_description",
-					"label": "color_contact_blocks_label",
-					"value": "secondary",
-					"options": [
-						{
-							"label": "White",
-							"value": "white"
-						},
-						{
-							"label": "Gray lightest",
-							"value": "gray-100"
-						},
-						{
-							"label": "Gray light",
-							"value": "gray-200"
-						},
-						{
-							"label": "Primary",
-							"value": "primary"
-						},
-						{
-							"label": "Secondary",
-							"value": "secondary"
-						},
-						{
-							"label": "Tertiary",
-							"value": "tertiary"
-						}
-					]
-				},
-				{
-					"identifier": "contact_blocks_heading",
-					"type": "text",
-					"description": "contact_blocks_heading_description",
-					"label": "contact_blocks_heading_label",
-					"value": "Get in touch"
-				},
-				{
-					"identifier": "number_contact_blocks",
-					"type": "list",
-					"description": "number_contact_blocks_description",
-					"label": "number_contact_blocks_label",
-					"value": "3",
-					"options": [
-						{
-							"label": "1",
-							"value": "1"
-						},
-						{
-							"label": "2",
-							"value": "2"
-						},
-						{
-							"label": "3",
-							"value": "3"
-						},
-						{
-							"label": "4",
-							"value": "4"
-						}
-					]
-				},
-				{
-					"identifier": "number_contact_block_columns",
-					"type": "list",
-					"description": "number_contact_block_columns_description",
-					"label": "number_contact_block_columns_label",
-					"value": "3",
-					"options": [
-						{
-							"label": "1",
-							"value": "1"
-						},
-						{
-							"label": "2",
-							"value": "2"
-						},
-						{
-							"label": "3",
-							"value": "3"
-						},
-						{
-							"label": "4",
-							"value": "4"
-						}
-					]
-				},
-				{
-					"identifier": "contact_block_image_height",
-					"type": "text",
-					"description": "contact_block_image_height_description",
-					"label": "contact_block_image_height_label",
-					"value": "40px"
-				},
-				{
-					"identifier": "contact_block_1_title",
-					"type": "text",
-					"description": "contact_block_1_title_description",
-					"label": "contact_block_1_title_label",
-					"value": "Message us"
-				},
-				{
-					"identifier": "contact_block_1_description",
-					"type": "text",
-					"description": "contact_block_1_description_description",
-					"label": "contact_block_1_description_label",
-					"value": "Start a conversation with our team and get the answers you need"
-				},
-				{
-					"identifier": "contact_block_1_url",
-					"type": "text",
-					"description": "contact_block_1_url_description",
-					"label": "contact_block_1_url_label",
-					"value": "#"
-				},
-				{
-					"identifier": "contact_block_2_title",
-					"type": "text",
-					"description": "contact_block_2_title_description",
-					"label": "contact_block_2_title_label",
-					"value": "Call us"
-				},
-				{
-					"identifier": "contact_block_2_description",
-					"type": "text",
-					"description": "contact_block_2_description_description",
-					"label": "contact_block_2_description_label",
-					"value": "Call us at 1 (800) 111-2222 anytime for assistance"
-				},
-				{
-					"identifier": "contact_block_2_url",
-					"type": "text",
-					"description": "contact_block_2_url_description",
-					"label": "contact_block_2_url_label",
-					"value": "tel:18001112222"
-				},
-				{
-					"identifier": "contact_block_3_title",
-					"type": "text",
-					"description": "contact_block_3_title_description",
-					"label": "contact_block_3_title_label",
-					"value": "Find a store"
-				},
-				{
-					"identifier": "contact_block_3_description",
-					"type": "text",
-					"description": "contact_block_3_description_description",
-					"label": "contact_block_3_description_label",
-					"value": "Find a location near you for in person service"
-				},
-				{
-					"identifier": "contact_block_3_url",
-					"type": "text",
-					"description": "contact_block_3_url_description",
-					"label": "contact_block_3_url_label",
-					"value": "https://www.twitter.com"
-				},
-				{
-					"identifier": "contact_block_4_title",
-					"type": "text",
-					"description": "contact_block_4_title_description",
-					"label": "contact_block_4_title_label",
-					"value": "Subscribe"
-				},
-				{
-					"identifier": "contact_block_4_description",
-					"type": "text",
-					"description": "contact_block_4_description_description",
-					"label": "contact_block_4_description_label",
-					"value": "Discover video tutorials covering a variety of topics"
-				},
-				{
-					"identifier": "contact_block_4_url",
-					"type": "text",
-					"description": "contact_block_4_url_description",
-					"label": "contact_block_4_url_label",
-					"value": "https://www.youtube.com"
-				}
-			]
-		},
-		{
-			"label": "cta_group_label",
-			"variables": [
-				{
-					"identifier": "cta_style",
-					"type": "list",
-					"description": "cta_style_description",
-					"label": "cta_style_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Banner",
-							"value": "banner"
-						},
-						{
-							"label": "Boxed",
-							"value": "boxed"
-						},
-						{
-							"label": "Boxed with image",
-							"value": "boxed-image"
-						},
-						{
-							"label": "In sidebar (right)",
-							"value": "sidebar"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "cta_location",
-					"type": "list",
-					"description": "cta_location_description",
-					"label": "cta_location_label",
-					"value": "all",
-					"options": [
-						{
-							"label": "Home page only",
-							"value": "home"
-						},
-						{
-							"label": "Internal pages only",
-							"value": "internal"
-						},
-						{
-							"label": "All pages",
-							"value": "all"
-						}
-					]
-				},
-				{
-					"identifier": "cta_element_heading",
-					"type": "text",
-					"description": "cta_element_heading_description",
-					"label": "cta_element_heading_label",
-					"value": "Still need help?"
-				},
-				{
-					"identifier": "color_heading_cta",
-					"type": "color",
-					"description": "color_heading_cta_description",
-					"label": "color_heading_cta_label",
-					"value": "#323232"
-				},
-				{
-					"identifier": "cta_element_body",
-					"type": "text",
-					"description": "cta_element_body_description",
-					"label": "cta_element_body_label",
-					"value": "Our team of experts are available and just a click away"
-				},
-				{
-					"identifier": "color_text_cta",
-					"type": "color",
-					"description": "color_text_cta_description",
-					"label": "color_text_cta_label",
-					"value": "#555"
-				},
-				{
-					"identifier": "cta_element_link_text",
-					"type": "text",
-					"description": "cta_element_link_text_description",
-					"label": "cta_element_link_text_label",
-					"value": "Contact us"
-				},
-				{
-					"identifier": "bg_color_cta",
-					"type": "color",
-					"description": "bg_color_cta_description",
-					"label": "bg_color_cta_label",
-					"value": "#edf2f7"
-				}
-			]
-		},
-		{
-			"label": "category_page_group_label",
-			"variables": [
-				{
-					"identifier": "subsection_style",
-					"type": "list",
-					"description": "subsection_style_description",
-					"label": "subsection_style_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "List",
-							"value": "list"
-						}
-					]
-				},
-				{
-					"identifier": "category_sidebar",
-					"type": "list",
-					"description": "category_sidebar_description",
-					"label": "category_sidebar_label",
-					"value": "section-list",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Article list",
-							"value": "article-list"
-						},
-						{
-							"label": "Section list",
-							"value": "section-list"
-						},
-						{
-							"label": "Category list",
-							"value": "category-list"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				}
-			]
-		},
-		{
-			"label": "section_page_group_label",
-			"variables": [
-				{
-					"identifier": "section_sidebar",
-					"type": "list",
-					"description": "section_sidebar_description",
-					"label": "section_sidebar_label",
-					"value": "article-list",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Article list",
-							"value": "article-list"
-						},
-						{
-							"label": "Section list",
-							"value": "section-list"
-						},
-						{
-							"label": "Category list",
-							"value": "category-list"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "show_follow_section",
-					"type": "checkbox",
-					"description": "follow_section_description",
-					"label": "follow_section_label",
-					"value": true
-				}
-			]
-		},
-		{
-			"label": "article_page_group_label",
-			"variables": [
-				{
-					"identifier": "article_metadata",
-					"type": "list",
-					"description": "article_metadata_description",
-					"label": "article_metadata_label",
-					"value": "date-start",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Date at start of article",
-							"value": "date-start"
-						},
-						{
-							"label": "Date at end of article",
-							"value": "date-end"
-						},
-						{
-							"label": "Author and date",
-							"value": "author"
-						}
-					]
-				},
-				{
-					"identifier": "show_follow_article",
-					"type": "checkbox",
-					"description": "follow_article_description",
-					"label": "follow_article_label",
-					"value": true
-				},
-				{
-					"identifier": "table_of_contents_style",
-					"type": "list",
-					"description": "table_of_contents_style_description",
-					"label": "table_of_contents_style_label",
-					"value": "full-width",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Simple",
-							"value": "simple"
-						},
-						{
-							"label": "Boxed",
-							"value": "boxed"
-						},
-						{
-							"label": "Boxed (full-width)",
-							"value": "full-width"
-						},
-						{
-							"label": "In sidebar (right)",
-							"value": "sidebar-right"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "table_of_contents_heading",
-					"type": "text",
-					"description": "table_of_contents_heading_description",
-					"label": "table_of_contents_heading_label",
-					"value": "In this article"
-				},
-				{
-					"identifier": "article_navigation_style",
-					"type": "list",
-					"description": "article_navigation_style_description",
-					"label": "article_navigation_style_label",
-					"value": "standard",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Standard",
-							"value": "standard"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "next_article_title",
-					"type": "text",
-					"description": "next_article_title_description",
-					"label": "next_article_title_label",
-					"value": "Next article"
-				},
-				{
-					"identifier": "previous_article_title",
-					"type": "text",
-					"description": "previous_article_title_description",
-					"label": "previous_article_title_label",
-					"value": "Previous article"
-				},
-				{
-					"identifier": "show_article_voting",
-					"type": "checkbox",
-					"description": "show_article_voting_description",
-					"label": "show_article_voting_label",
-					"value": true
-				},
-				{
-					"identifier": "show_article_sharing",
-					"type": "checkbox",
-					"description": "article_sharing_description",
-					"label": "article_sharing_label",
-					"value": false
-				},
-				{
-					"identifier": "share_title",
-					"type": "text",
-					"description": "share_title_description",
-					"label": "share_title_label",
-					"value": ""
-				},
-				{
-					"identifier": "show_recently_viewed_articles",
-					"type": "checkbox",
-					"description": "recently_viewed_articles_description",
-					"label": "recently_viewed_articles_label",
-					"value": true
-				},
-				{
-					"identifier": "show_related_articles",
-					"type": "checkbox",
-					"description": "related_articles_description",
-					"label": "related_articles_label",
-					"value": true
-				},
-				{
-					"identifier": "show_article_comments",
-					"type": "checkbox",
-					"description": "article_comments_description",
-					"label": "article_comments_label",
-					"value": true
-				},
-				{
-					"identifier": "article_sidebar",
-					"type": "list",
-					"description": "article_sidebar_description",
-					"label": "article_sidebar_label",
-					"value": "article-list",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Article list",
-							"value": "article-list"
-						},
-						{
-							"label": "Section list",
-							"value": "section-list"
-						},
-						{
-							"label": "Category list",
-							"value": "category-list"
-						},
-						{
-							"label": "Articles in this section",
-							"value": "articles-in-section"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "note_title",
-					"type": "text",
-					"description": "note_title_description",
-					"label": "note_title_label",
-					"value": "Note"
-				},
-				{
-					"identifier": "color_note",
-					"type": "color",
-					"description": "color_note_description",
-					"label": "color_note_label",
-					"value": "#61a5ff"
-				},
-				{
-					"identifier": "warning_title",
-					"type": "text",
-					"description": "warning_title_description",
-					"label": "warning_title_label",
-					"value": "Warning"
-				},
-				{
-					"identifier": "color_warning",
-					"type": "color",
-					"description": "color_warning_description",
-					"label": "color_warning_label",
-					"value": "#ef526e"
-				},
-				{
-					"identifier": "enable_lightboxes",
-					"type": "checkbox",
-					"description": "enable_lightboxes_description",
-					"label": "enable_lightboxes_label",
-					"value": false
-				},
-				{
-					"identifier": "enable_video_player",
-					"type": "checkbox",
-					"description": "enable_video_player_description",
-					"label": "enable_video_player_label",
-					"value": false
-				}
-			]
-		},
-		{
-			"label": "new_request_page_group_label",
-			"variables": [
-				{
-					"identifier": "form_list_style",
-					"type": "list",
-					"description": "form_list_style_description",
-					"label": "form_list_style_label",
-					"value": "list",
-					"options": [
-						{
-							"label": "Standard",
-							"value": "standard"
-						},
-						{
-							"label": "Boxes",
-							"value": "boxes"
-						},
-						{
-							"label": "List",
-							"value": "list"
-						},
-						{
-							"label": "Custom template",
-							"value": "custom"
-						}
-					]
-				},
-				{
-					"identifier": "form_tip",
-					"type": "text",
-					"description": "form_tip_description",
-					"label": "form_tip_label",
-					"value": "Providing as much information as possible in your request will allow us to help you faster"
-				}
-			]
-		},
-		{
-			"label": "community_group_label",
-			"variables": [
-				{
-					"identifier": "community_image_style",
-					"type": "list",
-					"description": "community_image_style_description",
-					"label": "community_image_style_label",
-					"value": "standard",
-					"options": [
-						{
-							"label": "Behind background",
-							"value": "standard"
-						},
-						{
-							"label": "Overlay",
-							"value": "overlay"
-						},
-						{
-							"label": "Overlay (pattern)",
-							"value": "overlay-pattern"
-						},
-						{
-							"label": "Parallax effect",
-							"value": "parallax"
-						}
-					]
-				},
-				{
-					"identifier": "show_recent_activity_community",
-					"type": "checkbox",
-					"description": "show_recent_activity_community_description",
-					"label": "recent_activity_label",
-					"value": true
-				},
-				{
-					"identifier": "show_follow_topic",
-					"type": "checkbox",
-					"description": "follow_topic_description",
-					"label": "follow_topic_label",
-					"value": true
-				},
-				{
-					"identifier": "show_follow_post",
-					"type": "checkbox",
-					"description": "follow_post_description",
-					"label": "follow_post_label",
-					"value": true
-				},
-				{
-					"identifier": "show_post_sharing",
-					"type": "checkbox",
-					"description": "post_sharing_description",
-					"label": "post_sharing_label",
-					"value": false
-				}
-			]
-		},
-		{
-			"label": "footer_group_label",
-			"variables": [
-				{
-					"identifier": "footer_layout",
-					"type": "list",
-					"description": "footer_layout_description",
-					"label": "footer_layout_label",
-					"value": "links-left",
-					"options": [
-						{
-							"label": "Links on left",
-							"value": "links-left"
-						},
-						{
-							"label": "Links in center",
-							"value": "links-center"
-						},
-						{
-							"label": "Links on right",
-							"value": "links-right"
-						},
-						{
-							"label": "Custom links on top",
-							"value": "links-stacked"
-						}
-					]
-				},
-				{
-					"identifier": "footer_shape",
-					"type": "list",
-					"description": "footer_shape_description",
-					"label": "footer_shape_label",
-					"value": "none",
-					"options": [
-						{
-							"label": "None",
-							"value": "none"
-						},
-						{
-							"label": "Book",
-							"value": "book"
-						},
-						{
-							"label": "Curve",
-							"value": "curve"
-						},
-						{
-							"label": "Diagonal",
-							"value": "diagonal"
-						},
-						{
-							"label": "Hills",
-							"value": "hills"
-						},
-						{
-							"label": "Mountains",
-							"value": "mountains"
-						},
-						{
-							"label": "Rays",
-							"value": "rays"
-						},
-						{
-							"label": "Triangle",
-							"value": "triangle"
-						},
-						{
-							"label": "Wave",
-							"value": "wave"
-						},
-						{
-							"label": "Waves",
-							"value": "waves"
-						},
-						{
-							"label": "Zig zag",
-							"value": "zigzag"
-						}
-					]
-				},
-				{
-					"identifier": "color_footer_link",
-					"type": "color",
-					"description": "color_footer_link_description",
-					"label": "color_footer_link_label",
-					"value": "#4A5568"
-				},
-				{
-					"identifier": "bg_color_footer",
-					"type": "color",
-					"description": "bg_color_footer_description",
-					"label": "bg_color_footer_label",
-					"value": "rgba(230, 234, 237, 1)"
-				},
-				{
-					"identifier": "footer_link_1_text",
-					"type": "text",
-					"description": "footer_link_1_text_description",
-					"label": "footer_link_1_text_label",
-					"value": ""
-				},
-				{
-					"identifier": "footer_link_1_url",
-					"type": "text",
-					"description": "footer_link_1_url_description",
-					"label": "footer_link_1_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "footer_link_2_text",
-					"type": "text",
-					"description": "footer_link_2_text_description",
-					"label": "footer_link_2_text_label",
-					"value": ""
-				},
-				{
-					"identifier": "footer_link_2_url",
-					"type": "text",
-					"description": "footer_link_2_url_description",
-					"label": "footer_link_2_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "footer_link_3_text",
-					"type": "text",
-					"description": "footer_link_3_text_description",
-					"label": "footer_link_3_text_label",
-					"value": ""
-				},
-				{
-					"identifier": "footer_link_3_url",
-					"type": "text",
-					"description": "footer_link_3_url_description",
-					"label": "footer_link_3_url_label",
-					"value": ""
-				},
-				{
-					"identifier": "facebook_link",
-					"type": "text",
-					"description": "facebook_link_description",
-					"label": "facebook_link_label",
-					"value": ""
-				},
-				{
-					"identifier": "twitter_link",
-					"type": "text",
-					"description": "twitter_link_description",
-					"label": "twitter_link_label",
-					"value": ""
-				},
-				{
-					"identifier": "linkedin_link",
-					"type": "text",
-					"description": "linkedin_link_description",
-					"label": "linkedin_link_label",
-					"value": ""
-				},
-				{
-					"identifier": "instagram_link",
-					"type": "text",
-					"description": "instagram_link_description",
-					"label": "instagram_link_label",
-					"value": ""
-				},
-				{
-					"identifier": "youtube_link",
-					"type": "text",
-					"description": "youtube_link_description",
-					"label": "youtube_link_label",
-					"value": ""
-				},
-				{
-					"identifier": "show_credit_link",
-					"type": "checkbox",
-					"description": "show_credit_link_description",
-					"label": "show_credit_link_label",
-					"value": false
-				}
-			]
-		},
-		{
-			"label": "translations_group_label",
-			"variables": [
-				{
-					"identifier": "use_translations",
-					"type": "checkbox",
-					"description": "use_translations_description",
-					"label": "use_translations_label",
-					"value": false
-				}
-			]
-		}
-	]
+  "name": "HMG Help Center Theme",
+  "author": "Zenplates",
+  "version": "1.0.0",
+  "api_version": 3,
+  "default_locale": "en-us",
+  "settings": [
+    {
+      "label": "colors_group_label",
+      "variables": [
+        {
+          "identifier": "color_primary",
+          "type": "color",
+          "description": "color_primary_description",
+          "label": "color_primary_label",
+          "value": "rgba(5, 20, 31, 1)"
+        },
+        {
+          "identifier": "color_primary_inverse",
+          "type": "color",
+          "description": "color_primary_inverse_description",
+          "label": "color_primary_inverse_label",
+          "value": "#fff"
+        },
+        {
+          "identifier": "color_secondary",
+          "type": "color",
+          "description": "color_secondary_description",
+          "label": "color_secondary_label",
+          "value": "rgba(5, 20, 31, 1)"
+        },
+        {
+          "identifier": "color_secondary_inverse",
+          "type": "color",
+          "description": "color_secondary_inverse_description",
+          "label": "color_secondary_inverse_label",
+          "value": "#fff"
+        },
+        {
+          "identifier": "color_tertiary",
+          "type": "color",
+          "description": "color_tertiary_description",
+          "label": "color_tertiary_label",
+          "value": "#bb4290"
+        },
+        {
+          "identifier": "color_tertiary_inverse",
+          "type": "color",
+          "description": "color_tertiary_inverse_description",
+          "label": "color_tertiary_inverse_label",
+          "value": "#fff"
+        },
+        {
+          "identifier": "color_heading",
+          "type": "color",
+          "description": "heading_color_description",
+          "label": "heading_color_label",
+          "value": "#323232"
+        },
+        {
+          "identifier": "color_text",
+          "type": "color",
+          "description": "text_color_description",
+          "label": "text_color_label",
+          "value": "#555"
+        },
+        {
+          "identifier": "color_link",
+          "type": "color",
+          "description": "link_color_description",
+          "label": "link_color_label",
+          "value": "rgba(9, 47, 75, 1)"
+        },
+        {
+          "identifier": "color_border",
+          "type": "color",
+          "description": "color_border_description",
+          "label": "color_border_label",
+          "value": "rgba(230, 234, 237, 1)"
+        },
+        {
+          "identifier": "color_outline",
+          "type": "color",
+          "description": "outline_color_description",
+          "label": "outline_color_label",
+          "value": "rgba(230, 234, 237, 0.25)"
+        },
+        {
+          "identifier": "color_gray_100",
+          "type": "color",
+          "description": "color_gray_100_description",
+          "label": "color_gray_100_label",
+          "value": "rgba(230, 234, 237, 1)"
+        },
+        {
+          "identifier": "color_gray_200",
+          "type": "color",
+          "description": "color_gray_200_description",
+          "label": "color_gray_200_label",
+          "value": "rgba(230, 234, 237, 1)"
+        },
+        {
+          "identifier": "color_gray_600",
+          "type": "color",
+          "description": "color_gray_600_description",
+          "label": "color_gray_600_label",
+          "value": "#718096"
+        },
+        {
+          "identifier": "bg_color",
+          "type": "color",
+          "description": "background_color_description",
+          "label": "background_color_label",
+          "value": "#fff"
+        }
+      ]
+    },
+    {
+      "label": "fonts_group_label",
+      "variables": [
+        {
+          "identifier": "heading_font",
+          "type": "list",
+          "description": "heading_font_description",
+          "label": "heading_font_label",
+          "value": "Helvetica, Arial, sans-serif",
+          "options": [
+            {
+              "label": "Arimo (Google)",
+              "value": "'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Bitter (Google)",
+              "value": "'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Catamaran (Google)",
+              "value": "'Catamaran', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Crimson Text (Google)",
+              "value": "'Crimson Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "DM Sans (Google)",
+              "value": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "EB Garamond (Google)",
+              "value": "'EB Garamond', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Faustina (Google)",
+              "value": "'Faustina', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Fira Sans (Google)",
+              "value": "'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Inter (Google)",
+              "value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Jost (Google)",
+              "value": "'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Lato (Google)",
+              "value": "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Libre Franklin (Google)",
+              "value": "'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Lora (Google)",
+              "value": "'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Manrope (Google)",
+              "value": "'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Merriweather (Google)",
+              "value": "'Merriweather', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Montserrat (Google)",
+              "value": "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Mukta (Google)",
+              "value": "'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Mulish (Google)",
+              "value": "'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Nunito Sans (Google)",
+              "value": "'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Noto Sans Display (Google)",
+              "value": "'Noto Sans Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Noto Serif (Google)",
+              "value": "'Noto Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Oswald (Google)",
+              "value": "'Oswald', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Roboto (Google)",
+              "value": "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Rubik (Google)",
+              "value": "'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Open Sans (Google)",
+              "value": "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Poppins (Google)",
+              "value": "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Prata (Google)",
+              "value": "'Prata', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "PT Sans (Google)",
+              "value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "PT Serif (Google)",
+              "value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Public Sans (Google)",
+              "value": "'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Raleway (Google)",
+              "value": "'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Signika (Google)",
+              "value": "'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Source Sans Pro (Google)",
+              "value": "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Ubuntu (Google)",
+              "value": "'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Work Sans (Google)",
+              "value": "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "System",
+              "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Arial",
+              "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif"
+            },
+            {
+              "label": "Arial Black",
+              "value": "'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif"
+            },
+            {
+              "label": "Baskerville",
+              "value": "Baskerville, 'Times New Roman', Times, serif"
+            },
+            {
+              "label": "Century Gothic",
+              "value": "'Century Gothic', AppleGothic, sans-serif"
+            },
+            {
+              "label": "Copperplate Light",
+              "value": "'Copperplate Light', 'Copperplate Gothic Light', serif"
+            },
+            {
+              "label": "Courier New",
+              "value": "'Courier New', Courier, monospace"
+            },
+            {
+              "label": "Futura",
+              "value": "Futura, 'Century Gothic', AppleGothic, sans-serif"
+            },
+            {
+              "label": "Garamond",
+              "value": "Garamond, 'Hoefler Text', 'Times New Roman', Times, serif"
+            },
+            {
+              "label": "Geneva",
+              "value": "Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif"
+            },
+            {
+              "label": "Georgia",
+              "value": "Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif"
+            },
+            {
+              "label": "Helvetica",
+              "value": "Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Helvetica Neue",
+              "value": "'Helvetica Neue', Arial, Helvetica, sans-serif"
+            },
+            {
+              "label": "Impact",
+              "value": "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
+            },
+            {
+              "label": "Lucida Grande",
+              "value": "'Lucida Grande', 'Lucida Sans', 'Lucida Sans Unicode', sans-serif"
+            },
+            {
+              "label": "Trebuchet MS",
+              "value": "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+            }
+          ]
+        },
+        {
+          "identifier": "text_font",
+          "type": "list",
+          "description": "text_font_description",
+          "label": "text_font_label",
+          "value": "Helvetica, Arial, sans-serif",
+          "options": [
+            {
+              "label": "Arimo (Google)",
+              "value": "'Arimo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Bitter (Google)",
+              "value": "'Bitter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Catamaran (Google)",
+              "value": "'Catamaran', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Crimson Text (Google)",
+              "value": "'Crimson Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "DM Sans (Google)",
+              "value": "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "EB Garamond (Google)",
+              "value": "'EB Garamond', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Fira Sans (Google)",
+              "value": "'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Inter (Google)",
+              "value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Jost (Google)",
+              "value": "'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Lato (Google)",
+              "value": "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Libre Franklin (Google)",
+              "value": "'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Lora (Google)",
+              "value": "'Lora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Merriweather (Google)",
+              "value": "'Merriweather', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Montserrat (Google)",
+              "value": "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Mukta (Google)",
+              "value": "'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Mulish (Google)",
+              "value": "'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Nunito Sans (Google)",
+              "value": "'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Noto Sans (Google)",
+              "value": "'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Noto Serif (Google)",
+              "value": "'Noto Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Roboto (Google)",
+              "value": "'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Rubik (Google)",
+              "value": "'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Open Sans (Google)",
+              "value": "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Poppins (Google)",
+              "value": "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Prata (Google)",
+              "value": "'Prata', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "PT Sans (Google)",
+              "value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "PT Serif (Google)",
+              "value": "'PT Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Public Sans (Google)",
+              "value": "'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Raleway (Google)",
+              "value": "'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Slabo 27px (Google)",
+              "value": "'Slabo 27px', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, serif"
+            },
+            {
+              "label": "Signika (Google)",
+              "value": "'Signika', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Source Sans Pro (Google)",
+              "value": "'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Ubuntu (Google)",
+              "value": "'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Work Sans (Google)",
+              "value": "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "System",
+              "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Arial",
+              "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif"
+            },
+            {
+              "label": "Arial Black",
+              "value": "'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif"
+            },
+            {
+              "label": "Baskerville",
+              "value": "Baskerville, 'Times New Roman', Times, serif"
+            },
+            {
+              "label": "Century Gothic",
+              "value": "'Century Gothic', AppleGothic, sans-serif"
+            },
+            {
+              "label": "Copperplate Light",
+              "value": "'Copperplate Light', 'Copperplate Gothic Light', serif"
+            },
+            {
+              "label": "Courier New",
+              "value": "'Courier New', Courier, monospace"
+            },
+            {
+              "label": "Futura",
+              "value": "Futura, 'Century Gothic', AppleGothic, sans-serif"
+            },
+            {
+              "label": "Garamond",
+              "value": "Garamond, 'Hoefler Text', 'Times New Roman', Times, serif"
+            },
+            {
+              "label": "Geneva",
+              "value": "Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif"
+            },
+            {
+              "label": "Georgia",
+              "value": "Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif"
+            },
+            {
+              "label": "Helvetica",
+              "value": "Helvetica, Arial, sans-serif"
+            },
+            {
+              "label": "Helvetica Neue",
+              "value": "'Helvetica Neue', Arial, Helvetica, sans-serif"
+            },
+            {
+              "label": "Impact",
+              "value": "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
+            },
+            {
+              "label": "Lucida Grande",
+              "value": "'Lucida Grande', 'Lucida Sans', 'Lucida Sans Unicode', sans-serif"
+            },
+            {
+              "label": "Trebuchet MS",
+              "value": "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+            }
+          ]
+        },
+        {
+          "identifier": "base_font_size",
+          "type": "text",
+          "description": "base_font_size_description",
+          "label": "base_font_size_label",
+          "value": "16px"
+        }
+      ]
+    },
+    {
+      "label": "brand_group_label",
+      "variables": [
+        {
+          "identifier": "favicon",
+          "type": "file",
+          "description": "favicon_description",
+          "label": "favicon_label"
+        },
+        {
+          "identifier": "logo",
+          "type": "file",
+          "description": "logo_description",
+          "label": "logo_label"
+        },
+        {
+          "identifier": "logo_height",
+          "type": "text",
+          "description": "logo_height_description",
+          "label": "logo_height_label",
+          "value": "40px"
+        },
+        {
+          "identifier": "tagline",
+          "type": "text",
+          "description": "tagline_description",
+          "label": "tagline_label",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "label": "images_group_label",
+      "variables": [
+        {
+          "identifier": "homepage_background_image",
+          "type": "file",
+          "description": "homepage_background_image_description",
+          "label": "homepage_background_image_label"
+        },
+        {
+          "identifier": "community_background_image",
+          "type": "file",
+          "description": "community_background_image_description",
+          "label": "community_background_image_label"
+        },
+        {
+          "identifier": "content_block_1_image",
+          "type": "file",
+          "description": "content_block_1_image_description",
+          "label": "content_block_1_image_label"
+        },
+        {
+          "identifier": "content_block_2_image",
+          "type": "file",
+          "description": "content_block_2_image_description",
+          "label": "content_block_2_image_label"
+        },
+        {
+          "identifier": "content_block_3_image",
+          "type": "file",
+          "description": "content_block_3_image_description",
+          "label": "content_block_3_image_label"
+        },
+        {
+          "identifier": "content_block_4_image",
+          "type": "file",
+          "description": "content_block_4_image_description",
+          "label": "content_block_4_image_label"
+        },
+        {
+          "identifier": "content_block_5_image",
+          "type": "file",
+          "description": "content_block_5_image_description",
+          "label": "content_block_5_image_label"
+        },
+        {
+          "identifier": "content_block_6_image",
+          "type": "file",
+          "description": "content_block_6_image_description",
+          "label": "content_block_6_image_label"
+        },
+        {
+          "identifier": "content_block_7_image",
+          "type": "file",
+          "description": "content_block_7_image_description",
+          "label": "content_block_7_image_label"
+        },
+        {
+          "identifier": "content_block_8_image",
+          "type": "file",
+          "description": "content_block_8_image_description",
+          "label": "content_block_8_image_label"
+        },
+        {
+          "identifier": "custom_block_1_image",
+          "type": "file",
+          "description": "custom_block_1_image_description",
+          "label": "custom_block_1_image_label"
+        },
+        {
+          "identifier": "custom_block_2_image",
+          "type": "file",
+          "description": "custom_block_2_image_description",
+          "label": "custom_block_2_image_label"
+        },
+        {
+          "identifier": "custom_block_3_image",
+          "type": "file",
+          "description": "custom_block_3_image_description",
+          "label": "custom_block_3_image_label"
+        },
+        {
+          "identifier": "custom_block_4_image",
+          "type": "file",
+          "description": "custom_block_4_image_description",
+          "label": "custom_block_4_image_label"
+        },
+        {
+          "identifier": "contact_block_1_image",
+          "type": "file",
+          "description": "contact_block_1_image_description",
+          "label": "contact_block_1_image_label"
+        },
+        {
+          "identifier": "contact_block_2_image",
+          "type": "file",
+          "description": "contact_block_2_image_description",
+          "label": "contact_block_2_image_label"
+        },
+        {
+          "identifier": "contact_block_3_image",
+          "type": "file",
+          "description": "contact_block_3_image_description",
+          "label": "contact_block_3_image_label"
+        },
+        {
+          "identifier": "contact_block_4_image",
+          "type": "file",
+          "description": "contact_block_4_image_description",
+          "label": "contact_block_4_image_label"
+        },
+        {
+          "identifier": "cta_block_image",
+          "type": "file",
+          "description": "cta_block_image_description",
+          "label": "cta_block_image_label"
+        }
+      ]
+    },
+    {
+      "label": "search_group_label",
+      "variables": [
+        {
+          "identifier": "header_search_style",
+          "type": "list",
+          "description": "header_search_style_description",
+          "label": "header_search_style_label",
+          "value": "inline",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Inline",
+              "value": "inline"
+            },
+            {
+              "label": "Collapsible",
+              "value": "collapsible"
+            },
+            {
+              "label": "Slide down",
+              "value": "slide-down"
+            }
+          ]
+        },
+        {
+          "identifier": "instant_search",
+          "type": "checkbox",
+          "description": "instant_search_description",
+          "label": "instant_search_label",
+          "value": true
+        },
+        {
+          "identifier": "scoped_kb_search",
+          "type": "checkbox",
+          "description": "scoped_knowledge_base_search_description",
+          "label": "scoped_knowledge_base_search_label",
+          "value": true
+        },
+        {
+          "identifier": "scoped_community_search",
+          "type": "checkbox",
+          "description": "scoped_community_search_description",
+          "label": "scoped_community_search_label",
+          "value": true
+        },
+        {
+          "identifier": "search_placeholder",
+          "type": "text",
+          "description": "search_placeholder_description",
+          "label": "search_placeholder_label",
+          "value": ""
+        },
+        {
+          "identifier": "search_translucent",
+          "type": "checkbox",
+          "description": "search_translucent_description",
+          "label": "search_translucent_label",
+          "value": true
+        },
+        {
+          "identifier": "show_search_button",
+          "type": "checkbox",
+          "description": "show_search_button_description",
+          "label": "show_search_button_label",
+          "value": true
+        }
+      ]
+    },
+    {
+      "label": "header_group_label",
+      "variables": [
+        {
+          "identifier": "header_layout",
+          "type": "list",
+          "description": "header_layout_description",
+          "label": "header_layout_label",
+          "value": "links-right",
+          "options": [
+            {
+              "label": "Links on left",
+              "value": "links-left"
+            },
+            {
+              "label": "Links in center",
+              "value": "links-center"
+            },
+            {
+              "label": "Links on right",
+              "value": "links-right"
+            },
+            {
+              "label": "Links in top bar",
+              "value": "links-topbar"
+            }
+          ]
+        },
+        {
+          "identifier": "fixed_header",
+          "type": "checkbox",
+          "description": "fixed_header_description",
+          "label": "fixed_header_label",
+          "value": true
+        },
+        {
+          "identifier": "sticky_header",
+          "type": "checkbox",
+          "description": "sticky_header_description",
+          "label": "sticky_header_label",
+          "value": true
+        },
+        {
+          "identifier": "nav_style",
+          "type": "list",
+          "description": "nav_style_description",
+          "label": "nav_style_label",
+          "value": "standard",
+          "options": [
+            {
+              "label": "Standard",
+              "value": "standard"
+            },
+            {
+              "label": "Slide in",
+              "value": "slide-in"
+            }
+          ]
+        },
+        {
+          "identifier": "nav_breakpoint",
+          "type": "list",
+          "description": "nav_breakpoint_description",
+          "label": "nav_breakpoint_label",
+          "value": "xl",
+          "options": [
+            {
+              "label": "Small",
+              "value": "sm"
+            },
+            {
+              "label": "Medium",
+              "value": "md"
+            },
+            {
+              "label": "Large",
+              "value": "lg"
+            },
+            {
+              "label": "Extra large",
+              "value": "xl"
+            },
+            {
+              "label": "None",
+              "value": "none"
+            }
+          ]
+        },
+        {
+          "identifier": "full_width_header",
+          "type": "checkbox",
+          "description": "full_width_header_description",
+          "label": "full_width_header_label",
+          "value": false
+        },
+        {
+          "identifier": "header_height",
+          "type": "text",
+          "description": "header_height_description",
+          "label": "header_height_label",
+          "value": "72px"
+        },
+        {
+          "identifier": "color_header_link",
+          "type": "color",
+          "description": "color_header_link_description",
+          "label": "color_header_link_label",
+          "value": "#fefefe"
+        },
+        {
+          "identifier": "color_header_link_fixed",
+          "type": "color",
+          "description": "color_header_link_fixed_description",
+          "label": "color_header_link_fixed_label",
+          "value": "#fefefe"
+        },
+        {
+          "identifier": "bg_color_header",
+          "type": "color",
+          "description": "bg_color_header_description",
+          "label": "bg_color_header_label",
+          "value": "rgba(5, 20, 31, 1)"
+        },
+        {
+          "identifier": "header_link_1_text",
+          "type": "text",
+          "description": "header_link_1_text_description",
+          "label": "header_link_1_text_label",
+          "value": ""
+        },
+        {
+          "identifier": "header_link_1_url",
+          "type": "text",
+          "description": "header_link_1_url_description",
+          "label": "header_link_1_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "header_link_2_text",
+          "type": "text",
+          "description": "header_link_2_text_description",
+          "label": "header_link_2_text_label",
+          "value": ""
+        },
+        {
+          "identifier": "header_link_2_url",
+          "type": "text",
+          "description": "header_link_2_url_description",
+          "label": "header_link_2_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "header_link_3_text",
+          "type": "text",
+          "description": "header_link_3_text_description",
+          "label": "header_link_3_text_label",
+          "value": ""
+        },
+        {
+          "identifier": "header_link_3_url",
+          "type": "text",
+          "description": "header_link_3_url_description",
+          "label": "header_link_3_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "show_submit_a_request_link",
+          "type": "checkbox",
+          "description": "show_submit_a_request_link_description",
+          "label": "show_submit_a_request_link_label",
+          "value": true
+        },
+        {
+          "identifier": "category_dropdown_style",
+          "type": "list",
+          "description": "category_dropdown_style_description",
+          "label": "category_dropdown_style_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Dropdown menu",
+              "value": "dropdown"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "general_page_group_label",
+      "variables": [
+        {
+          "identifier": "notification_location",
+          "type": "list",
+          "description": "notification_location_description",
+          "label": "notification_location_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Header",
+              "value": "header"
+            },
+            {
+              "label": "Home page",
+              "value": "home"
+            }
+          ]
+        },
+        {
+          "identifier": "notification_content",
+          "type": "text",
+          "description": "notification_content_description",
+          "label": "notification_content_label",
+          "value": "notification_content"
+        },
+        {
+          "identifier": "color_notification",
+          "type": "color",
+          "description": "color_notification_description",
+          "label": "color_notification_label",
+          "value": "#fff"
+        },
+        {
+          "identifier": "bg_color_notification",
+          "type": "color",
+          "description": "bg_color_notification_description",
+          "label": "bg_color_notification_label",
+          "value": "#ef526e"
+        },
+        {
+          "identifier": "back_to_top_link_style",
+          "type": "list",
+          "description": "back_to_top_link_style_description",
+          "label": "back_to_top_link_style_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Standard",
+              "value": "standard"
+            },
+            {
+              "label": "In footer",
+              "value": "footer"
+            }
+          ]
+        },
+        {
+          "identifier": "boxed_layout",
+          "type": "checkbox",
+          "description": "boxed_layout_description",
+          "label": "boxed_layout_label",
+          "value": false
+        },
+        {
+          "identifier": "bg_color_boxed",
+          "type": "color",
+          "description": "bg_color_boxed_description",
+          "label": "bg_color_boxed_label",
+          "value": "#F7F7F7"
+        }
+      ]
+    },
+    {
+      "label": "home_page_group_label",
+      "variables": [
+        {
+          "identifier": "hero_heading",
+          "type": "text",
+          "description": "hero_heading_description",
+          "label": "hero_heading_label",
+          "value": "HKMC Knowledge Base"
+        },
+        {
+          "identifier": "color_hero_heading",
+          "type": "color",
+          "description": "color_hero_heading_description",
+          "label": "color_hero_heading_label",
+          "value": "#fefefe"
+        },
+        {
+          "identifier": "hero_text",
+          "type": "text",
+          "description": "hero_text_description",
+          "label": "hero_text_label",
+          "value": ""
+        },
+        {
+          "identifier": "color_hero_text",
+          "type": "color",
+          "description": "color_hero_text_description",
+          "label": "color_hero_text_label",
+          "value": "#fdfdfd"
+        },
+        {
+          "identifier": "hero_image_style",
+          "type": "list",
+          "description": "hero_image_style_description",
+          "label": "hero_image_style_label",
+          "value": "parallax",
+          "options": [
+            {
+              "label": "Behind background",
+              "value": "standard"
+            },
+            {
+              "label": "Overlay",
+              "value": "overlay"
+            },
+            {
+              "label": "Overlay (pattern)",
+              "value": "overlay-pattern"
+            },
+            {
+              "label": "Parallax effect",
+              "value": "parallax"
+            }
+          ]
+        },
+        {
+          "identifier": "bg_color_hero",
+          "type": "color",
+          "description": "bg_color_hero_description",
+          "label": "bg_color_hero_label",
+          "value": "rgba(5, 20, 31, 1)"
+        },
+        {
+          "identifier": "bg_color_secondary_hero",
+          "type": "color",
+          "description": "bg_color_secondary_hero_description",
+          "label": "bg_color_secondary_hero_label",
+          "value": "rgba(5, 20, 31, 0.9)"
+        },
+        {
+          "identifier": "bg_gradient_hero",
+          "type": "list",
+          "description": "bg_gradient_hero_description",
+          "label": "bg_gradient_hero_label",
+          "value": "linear",
+          "options": [
+            {
+              "label": "Conic",
+              "value": "conic"
+            },
+            {
+              "label": "Linear",
+              "value": "linear"
+            },
+            {
+              "label": "Radial",
+              "value": "radial"
+            }
+          ]
+        },
+        {
+          "identifier": "hero_content_alignment",
+          "type": "list",
+          "description": "hero_content_alignment_description",
+          "label": "hero_content_alignment_label",
+          "value": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            }
+          ]
+        },
+        {
+          "identifier": "hero_element_shape",
+          "type": "list",
+          "description": "hero_element_shape_description",
+          "label": "hero_element_shape_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Book",
+              "value": "book"
+            },
+            {
+              "label": "Curve",
+              "value": "curve"
+            },
+            {
+              "label": "Diagonal",
+              "value": "diagonal"
+            },
+            {
+              "label": "Hills",
+              "value": "hills"
+            },
+            {
+              "label": "Mountains",
+              "value": "mountains"
+            },
+            {
+              "label": "Rays",
+              "value": "rays"
+            },
+            {
+              "label": "Triangle",
+              "value": "triangle"
+            },
+            {
+              "label": "Wave",
+              "value": "wave"
+            },
+            {
+              "label": "Waves",
+              "value": "waves"
+            },
+            {
+              "label": "Zig zag",
+              "value": "zigzag"
+            }
+          ]
+        },
+        {
+          "identifier": "popular_keywords_style",
+          "type": "list",
+          "description": "popular_keywords_style_description",
+          "label": "popular_keywords_style_label",
+          "value": "badges",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Badges",
+              "value": "badges"
+            },
+            {
+              "label": "Links",
+              "value": "links"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "popular_keywords_heading",
+          "type": "text",
+          "description": "popular_keywords_heading_description",
+          "label": "popular_keywords_heading_label",
+          "value": ""
+        },
+        {
+          "identifier": "popular_keywords",
+          "type": "text",
+          "description": "popular_keywords_description",
+          "label": "popular_keywords_label",
+          "value": ""
+        },
+        {
+          "identifier": "promoted_videos_heading",
+          "type": "text",
+          "description": "promoted_videos_heading_description",
+          "label": "promoted_videos_heading_label",
+          "value": ""
+        },
+        {
+          "identifier": "promoted_video_ids",
+          "type": "text",
+          "description": "promoted_video_ids_description",
+          "label": "promoted_video_ids_label",
+          "value": ""
+        },
+        {
+          "identifier": "recent_activity",
+          "type": "list",
+          "description": "recent_activity_description",
+          "label": "recent_activity_label",
+          "value": "all",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Community only",
+              "value": "community"
+            },
+            {
+              "label": "All activity",
+              "value": "all"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "custom_block_group_label",
+      "variables": [
+        {
+          "identifier": "custom_block_style",
+          "type": "list",
+          "description": "custom_block_style_description",
+          "label": "custom_block_style_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Boxes",
+              "value": "boxes"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "color_custom_blocks",
+          "type": "list",
+          "description": "color_custom_blocks_description",
+          "label": "color_custom_blocks_label",
+          "value": "gray-100",
+          "options": [
+            {
+              "label": "White",
+              "value": "white"
+            },
+            {
+              "label": "Gray lightest",
+              "value": "gray-100"
+            },
+            {
+              "label": "Gray light",
+              "value": "gray-200"
+            },
+            {
+              "label": "Primary",
+              "value": "primary"
+            },
+            {
+              "label": "Secondary",
+              "value": "secondary"
+            },
+            {
+              "label": "Tertiary",
+              "value": "tertiary"
+            }
+          ]
+        },
+        {
+          "identifier": "bg_color_custom_blocks",
+          "type": "color",
+          "description": "bg_color_custom_blocks_description",
+          "label": "bg_color_custom_blocks_label",
+          "value": "#fff"
+        },
+        {
+          "identifier": "custom_blocks_heading",
+          "type": "text",
+          "description": "custom_blocks_heading_description",
+          "label": "custom_blocks_heading_label",
+          "value": "Helpful links"
+        },
+        {
+          "identifier": "number_custom_blocks",
+          "type": "list",
+          "description": "number_custom_blocks_description",
+          "label": "number_custom_blocks_label",
+          "value": "2",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "identifier": "number_custom_block_columns",
+          "type": "list",
+          "description": "number_custom_block_columns_description",
+          "label": "number_custom_block_columns_label",
+          "value": "2",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "identifier": "custom_block_alignment",
+          "type": "list",
+          "description": "custom_block_alignment_description",
+          "label": "custom_block_alignment_label",
+          "value": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            }
+          ]
+        },
+        {
+          "identifier": "custom_block_image_height",
+          "type": "text",
+          "description": "custom_block_image_height_description",
+          "label": "custom_block_image_height_label",
+          "value": "40px"
+        },
+        {
+          "identifier": "custom_block_1_title",
+          "type": "text",
+          "description": "custom_block_1_title_description",
+          "label": "custom_block_1_title_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_1_description",
+          "type": "text",
+          "description": "custom_block_1_description_description",
+          "label": "custom_block_1_description_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_1_url",
+          "type": "text",
+          "description": "custom_block_1_url_description",
+          "label": "custom_block_1_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_2_title",
+          "type": "text",
+          "description": "custom_block_2_title_description",
+          "label": "custom_block_2_title_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_2_description",
+          "type": "text",
+          "description": "custom_block_2_description_description",
+          "label": "custom_block_2_description_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_2_url",
+          "type": "text",
+          "description": "custom_block_2_url_description",
+          "label": "custom_block_2_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_3_title",
+          "type": "text",
+          "description": "custom_block_3_title_description",
+          "label": "custom_block_3_title_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_3_description",
+          "type": "text",
+          "description": "custom_block_3_description_description",
+          "label": "custom_block_3_description_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_3_url",
+          "type": "text",
+          "description": "custom_block_3_url_description",
+          "label": "custom_block_3_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_4_title",
+          "type": "text",
+          "description": "custom_block_4_title_description",
+          "label": "custom_block_4_title_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_4_description",
+          "type": "text",
+          "description": "custom_block_4_description_description",
+          "label": "custom_block_4_description_label",
+          "value": ""
+        },
+        {
+          "identifier": "custom_block_4_url",
+          "type": "text",
+          "description": "custom_block_4_url_description",
+          "label": "custom_block_4_url_label",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "label": "content_block_group_label",
+      "variables": [
+        {
+          "identifier": "content_block_style",
+          "type": "list",
+          "description": "content_block_style_description",
+          "label": "content_block_style_label",
+          "value": "1-boxes",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Boxes",
+              "value": "1-boxes"
+            },
+            {
+              "label": "Tree",
+              "value": "2-tree"
+            },
+            {
+              "label": "Toggles",
+              "value": "toggles"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "color_content_blocks",
+          "type": "list",
+          "description": "color_content_blocks_description",
+          "label": "color_content_blocks_label",
+          "value": "primary",
+          "options": [
+            {
+              "label": "White",
+              "value": "white"
+            },
+            {
+              "label": "Gray lightest",
+              "value": "gray-100"
+            },
+            {
+              "label": "Gray light",
+              "value": "gray-200"
+            },
+            {
+              "label": "Primary",
+              "value": "primary"
+            },
+            {
+              "label": "Secondary",
+              "value": "secondary"
+            },
+            {
+              "label": "Tertiary",
+              "value": "tertiary"
+            }
+          ]
+        },
+        {
+          "identifier": "bg_color_content_blocks",
+          "type": "color",
+          "description": "bg_color_content_blocks_description",
+          "label": "bg_color_content_blocks_label",
+          "value": "#fff"
+        },
+        {
+          "identifier": "content_blocks_heading",
+          "type": "text",
+          "description": "content_blocks_heading_description",
+          "label": "content_blocks_heading_label",
+          "value": "Browse topics"
+        },
+        {
+          "identifier": "number_content_block_columns",
+          "type": "list",
+          "description": "number_content_block_columns_description",
+          "label": "number_content_block_columns_label",
+          "value": "2",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "identifier": "content_block_alignment",
+          "type": "list",
+          "description": "content_block_alignment_description",
+          "label": "content_block_alignment_label",
+          "value": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            }
+          ]
+        },
+        {
+          "identifier": "content_block_image_height",
+          "type": "text",
+          "description": "content_block_image_height_description",
+          "label": "content_block_image_height_label",
+          "value": "40px"
+        }
+      ]
+    },
+    {
+      "label": "article_list_group_label",
+      "variables": [
+        {
+          "identifier": "article_list_style",
+          "type": "list",
+          "description": "article_list_style_description",
+          "label": "article_list_style_label",
+          "value": "3-bordered",
+          "options": [
+            {
+              "label": "Bullet list",
+              "value": "1-bullet"
+            },
+            {
+              "label": "Unstyled list",
+              "value": "2-unstyled"
+            },
+            {
+              "label": "Bordered list",
+              "value": "3-bordered"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "article_list_columns",
+          "type": "list",
+          "description": "article_list_columns_description",
+          "label": "article_list_columns_label",
+          "value": "1",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "identifier": "article_list_excerpt",
+          "type": "range",
+          "description": "article_list_excerpt_description",
+          "label": "article_list_excerpt_label",
+          "value": 0,
+          "min": 0,
+          "max": 256
+        },
+        {
+          "identifier": "promoted_article_style",
+          "type": "list",
+          "description": "promoted_article_style_description",
+          "label": "promoted_article_style_label",
+          "value": "bold",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Highlight as bold",
+              "value": "bold"
+            },
+            {
+              "label": "Highlight with icon",
+              "value": "icon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "promoted_article_list_group_label",
+      "variables": [
+        {
+          "identifier": "promoted_article_list_style",
+          "type": "list",
+          "description": "promoted_article_list_style_description",
+          "label": "promoted_article_list_style_label",
+          "value": "3-bordered",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Bullet list",
+              "value": "1-bullet"
+            },
+            {
+              "label": "Unstyled list",
+              "value": "2-unstyled"
+            },
+            {
+              "label": "Bordered list",
+              "value": "3-bordered"
+            },
+            {
+              "label": "Toggles",
+              "value": "toggles"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "promoted_article_list_position",
+          "type": "list",
+          "description": "promoted_article_list_position_description",
+          "label": "promoted_article_list_position_label",
+          "value": "sidebar",
+          "options": [
+            {
+              "label": "Before",
+              "value": "before"
+            },
+            {
+              "label": "After",
+              "value": "after"
+            },
+            {
+              "label": "Sidebar",
+              "value": "sidebar"
+            }
+          ]
+        },
+        {
+          "identifier": "promoted_articles_heading",
+          "type": "text",
+          "description": "promoted_articles_heading_description",
+          "label": "promoted_articles_heading_label",
+          "value": "Popular articles"
+        },
+        {
+          "identifier": "promoted_article_list_columns",
+          "type": "list",
+          "description": "promoted_article_list_columns_description",
+          "label": "promoted_article_list_columns_label",
+          "value": "1",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "identifier": "promoted_articles_alignment",
+          "type": "list",
+          "description": "promoted_article_list_alignment_description",
+          "label": "promoted_article_list_alignment_label",
+          "value": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            }
+          ]
+        },
+        {
+          "identifier": "promoted_article_list_excerpt",
+          "type": "range",
+          "description": "promoted_article_list_excerpt_description",
+          "label": "promoted_article_list_excerpt_label",
+          "value": 0,
+          "min": 0,
+          "max": 256
+        }
+      ]
+    },
+    {
+      "label": "contact_block_group_label",
+      "variables": [
+        {
+          "identifier": "contact_block_style",
+          "type": "list",
+          "description": "contact_block_style_description",
+          "label": "contact_block_style_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Boxes",
+              "value": "boxes"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "color_contact_blocks",
+          "type": "list",
+          "description": "color_contact_blocks_description",
+          "label": "color_contact_blocks_label",
+          "value": "secondary",
+          "options": [
+            {
+              "label": "White",
+              "value": "white"
+            },
+            {
+              "label": "Gray lightest",
+              "value": "gray-100"
+            },
+            {
+              "label": "Gray light",
+              "value": "gray-200"
+            },
+            {
+              "label": "Primary",
+              "value": "primary"
+            },
+            {
+              "label": "Secondary",
+              "value": "secondary"
+            },
+            {
+              "label": "Tertiary",
+              "value": "tertiary"
+            }
+          ]
+        },
+        {
+          "identifier": "contact_blocks_heading",
+          "type": "text",
+          "description": "contact_blocks_heading_description",
+          "label": "contact_blocks_heading_label",
+          "value": "Get in touch"
+        },
+        {
+          "identifier": "number_contact_blocks",
+          "type": "list",
+          "description": "number_contact_blocks_description",
+          "label": "number_contact_blocks_label",
+          "value": "3",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "identifier": "number_contact_block_columns",
+          "type": "list",
+          "description": "number_contact_block_columns_description",
+          "label": "number_contact_block_columns_label",
+          "value": "3",
+          "options": [
+            {
+              "label": "1",
+              "value": "1"
+            },
+            {
+              "label": "2",
+              "value": "2"
+            },
+            {
+              "label": "3",
+              "value": "3"
+            },
+            {
+              "label": "4",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "identifier": "contact_block_image_height",
+          "type": "text",
+          "description": "contact_block_image_height_description",
+          "label": "contact_block_image_height_label",
+          "value": "40px"
+        },
+        {
+          "identifier": "contact_block_1_title",
+          "type": "text",
+          "description": "contact_block_1_title_description",
+          "label": "contact_block_1_title_label",
+          "value": "Message us"
+        },
+        {
+          "identifier": "contact_block_1_description",
+          "type": "text",
+          "description": "contact_block_1_description_description",
+          "label": "contact_block_1_description_label",
+          "value": "Start a conversation with our team and get the answers you need"
+        },
+        {
+          "identifier": "contact_block_1_url",
+          "type": "text",
+          "description": "contact_block_1_url_description",
+          "label": "contact_block_1_url_label",
+          "value": "#"
+        },
+        {
+          "identifier": "contact_block_2_title",
+          "type": "text",
+          "description": "contact_block_2_title_description",
+          "label": "contact_block_2_title_label",
+          "value": "Call us"
+        },
+        {
+          "identifier": "contact_block_2_description",
+          "type": "text",
+          "description": "contact_block_2_description_description",
+          "label": "contact_block_2_description_label",
+          "value": "Call us at 1 (800) 111-2222 anytime for assistance"
+        },
+        {
+          "identifier": "contact_block_2_url",
+          "type": "text",
+          "description": "contact_block_2_url_description",
+          "label": "contact_block_2_url_label",
+          "value": "tel:18001112222"
+        },
+        {
+          "identifier": "contact_block_3_title",
+          "type": "text",
+          "description": "contact_block_3_title_description",
+          "label": "contact_block_3_title_label",
+          "value": "Find a store"
+        },
+        {
+          "identifier": "contact_block_3_description",
+          "type": "text",
+          "description": "contact_block_3_description_description",
+          "label": "contact_block_3_description_label",
+          "value": "Find a location near you for in person service"
+        },
+        {
+          "identifier": "contact_block_3_url",
+          "type": "text",
+          "description": "contact_block_3_url_description",
+          "label": "contact_block_3_url_label",
+          "value": "https://www.twitter.com"
+        },
+        {
+          "identifier": "contact_block_4_title",
+          "type": "text",
+          "description": "contact_block_4_title_description",
+          "label": "contact_block_4_title_label",
+          "value": "Subscribe"
+        },
+        {
+          "identifier": "contact_block_4_description",
+          "type": "text",
+          "description": "contact_block_4_description_description",
+          "label": "contact_block_4_description_label",
+          "value": "Discover video tutorials covering a variety of topics"
+        },
+        {
+          "identifier": "contact_block_4_url",
+          "type": "text",
+          "description": "contact_block_4_url_description",
+          "label": "contact_block_4_url_label",
+          "value": "https://www.youtube.com"
+        }
+      ]
+    },
+    {
+      "label": "cta_group_label",
+      "variables": [
+        {
+          "identifier": "cta_style",
+          "type": "list",
+          "description": "cta_style_description",
+          "label": "cta_style_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Banner",
+              "value": "banner"
+            },
+            {
+              "label": "Boxed",
+              "value": "boxed"
+            },
+            {
+              "label": "Boxed with image",
+              "value": "boxed-image"
+            },
+            {
+              "label": "In sidebar (right)",
+              "value": "sidebar"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "cta_location",
+          "type": "list",
+          "description": "cta_location_description",
+          "label": "cta_location_label",
+          "value": "all",
+          "options": [
+            {
+              "label": "Home page only",
+              "value": "home"
+            },
+            {
+              "label": "Internal pages only",
+              "value": "internal"
+            },
+            {
+              "label": "All pages",
+              "value": "all"
+            }
+          ]
+        },
+        {
+          "identifier": "cta_element_heading",
+          "type": "text",
+          "description": "cta_element_heading_description",
+          "label": "cta_element_heading_label",
+          "value": "Still need help?"
+        },
+        {
+          "identifier": "color_heading_cta",
+          "type": "color",
+          "description": "color_heading_cta_description",
+          "label": "color_heading_cta_label",
+          "value": "#323232"
+        },
+        {
+          "identifier": "cta_element_body",
+          "type": "text",
+          "description": "cta_element_body_description",
+          "label": "cta_element_body_label",
+          "value": "Our team of experts are available and just a click away"
+        },
+        {
+          "identifier": "color_text_cta",
+          "type": "color",
+          "description": "color_text_cta_description",
+          "label": "color_text_cta_label",
+          "value": "#555"
+        },
+        {
+          "identifier": "cta_element_link_text",
+          "type": "text",
+          "description": "cta_element_link_text_description",
+          "label": "cta_element_link_text_label",
+          "value": "Contact us"
+        },
+        {
+          "identifier": "bg_color_cta",
+          "type": "color",
+          "description": "bg_color_cta_description",
+          "label": "bg_color_cta_label",
+          "value": "#edf2f7"
+        }
+      ]
+    },
+    {
+      "label": "category_page_group_label",
+      "variables": [
+        {
+          "identifier": "subsection_style",
+          "type": "list",
+          "description": "subsection_style_description",
+          "label": "subsection_style_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "List",
+              "value": "list"
+            }
+          ]
+        },
+        {
+          "identifier": "category_sidebar",
+          "type": "list",
+          "description": "category_sidebar_description",
+          "label": "category_sidebar_label",
+          "value": "section-list",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Article list",
+              "value": "article-list"
+            },
+            {
+              "label": "Section list",
+              "value": "section-list"
+            },
+            {
+              "label": "Category list",
+              "value": "category-list"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "section_page_group_label",
+      "variables": [
+        {
+          "identifier": "section_sidebar",
+          "type": "list",
+          "description": "section_sidebar_description",
+          "label": "section_sidebar_label",
+          "value": "article-list",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Article list",
+              "value": "article-list"
+            },
+            {
+              "label": "Section list",
+              "value": "section-list"
+            },
+            {
+              "label": "Category list",
+              "value": "category-list"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "show_follow_section",
+          "type": "checkbox",
+          "description": "follow_section_description",
+          "label": "follow_section_label",
+          "value": true
+        }
+      ]
+    },
+    {
+      "label": "article_page_group_label",
+      "variables": [
+        {
+          "identifier": "article_metadata",
+          "type": "list",
+          "description": "article_metadata_description",
+          "label": "article_metadata_label",
+          "value": "date-start",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Date at start of article",
+              "value": "date-start"
+            },
+            {
+              "label": "Date at end of article",
+              "value": "date-end"
+            },
+            {
+              "label": "Author and date",
+              "value": "author"
+            }
+          ]
+        },
+        {
+          "identifier": "show_follow_article",
+          "type": "checkbox",
+          "description": "follow_article_description",
+          "label": "follow_article_label",
+          "value": true
+        },
+        {
+          "identifier": "table_of_contents_style",
+          "type": "list",
+          "description": "table_of_contents_style_description",
+          "label": "table_of_contents_style_label",
+          "value": "full-width",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Simple",
+              "value": "simple"
+            },
+            {
+              "label": "Boxed",
+              "value": "boxed"
+            },
+            {
+              "label": "Boxed (full-width)",
+              "value": "full-width"
+            },
+            {
+              "label": "In sidebar (right)",
+              "value": "sidebar-right"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "table_of_contents_heading",
+          "type": "text",
+          "description": "table_of_contents_heading_description",
+          "label": "table_of_contents_heading_label",
+          "value": "In this article"
+        },
+        {
+          "identifier": "article_navigation_style",
+          "type": "list",
+          "description": "article_navigation_style_description",
+          "label": "article_navigation_style_label",
+          "value": "standard",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Standard",
+              "value": "standard"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "next_article_title",
+          "type": "text",
+          "description": "next_article_title_description",
+          "label": "next_article_title_label",
+          "value": "Next article"
+        },
+        {
+          "identifier": "previous_article_title",
+          "type": "text",
+          "description": "previous_article_title_description",
+          "label": "previous_article_title_label",
+          "value": "Previous article"
+        },
+        {
+          "identifier": "show_article_voting",
+          "type": "checkbox",
+          "description": "show_article_voting_description",
+          "label": "show_article_voting_label",
+          "value": true
+        },
+        {
+          "identifier": "show_article_sharing",
+          "type": "checkbox",
+          "description": "article_sharing_description",
+          "label": "article_sharing_label",
+          "value": false
+        },
+        {
+          "identifier": "share_title",
+          "type": "text",
+          "description": "share_title_description",
+          "label": "share_title_label",
+          "value": ""
+        },
+        {
+          "identifier": "show_recently_viewed_articles",
+          "type": "checkbox",
+          "description": "recently_viewed_articles_description",
+          "label": "recently_viewed_articles_label",
+          "value": true
+        },
+        {
+          "identifier": "show_related_articles",
+          "type": "checkbox",
+          "description": "related_articles_description",
+          "label": "related_articles_label",
+          "value": true
+        },
+        {
+          "identifier": "show_article_comments",
+          "type": "checkbox",
+          "description": "article_comments_description",
+          "label": "article_comments_label",
+          "value": true
+        },
+        {
+          "identifier": "article_sidebar",
+          "type": "list",
+          "description": "article_sidebar_description",
+          "label": "article_sidebar_label",
+          "value": "article-list",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Article list",
+              "value": "article-list"
+            },
+            {
+              "label": "Section list",
+              "value": "section-list"
+            },
+            {
+              "label": "Category list",
+              "value": "category-list"
+            },
+            {
+              "label": "Articles in this section",
+              "value": "articles-in-section"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "note_title",
+          "type": "text",
+          "description": "note_title_description",
+          "label": "note_title_label",
+          "value": "Note"
+        },
+        {
+          "identifier": "color_note",
+          "type": "color",
+          "description": "color_note_description",
+          "label": "color_note_label",
+          "value": "#61a5ff"
+        },
+        {
+          "identifier": "warning_title",
+          "type": "text",
+          "description": "warning_title_description",
+          "label": "warning_title_label",
+          "value": "Warning"
+        },
+        {
+          "identifier": "color_warning",
+          "type": "color",
+          "description": "color_warning_description",
+          "label": "color_warning_label",
+          "value": "#ef526e"
+        },
+        {
+          "identifier": "enable_lightboxes",
+          "type": "checkbox",
+          "description": "enable_lightboxes_description",
+          "label": "enable_lightboxes_label",
+          "value": false
+        },
+        {
+          "identifier": "enable_video_player",
+          "type": "checkbox",
+          "description": "enable_video_player_description",
+          "label": "enable_video_player_label",
+          "value": false
+        }
+      ]
+    },
+    {
+      "label": "new_request_page_group_label",
+      "variables": [
+        {
+          "identifier": "form_list_style",
+          "type": "list",
+          "description": "form_list_style_description",
+          "label": "form_list_style_label",
+          "value": "standard",
+          "options": [
+            {
+              "label": "Standard",
+              "value": "standard"
+            },
+            {
+              "label": "Boxes",
+              "value": "boxes"
+            },
+            {
+              "label": "List",
+              "value": "list"
+            },
+            {
+              "label": "Custom template",
+              "value": "custom"
+            }
+          ]
+        },
+        {
+          "identifier": "form_tip",
+          "type": "text",
+          "description": "form_tip_description",
+          "label": "form_tip_label",
+          "value": "Providing as much information as possible in your request will allow us to help you faster"
+        }
+      ]
+    },
+    {
+      "label": "community_group_label",
+      "variables": [
+        {
+          "identifier": "community_image_style",
+          "type": "list",
+          "description": "community_image_style_description",
+          "label": "community_image_style_label",
+          "value": "standard",
+          "options": [
+            {
+              "label": "Behind background",
+              "value": "standard"
+            },
+            {
+              "label": "Overlay",
+              "value": "overlay"
+            },
+            {
+              "label": "Overlay (pattern)",
+              "value": "overlay-pattern"
+            },
+            {
+              "label": "Parallax effect",
+              "value": "parallax"
+            }
+          ]
+        },
+        {
+          "identifier": "show_recent_activity_community",
+          "type": "checkbox",
+          "description": "show_recent_activity_community_description",
+          "label": "recent_activity_label",
+          "value": true
+        },
+        {
+          "identifier": "show_follow_topic",
+          "type": "checkbox",
+          "description": "follow_topic_description",
+          "label": "follow_topic_label",
+          "value": true
+        },
+        {
+          "identifier": "show_follow_post",
+          "type": "checkbox",
+          "description": "follow_post_description",
+          "label": "follow_post_label",
+          "value": true
+        },
+        {
+          "identifier": "show_post_sharing",
+          "type": "checkbox",
+          "description": "post_sharing_description",
+          "label": "post_sharing_label",
+          "value": true
+        }
+      ]
+    },
+    {
+      "label": "footer_group_label",
+      "variables": [
+        {
+          "identifier": "footer_layout",
+          "type": "list",
+          "description": "footer_layout_description",
+          "label": "footer_layout_label",
+          "value": "links-left",
+          "options": [
+            {
+              "label": "Links on left",
+              "value": "links-left"
+            },
+            {
+              "label": "Links in center",
+              "value": "links-center"
+            },
+            {
+              "label": "Links on right",
+              "value": "links-right"
+            },
+            {
+              "label": "Custom links on top",
+              "value": "links-stacked"
+            }
+          ]
+        },
+        {
+          "identifier": "footer_shape",
+          "type": "list",
+          "description": "footer_shape_description",
+          "label": "footer_shape_label",
+          "value": "none",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Book",
+              "value": "book"
+            },
+            {
+              "label": "Curve",
+              "value": "curve"
+            },
+            {
+              "label": "Diagonal",
+              "value": "diagonal"
+            },
+            {
+              "label": "Hills",
+              "value": "hills"
+            },
+            {
+              "label": "Mountains",
+              "value": "mountains"
+            },
+            {
+              "label": "Rays",
+              "value": "rays"
+            },
+            {
+              "label": "Triangle",
+              "value": "triangle"
+            },
+            {
+              "label": "Wave",
+              "value": "wave"
+            },
+            {
+              "label": "Waves",
+              "value": "waves"
+            },
+            {
+              "label": "Zig zag",
+              "value": "zigzag"
+            }
+          ]
+        },
+        {
+          "identifier": "color_footer_link",
+          "type": "color",
+          "description": "color_footer_link_description",
+          "label": "color_footer_link_label",
+          "value": "#4A5568"
+        },
+        {
+          "identifier": "bg_color_footer",
+          "type": "color",
+          "description": "bg_color_footer_description",
+          "label": "bg_color_footer_label",
+          "value": "rgba(230, 234, 237, 1)"
+        },
+        {
+          "identifier": "footer_link_1_text",
+          "type": "text",
+          "description": "footer_link_1_text_description",
+          "label": "footer_link_1_text_label",
+          "value": ""
+        },
+        {
+          "identifier": "footer_link_1_url",
+          "type": "text",
+          "description": "footer_link_1_url_description",
+          "label": "footer_link_1_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "footer_link_2_text",
+          "type": "text",
+          "description": "footer_link_2_text_description",
+          "label": "footer_link_2_text_label",
+          "value": ""
+        },
+        {
+          "identifier": "footer_link_2_url",
+          "type": "text",
+          "description": "footer_link_2_url_description",
+          "label": "footer_link_2_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "footer_link_3_text",
+          "type": "text",
+          "description": "footer_link_3_text_description",
+          "label": "footer_link_3_text_label",
+          "value": ""
+        },
+        {
+          "identifier": "footer_link_3_url",
+          "type": "text",
+          "description": "footer_link_3_url_description",
+          "label": "footer_link_3_url_label",
+          "value": ""
+        },
+        {
+          "identifier": "facebook_link",
+          "type": "text",
+          "description": "facebook_link_description",
+          "label": "facebook_link_label",
+          "value": ""
+        },
+        {
+          "identifier": "twitter_link",
+          "type": "text",
+          "description": "twitter_link_description",
+          "label": "twitter_link_label",
+          "value": ""
+        },
+        {
+          "identifier": "linkedin_link",
+          "type": "text",
+          "description": "linkedin_link_description",
+          "label": "linkedin_link_label",
+          "value": ""
+        },
+        {
+          "identifier": "instagram_link",
+          "type": "text",
+          "description": "instagram_link_description",
+          "label": "instagram_link_label",
+          "value": ""
+        },
+        {
+          "identifier": "youtube_link",
+          "type": "text",
+          "description": "youtube_link_description",
+          "label": "youtube_link_label",
+          "value": ""
+        },
+        {
+          "identifier": "show_credit_link",
+          "type": "checkbox",
+          "description": "show_credit_link_description",
+          "label": "show_credit_link_label",
+          "value": false
+        }
+      ]
+    },
+    {
+      "label": "translations_group_label",
+      "variables": [
+        {
+          "identifier": "use_translations",
+          "type": "checkbox",
+          "description": "use_translations_description",
+          "label": "use_translations_label",
+          "value": false
+        }
+      ]
+    }
+  ]
 }
