@@ -75,6 +75,86 @@
 
 <script type="text/javascript">document.documentElement.classList.add('new-request-page')</script>
 
+{{!-- Access Permission Request 관련 로직 --}}
+<script type="module">
+  const isLoggedIn = {{signed_in}};
+  const TARGET_FORM_ID = "26443122488476"; // Access Permission Request Form ID
+  
+  const getCurrentUserInfo = async () => {
+  	const req = await fetch('/api/v2/users/me');
+  	const res = await req.json();
+  	return res?.user || {}
+  }
+  
+  const setEmailFieldValue = (value) => {
+  	const targetId = 26522937033756;
+  	const targetField = document.querySelector(`#request_custom_fields_${targetId}`);
+  	const targetValue = targetField?.value || "";
+  	if (targetField && !targetValue) {
+  		targetField.value = value;
+  	}
+  }
+  
+  // 필요 시 추가 구현
+  const replaceDescriptionLabel = () => {
+  	// 기존 필드 라벨 제거
+  	const removeTarget = document.querySelector('#request_description_hint');
+  	if (removeTarget) {
+  		removeTarget.remove();
+  	}
+  
+  	// 신규 필드 라벨 추가
+  	// const targetEl = document.querySelector('.request_description');
+  	// const newLabel = "";
+  	// 신규 p 태그 구성하여 targetEl 자식 태그로 추가
+  }
+  
+  // 즉시 DOM 렌더링되는 제거 대상 옵션 제거
+  const removeTargetOption = () => {
+    const option = document.querySelector(`option[value="${TARGET_FORM_ID}"]`);
+    if (option) option.remove();
+  }
+
+  const formObserve = () => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType !== 1) return;
+  
+          if (node.nodeName === "OPTION" && node.value === TARGET_FORM_ID) {
+            node.remove();
+            return;
+          }
+          if (node.nodeName === "LI" && node.id === TARGET_FORM_ID) {
+            node.remove();
+            return;
+          }
+  
+          const targetOption = node.querySelector(`option[value="${TARGET_FORM_ID}"]`);
+          if (targetOption) targetOption.remove();
+          const targetLi = node.querySelector(`li[id="${TARGET_FORM_ID}"]`);
+          if (targetLi) targetLi.remove();
+        });
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
+  
+  document.addEventListener("DOMContentLoaded", async () => {
+    if (isLoggedIn) {
+      const user = await getCurrentUserInfo();
+      setEmailFieldValue(user?.email || "");
+    } else {
+  		removeTargetOption();
+    	formObserve();
+  	}
+  });
+</script>
+
 {{!---------------
    Micro-templates
    ---------------}}
@@ -124,23 +204,30 @@
   {{/is~}}
   {{~#is settings.form_list_style 'list'}}
     <script type="text/template" id="tmpl-form-list">
+      <% 
+        const isLoggedIn = {{signed_in}}; 
+      %>
+
       <% if (title) { %>
         <h2><%= title %></h2>
       <% } %>
+
       <div class="card bg-white my-6">
         <% if (forms.length) { %>
           <div class="list-group list-group-flush">
             <% forms.forEach(function(form) { %>
-              <a class="list-group-item list-group-item-action p-4" href="<%= form.html_url %>">
-                <div class="media align-items-center">
-                  <div class="media-body font-semibold">
-                    <%= form.title %>
+              <% if (!( !isLoggedIn && form.html_url.includes('ticket_form_id=26443122488476') )) { %>
+                <a class="list-group-item list-group-item-action p-4" href="<%= form.html_url %>">
+                  <div class="media align-items-center">
+                    <div class="media-body font-semibold">
+                      <%= form.title %>
+                    </div>
+                    <svg class="svg-icon fill-current text-primary ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 323" aria-hidden="true">
+                      <path d="M190,162 C190,168 187,174 183,178 L38,317 C34,321 28,323 23,323 C17,323 11,321 7,317 C-2,308 -2,294 7,285 L135,162 L7,39 C-2,31 -2,16 7,7 C15,-2 29,-2 38,7 L183,146 C187,150 190,156 190,162 Z"></path>
+                    </svg>
                   </div>
-                  <svg class="svg-icon fill-current text-primary ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 323" aria-hidden="true">
-                    <path d="M190,162 C190,168 187,174 183,178 L38,317 C34,321 28,323 23,323 C17,323 11,321 7,317 C-2,308 -2,294 7,285 L135,162 L7,39 C-2,31 -2,16 7,7 C15,-2 29,-2 38,7 L183,146 C187,150 190,156 190,162 Z"></path>
-                  </svg>
-                </div>
-              </a>
+                </a>
+              <% } %>
             <% }); %>
           </div>
         <% } %>
