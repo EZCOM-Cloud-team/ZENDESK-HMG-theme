@@ -15863,8 +15863,69 @@ a:hover .icon-circle {
 	visibility: hidden;
 }
 
-/**** 팝업 공지사항 ****/
+/* =========================================
+   1. 상태 뱃지 공통 기본 스타일
+   ========================================= */
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+  color: #ffffff;
+  vertical-align: middle;
+  line-height: 1;
+}
+.article-title {
+  display: flex;
+  align-items: center;
+}
 
+/* =========================================
+   2. 상태별 색상 지정 (기본 상태값 - 수정됨)
+   ========================================= */
+.badge-investigating-kr, .badge-investigating-en { background-color: #F39C12; } /* 주황색 (확인 중) */
+.badge-scheduled-kr, .badge-scheduled-en { background-color: #3498DB; } /* 파란색 (예정됨) */
+.badge-fixed-kr, .badge-fixed-en { background-color: #2ECC71; } /* 초록색 (해결됨) */
+
+/* =========================================
+   3. 상태별 색상 지정 (장애 공지 전용)
+   ========================================= */
+.badge-incident-kr, .badge-incident-en { background-color: #E74C3C; } /* 빨간색 */
+.badge-resolved-kr, .badge-resolved-en { background-color: #95A5A6; } /* 회색 (종료 통일) */
+
+/* =========================================
+   4. 상태별 색상 지정 (배포 공지 전용)
+   ========================================= */
+.badge-prerelease-kr, .badge-prerelease-en { background-color: #9B59B6; } /* 보라색 */
+.badge-released-kr, .badge-released-en { background-color: #1ABC9C; } /* 청록색 */
+
+/* =========================================
+   5. 상태별 색상 지정 (이벤트 공지 전용)
+   ========================================= */
+/* 예정 (Upcoming) */
+.badge-event-upcoming-kr, .badge-event-upcoming-en { 
+  background-color: #E84393; /* 핑크색 */ 
+}
+/* 진행 중 (Ongoing) */
+.badge-event-ongoing-kr, .badge-event-ongoing-en { 
+  background-color: #0984E3; /* 밝은 파란색 */ 
+}
+/* 종료 (Ended) - 장애 종료와 동일한 색상으로 통일 */
+.badge-event-ended-kr, .badge-event-ended-en { 
+  background-color: #95A5A6; /* 회색 (종료 통일) */ 
+}
+
+/* 헬프센터 전체 컨테이너 폭 조정 */
+.container {
+  max-width: 1440px; /* 원하는 폭으로 숫자를 변경하세요 (예: 1140px, 1440px 등) */
+}
+
+
+/* =========================================
+   팝업 공지사항
+   ========================================= */
 .popup-overlay {
 	display: none;
 	position: fixed;
