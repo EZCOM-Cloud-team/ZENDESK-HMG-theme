@@ -78,40 +78,76 @@
 {{!-- Access Permission Request 관련 로직 --}}
 <script type="module">
   const isLoggedIn = {{signed_in}};
-  const TARGET_FORM_ID = "26443122488476"; // Access Permission Request Form ID
+  const PERMISSION_REQUEST_FORM_ID = "26443122488476"; // Access Permission Request Form ID
+  const descriptionPlaceholderKo = `<p><strong>이름 및 신청 사유, 소속을 작성해주세요</strong></p><ul><li>이름: 김현대</li><li>신청 사유: CCI VOC 운영, 권역 담당자</li><li>소속: 고객센터</li></ul>`;
+  const descriptionPlaceholderEn = `<p><strong>Enter your name, reason for request, and department/affiliation</strong></p><ul><li>Name: Hyundai Kim</li><li>Purpose: Service Operation</li><li>Affiliation: Customer Contact Center</li></ul>`;
+
   
   const getCurrentUserInfo = async () => {
-  	const req = await fetch('/api/v2/users/me');
-  	const res = await req.json();
-  	return res?.user || {}
+    const req = await fetch('/api/v2/users/me');
+    const res = await req.json();
+    return res?.user || {}
   }
-  
+
   const setEmailFieldValue = (value) => {
-  	const targetId = 26522937033756;
-  	const targetField = document.querySelector(`#request_custom_fields_${targetId}`);
-  	const targetValue = targetField?.value || "";
-  	if (targetField && !targetValue) {
-  		targetField.value = value;
-  	}
+    const targetId = 26522937033756;
+    const targetField = document.querySelector(`#request_custom_fields_${targetId}`);
+    const targetValue = targetField?.value || "";
+    if (targetField && !targetValue) {
+      targetField.value = value;
+    }
+  }
+
+  const setDescriptionDefault = (lang) => {
+    const defaultHtml = lang === 'ko' ? descriptionPlaceholderKo : descriptionPlaceholderEn;
+
+    const paste = (editable) => {
+      const ckInstance = editable.ckeditorInstance;
+      if (ckInstance) {
+        ckInstance.setData(defaultHtml);
+        return;
+      }
+      editable.focus();
+      const dt = new DataTransfer();
+      dt.setData('text/html', defaultHtml);
+      dt.setData('text/plain', '');
+      editable.dispatchEvent(new ClipboardEvent('paste', {
+        bubbles: true,
+        cancelable: true,
+        clipboardData: dt,
+      }));
+      editable.blur();
+    };
+
+    const trySet = () => {
+      const editable = document.querySelector(
+        '.request_description .ck-editor__editable_inline[contenteditable="true"]'
+      );
+      if (!editable || editable.textContent.trim() !== '') return true;
+
+      paste(editable);
+
+      // paste가 CKEditor에 실제로 반영됐는지 확인
+      return editable.textContent.trim() !== '';
+    };
+
+    let attempts = 0;
+    const retry = () => {
+      if (!trySet() && ++attempts < 10) setTimeout(retry, 200);
+    };
+    retry();
+  };
+
+  const initPermissionRequestForm = (user) => {
+      const language = window.location.href.includes('ko') ? 'ko' : 'en';
+      console.log(language);
+      setDescriptionDefault(language);
+      setEmailFieldValue(user?.email || "");
   }
   
-  // 필요 시 추가 구현
-  const replaceDescriptionLabel = () => {
-  	// 기존 필드 라벨 제거
-  	const removeTarget = document.querySelector('#request_description_hint');
-  	if (removeTarget) {
-  		removeTarget.remove();
-  	}
-  
-  	// 신규 필드 라벨 추가
-  	// const targetEl = document.querySelector('.request_description');
-  	// const newLabel = "";
-  	// 신규 p 태그 구성하여 targetEl 자식 태그로 추가
-  }
-  
-  // 즉시 DOM 렌더링되는 제거 대상 옵션 제거
+  // 제거 대상 옵션 제거
   const removeTargetOption = () => {
-    const option = document.querySelector(`option[value="${TARGET_FORM_ID}"]`);
+    const option = document.querySelector(`option[value="${PERMISSION_REQUEST_FORM_ID}"]`);
     if (option) option.remove();
   }
 
@@ -121,18 +157,18 @@
         mutation.addedNodes.forEach(node => {
           if (node.nodeType !== 1) return;
   
-          if (node.nodeName === "OPTION" && node.value === TARGET_FORM_ID) {
+          if (node.nodeName === "OPTION" && node.value === PERMISSION_REQUEST_FORM_ID) {
             node.remove();
             return;
           }
-          if (node.nodeName === "LI" && node.id === TARGET_FORM_ID) {
+          if (node.nodeName === "LI" && node.id === PERMISSION_REQUEST_FORM_ID) {
             node.remove();
             return;
           }
   
-          const targetOption = node.querySelector(`option[value="${TARGET_FORM_ID}"]`);
+          const targetOption = node.querySelector(`option[value="${PERMISSION_REQUEST_FORM_ID}"]`);
           if (targetOption) targetOption.remove();
-          const targetLi = node.querySelector(`li[id="${TARGET_FORM_ID}"]`);
+          const targetLi = node.querySelector(`li[id="${PERMISSION_REQUEST_FORM_ID}"]`);
           if (targetLi) targetLi.remove();
         });
       });
@@ -146,12 +182,14 @@
   
   document.addEventListener("DOMContentLoaded", async () => {
     if (isLoggedIn) {
-      const user = await getCurrentUserInfo();
-      setEmailFieldValue(user?.email || "");
+      if (window.location.href.includes(`ticket_form_id=${PERMISSION_REQUEST_FORM_ID}`)) {
+        const user = await getCurrentUserInfo();
+        initPermissionRequestForm(user);
+      }
     } else {
-  		removeTargetOption();
-    	formObserve();
-  	}
+      removeTargetOption();
+      formObserve();
+    }
   });
 </script>
 
