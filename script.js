@@ -387,6 +387,7 @@
 		})();
 		const centerX = window.innerWidth / 2;
 		const centerY = window.innerHeight / 2;
+		const checkBox = popup.querySelector(".popup-visible-checkbox");
 
 		positionPopups(popups, centerX, centerY);
 
@@ -416,6 +417,12 @@
 				if (!popup) {
 					console.warn("[popup] popup 요소를 찾지 못함. id 불일치 가능성");
 					return;
+				}
+
+				// '일주일간 표시하지 않기'가 체크되어있는 경우
+				if (checkBox.checked) {
+					popupVisibleObj.push({ id: popupId, exp_date: nextWeek });
+					localStorage.setItem(popupVisibleKey, JSON.stringify(popupVisibleObj));
 				}
 
 				popup.classList.remove("show");
