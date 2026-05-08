@@ -372,11 +372,24 @@
 			});
 	}
 
-	function initPopups(popupOverlay) {
+	async function initPopups(popupOverlay) {
 		const popups = document.querySelectorAll(".popup");
 		if (!popups.length) return;
 
-		const userId = JSON.parse(localStorage.getItem("ajs_user_id"));
+		let userId = JSON.parse(localStorage.getItem("ajs_user_id"));
+
+		if (!userId) {
+			try {
+				const res = await fetch("/api/v2/users/me");
+				const data = await res.json();
+				userId = data.user?.id ?? null;
+			} catch (error) {
+				console.error("[popup] 사용자 ID 조회 실패:", error);
+			}
+		}
+
+		if (!userId) return;
+
 		const popupVisibleKey = `${userId}_popupVisible`;
 		const popupVisibleObj = JSON.parse(localStorage.getItem(popupVisibleKey)) || [];
 		const today = new Date().setHours(0, 0, 0, 0);
@@ -412,17 +425,18 @@
 			btn.addEventListener("click", () => {
 				const popupId = btn.getAttribute("data-popup-id");
 				const popup = document.getElementById("popup-" + popupId);
-				const checkBox = popup.querySelector(".popup-visible-checkbox");
-
 				if (!popup) {
 					console.warn("[popup] popup 요소를 찾지 못함. id 불일치 가능성");
 					return;
 				}
 
+				const checkBox = popup.querySelector(".popup-visible-checkbox");
+
 				// '일주일간 표시하지 않기'가 체크되어있는 경우
-				if (checkBox.checked) {
-					popupVisibleObj.push({ id: popupId, exp_date: nextWeek });
-					localStorage.setItem(popupVisibleKey, JSON.stringify(popupVisibleObj));
+				if (checkBox && checkBox.checked) {
+					const filtered = popupVisibleObj.filter((item) => item.id !== popupId);
+					const updated = [...filtered, { id: popupId, exp_date: nextWeek }];
+					localStorage.setItem(popupVisibleKey, JSON.stringify(updated));
 				}
 
 				popup.classList.remove("show");
