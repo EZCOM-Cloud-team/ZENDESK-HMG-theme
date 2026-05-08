@@ -409,15 +409,24 @@
 			}
 		};
 
-		popups.forEach((popup) => {
-			const stored = popupVisibleObj.find((item) => item.id === popup.id);
-			const isExpired = stored && stored.exp_date < today;
+		const checkPopupAllowed = () => {
+			popups.forEach((popup) => {
+				const isInLocalStorage = popupVisibleObj.some((item) => item.id === popup.id);
 
-			if (!stored || isExpired) {
-				popup.classList.add("show");
-				popupOverlay.classList.add("show");
-			}
-		});
+				if (!isInLocalStorage) {
+					popup.classList.add("show");
+					popupOverlay.classList.add("show");
+					return;
+				}
+
+				const stored = popupVisibleObj.find((item) => item.id === popup.id);
+				if (stored && stored.exp_date < today) {
+					popup.classList.add("show");
+					popupOverlay.classList.add("show");
+				}
+			});
+		};
+		checkPopupAllowed();
 
 		const btns = document.querySelectorAll(".btn-popup-check");
 
@@ -435,8 +444,8 @@
 				// '일주일간 표시하지 않기'가 체크되어있는 경우
 				if (checkBox && checkBox.checked) {
 					const currentObj = JSON.parse(localStorage.getItem(popupVisibleKey)) || [];
-					const filtered = currentObj.filter((item) => item.id !== popupId);
-					const updated = [...filtered, { id: popupId, exp_date: nextWeek }];
+					const filtered = currentObj.filter((item) => item.id !== popup.id);
+					const updated = [...filtered, { id: popup.id, exp_date: nextWeek }];
 					localStorage.setItem(popupVisibleKey, JSON.stringify(updated));
 				}
 
