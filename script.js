@@ -387,7 +387,6 @@
 		})();
 		const centerX = window.innerWidth / 2;
 		const centerY = window.innerHeight / 2;
-		const checkBox = popup.querySelector(".popup-visible-checkbox");
 
 		positionPopups(popups, centerX, centerY);
 
@@ -413,6 +412,7 @@
 			btn.addEventListener("click", () => {
 				const popupId = btn.getAttribute("data-popup-id");
 				const popup = document.getElementById("popup-" + popupId);
+				const checkBox = popup.querySelector(".popup-visible-checkbox");
 
 				if (!popup) {
 					console.warn("[popup] popup 요소를 찾지 못함. id 불일치 가능성");
