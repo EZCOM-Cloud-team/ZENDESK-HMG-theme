@@ -391,13 +391,16 @@
 		if (!userId) return;
 
 		const popupVisibleKey = `${userId}_popupVisible`;
-		const popupVisibleObj = JSON.parse(localStorage.getItem(popupVisibleKey)) || [];
-		const today = new Date().setHours(0, 0, 0, 0);
-		const nextWeek = (() => {
-			const d = new Date();
-			d.setDate(d.getDate() + 7);
-			return d.setHours(0, 0, 0, 0);
-		})();
+		const currentPopupIds = Array.from(popups).map((p) => p.id);
+		const rawPopupVisibleObj = JSON.parse(localStorage.getItem(popupVisibleKey)) || [];
+		const popupVisibleObj = rawPopupVisibleObj.filter((item) =>
+			currentPopupIds.includes(item.id)
+		);
+
+		if (popupVisibleObj.length !== rawPopupVisibleObj.length) {
+			localStorage.setItem(popupVisibleKey, JSON.stringify(popupVisibleObj));
+		}
+
 		const centerX = window.innerWidth / 2;
 		const centerY = window.innerHeight / 2;
 
@@ -414,13 +417,6 @@
 				const isInLocalStorage = popupVisibleObj.some((item) => item.id === popup.id);
 
 				if (!isInLocalStorage) {
-					popup.classList.add("show");
-					popupOverlay.classList.add("show");
-					return;
-				}
-
-				const stored = popupVisibleObj.find((item) => item.id === popup.id);
-				if (stored && stored.exp_date < today) {
 					popup.classList.add("show");
 					popupOverlay.classList.add("show");
 				}
@@ -441,11 +437,11 @@
 
 				const checkBox = popup.querySelector(".popup-visible-checkbox");
 
-				// '일주일간 표시하지 않기'가 체크되어있는 경우
+				// '다시 보지 않기'가 체크되어있는 경우
 				if (checkBox && checkBox.checked) {
 					const currentObj = JSON.parse(localStorage.getItem(popupVisibleKey)) || [];
 					const filtered = currentObj.filter((item) => item.id !== popup.id);
-					const updated = [...filtered, { id: popup.id, exp_date: nextWeek }];
+					const updated = [...filtered, { id: popup.id }];
 					localStorage.setItem(popupVisibleKey, JSON.stringify(updated));
 				}
 
