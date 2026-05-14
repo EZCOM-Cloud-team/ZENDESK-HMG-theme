@@ -16129,14 +16129,14 @@ a:hover .icon-circle {
 
 .checkbox-container input[type="checkbox"]:checked::after {
 	content: "✓";
-	font-size: 0.8rem;
+	font-size: 1rem;
 	font-weight: 600;
 	color: white;
 	width: 1rem;
 	height: 1rem;
 	display: block;
-	top: 0px;
-	left: 2px;
+	bottom: 3px;
+	left: 4px;
 }
 
 .show {
