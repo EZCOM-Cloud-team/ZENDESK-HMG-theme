@@ -393,6 +393,7 @@
 		const locale = window.Theme?.locale || document.documentElement.lang || "default";
 		const popupVisibleKey = `${userId}_${locale}_popupVisible`;
 		const currentPopupIds = Array.from(popups).map((p) => p.id);
+		const rawPopupVisibleObj = JSON.parse(localStorage.getItem(popupVisibleKey)) || [];
 		const popupVisibleObj = rawPopupVisibleObj.filter((item) =>
 			currentPopupIds.includes(item.id)
 		);
