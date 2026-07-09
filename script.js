@@ -234,7 +234,13 @@
 		);
 
 		titleElements.forEach(function (el) {
-			const originalText = el.innerText.trim();
+			// promoted-badge, internal 아이콘 등 형제 요소의 텍스트가 섞이지 않도록 제목 텍스트 노드만 사용
+			const titleTextNode = Array.from(el.childNodes).find(
+				(node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+			);
+			if (!titleTextNode) return;
+
+			const originalText = titleTextNode.textContent.trim();
 
 			// 1. 모든 상태값을 한 번에 찾는 정규식 (Open, In Progress, Solved -> Investigating, Scheduled, Fixed 및 한국어 추가)
 			const match = originalText.match(
@@ -348,10 +354,9 @@
 					// 기존 제목에서 [상태값] 텍스트 제거
 					const newText = originalText.replace(/^\[.*?\]\s*/, "");
 
-					// 요소 업데이트
-					el.innerHTML = "";
-					el.appendChild(badge);
-					el.appendChild(document.createTextNode(" " + newText));
+					// 제목 텍스트 노드만 교체 (promoted-badge 등 형제 요소는 보존)
+					titleTextNode.textContent = " " + newText;
+					el.insertBefore(badge, titleTextNode);
 				}
 			}
 		});
