@@ -393,6 +393,11 @@
 			}
 		}
 
+		// TEST: /api/v2/users/me/session 응답 확인용 (비교 후 제거)
+		fetch("/api/v2/users/me/session")
+			.then((r) => r.json().then((d) => console.log("[popup][test] session status:", r.status, d)))
+			.catch((e) => console.error("[popup][test] session fetch 실패:", e));
+
 		if (!userId) return;
 
 		const locale = window.Theme?.locale || document.documentElement.lang || "default";
