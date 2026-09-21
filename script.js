@@ -230,7 +230,7 @@
 
 	ready(function () {
 		const titleElements = document.querySelectorAll(
-			".link-stretched.text-inherit, h1.article-title, .article-list-item a, .promoted-articles-item a"
+			".link-stretched.text-inherit, h1.article-title, .article-list-item a, .promoted-articles-item a, .popup-header h2"
 		);
 
 		titleElements.forEach(function (el) {
