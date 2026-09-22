@@ -125,18 +125,21 @@
         {{~#isnt settings.table_of_contents_style 'none'}}
           {{~#isnt settings.table_of_contents_style 'sidebar-left'}}
             {{~#isnt settings.table_of_contents_style 'sidebar-right'}}
-              <div
-                class="table-of-contents"
-                data-element="table-of-contents"
-                data-template="table-of-contents"
-                data-selector=".content h2">
-              </div>
+
+<div
+  class="table-of-contents"
+  data-element="table-of-contents"
+  data-template="table-of-contents"
+  data-selector=".article-content h1"> <!-- h1만 1차 항목으로 지정 (h2는 자동으로 하위 자식으로 매핑됨) -->
+</div>
             {{/isnt~}}
           {{/isnt~}}
         {{/isnt~}}
 
         {{! Article content }}
-        {{article.body}}
+        <div class="article-body-content">
+          {{article.body}}
+        </div>
 
         {{! Content tags }}
         {{#if (compare article.content_tags.length ">" 0)}}
@@ -476,6 +479,72 @@
 {{/isnt~}}
 
 <script type="text/javascript">document.documentElement.classList.add('article-page', 'article-' + {{article.id}})</script>
+
+{{! Confluence 붙여넣기 서식 정규화. .article-body-content 범위로 한정. }}
+<style>
+  /* <li><p> 이중 래핑 여백 제거. 다문단 항목은 제외, 하위 리스트 앞 문단은 포함 */
+  .article-body-content li > p:only-child,
+  .article-body-content li > p:has(+ ul),
+  .article-body-content li > p:has(+ ol) {
+    margin: 0;
+  }
+
+  /* 표 테두리 색상 통일 */
+  .article-body-content table,
+  .article-body-content table th,
+  .article-body-content table td {
+    border-color: #DEE2E6 !important;
+  }
+
+  /* 셀 테두리와 텍스트 사이 여백 */
+  .article-body-content table th,
+  .article-body-content table td {
+    padding: 10px !important;
+  }
+
+  /* th는 thead 소속 여부와 무관하게 브랜드 공통 헤더 배경색을 항상 적용한다
+     (기존 인라인 배경 유무와도 무관). 표 작성 시 헤더 행만 th로 지정하면 자동 적용됨. */
+  .article-body-content th {
+    background-color: #F1F3F5 !important;
+  }
+
+  /* 헤더 축이 세로인 표는 헤더 역할 셀도 th가 아니라 td로 내보내지는 경우가 있는데,
+     이 경우 브랜드별로 지정된 헤더 배경색(#DCE0E6/#E1E0E0/#DCDCDC)을 체크해 동일하게
+     #F1F3F5로 통일한다. 실제 저장 시엔 hex가 아니라 rgb(...) 형태일 가능성이 높아
+     hex/rgb 표기를 모두 매칭해둔다(정확한 인라인 포맷은 실측 샘플로 재확인 필요).
+     th는 위 규칙에서 이미 전부 커버되므로 td만 대상. */
+  .article-body-content td[style*="rgb(220,224,230)"],
+  .article-body-content td[style*="rgb(225,224,224)"],
+  .article-body-content td[style*="rgb(220,220,220)"],
+  .article-body-content td[style*="dce0e6" i],
+  .article-body-content td[style*="e1e0e0" i],
+  .article-body-content td[style*="dcdcdc" i] {
+    background-color: #F1F3F5 !important;
+  }
+
+  /* 위 두 규칙에 해당하지 않는(=이미 배경색이 없는) 나머지 셀만 투명 배경 적용 */
+  .article-body-content table td:not([style*="background"]) {
+    background-color: transparent;
+  }
+
+  /* 서브픽셀 border-width 정규화 */
+  .article-body-content td[style*=".625px"],
+  .article-body-content th[style*=".625px"],
+  .article-body-content td[style*=".375px"],
+  .article-body-content th[style*=".375px"],
+  .article-body-content td[style*=".75px"],
+  .article-body-content th[style*=".75px"],
+  .article-body-content td[style*=".25px"],
+  .article-body-content th[style*=".25px"] {
+    border-width: 1px !important;
+  }
+
+  /* 본문 링크 색상 + 상시 밑줄 */
+  .article-body-content a:not([class*="button"]) {
+    color: #096ECC !important;
+    text-decoration: underline !important;
+  }
+</style>
 
 {{!---------------
    Micro-templates
