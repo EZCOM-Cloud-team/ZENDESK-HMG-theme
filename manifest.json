@@ -947,8 +947,8 @@
 					"value": "none",
 					"options": [
 						{
-							"label": "List",
-							"value": "list"
+							"label": "None",
+							"value": "none"
 						},
 						{
 							"label": "Dropdown menu",
@@ -2148,7 +2148,7 @@
 					"type": "list",
 					"description": "subsection_style_description",
 					"label": "subsection_style_label",
-					"value": "none",
+					"value": "list",
 					"options": [
 						{
 							"label": "None",
