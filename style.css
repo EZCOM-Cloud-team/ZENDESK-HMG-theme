@@ -16193,28 +16193,6 @@ a:hover .icon-circle {
 }
 
 /* 브랜드별 공지 섹션에서만 popup-controller 노출 */
-/* Hyundai */
-.section-26370097561500 .popup-controller.is-authorized, /* app_update_notice, ko */
-.section-26369793251740 .popup-controller.is-authorized, /* app_update_notice, eu */
-.section-26370096928156 .popup-controller.is-authorized, /* operation_event_notice, ko */
-.section-26369827063964 .popup-controller.is-authorized, /* operation_event_notice, eu */
-.section-26370119435548 .popup-controller.is-authorized, /* operation_issue_report, ko */
-.section-26369794512412 .popup-controller.is-authorized, /* operation_issue_report, eu */
-.section-28517479952028 .popup-controller.is-authorized, /* faq, ko */
-.section-28517514316316 .popup-controller.is-authorized, /* faq, eu */
-/* Kia */
-.section-26370136774940 .popup-controller.is-authorized, /* app_update_notice, ko */
-.section-26369999583772 .popup-controller.is-authorized, /* app_update_notice, eu */
-.section-28750102508956 .popup-controller.is-authorized, /* app_update_notice, na */
-.section-26370136021916 .popup-controller.is-authorized, /* operation_event_notice, ko */
-.section-26370009880604 .popup-controller.is-authorized, /* operation_event_notice, eu */
-.section-28750085971484 .popup-controller.is-authorized, /* operation_event_notice, na */
-.section-26370143125660 .popup-controller.is-authorized, /* operation_issue_report, ko */
-.section-26370069112988 .popup-controller.is-authorized, /* operation_issue_report, eu */
-.section-28750095043996 .popup-controller.is-authorized, /* operation_issue_report, na */
-.section-28517166377116 .popup-controller.is-authorized, /* faq, ko */
-.section-28517535258652 .popup-controller.is-authorized, /* faq, eu */
-.section-28750024902684 .popup-controller.is-authorized, /* faq, na */
 /* Genesis */
 .section-26370032613404 .popup-controller.is-authorized, /* app_update_notice, ko */
 .section-26369984281628 .popup-controller.is-authorized, /* app_update_notice, eu */
