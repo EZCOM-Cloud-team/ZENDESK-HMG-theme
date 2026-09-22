@@ -230,10 +230,17 @@
 
 	ready(function () {
 		const titleElements = document.querySelectorAll(
-			".link-stretched.text-inherit, h1.article-title, .article-list-item a, .promoted-articles-item a"
+			".link-stretched.text-inherit, h1.article-title, .article-list-item a, .promoted-articles-item a, .popup-header h2"
 		);
 
 		titleElements.forEach(function (el) {
+			// promoted-badge, internal 아이콘 등 형제 요소의 텍스트가 섞이지 않도록 제목 텍스트 노드만 사용
+			const titleTextNode = Array.from(el.childNodes).find(
+				(node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
+			);
+			if (!titleTextNode) return;
+
+			const originalText = titleTextNode.textContent.trim();
 			// promoted-badge, internal 아이콘 등 형제 요소의 텍스트가 섞이지 않도록 제목 텍스트 노드만 사용
 			const titleTextNode = Array.from(el.childNodes).find(
 				(node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim()
@@ -363,6 +370,23 @@
 	});
 
 	// 팝업 공지사항
+	// 우선순위: 1=장애 공지, 2=앱 업데이트 공지, 3=이벤트 공지/운영 이슈 리포트(동순위)
+	const POPUP_PRIORITY = {
+		"popup-badge--incident": 1,
+		"popup-badge--update": 2,
+		"popup-badge--event": 3,
+		"popup-badge--operation": 3
+	};
+
+	function getPopupPriority(popup) {
+		let priority = Infinity;
+		popup.querySelectorAll(".popup-badge").forEach((badge) => {
+			const key = Array.from(badge.classList).find((c) => c in POPUP_PRIORITY);
+			if (key && POPUP_PRIORITY[key] < priority) priority = POPUP_PRIORITY[key];
+		});
+		return priority;
+	}
+
 	function positionPopups(popups, centerX, centerY) {
 		let scaleValue = 1;
 		let offsetY = 0;
@@ -407,10 +431,16 @@
 			localStorage.setItem(popupVisibleKey, JSON.stringify(popupVisibleObj));
 		}
 
+		// 우선순위가 낮은(덜 급한) 팝업부터 DOM에 재배치 -> 장애 공지가 항상 최상단/최전면에 오도록
+		const sortedPopups = Array.from(popups).sort(
+			(a, b) => getPopupPriority(b) - getPopupPriority(a)
+		);
+		sortedPopups.forEach((popup) => popupOverlay.appendChild(popup));
+
 		const centerX = window.innerWidth / 2;
 		const centerY = window.innerHeight / 2;
 
-		positionPopups(popups, centerX, centerY);
+		positionPopups(sortedPopups, centerX, centerY);
 
 		const checkAllPopupClosed = () => {
 			if (!Array.from(popups).some((p) => p.classList.contains("show"))) {
