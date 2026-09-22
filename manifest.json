@@ -944,7 +944,7 @@
 					"type": "list",
 					"description": "category_dropdown_style_description",
 					"label": "category_dropdown_style_label",
-					"value": "list",
+					"value": "none",
 					"options": [
 						{
 							"label": "None",
