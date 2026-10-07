@@ -697,45 +697,6 @@
       {{/each}}
       {{/each}}
     {{/is}}
-
-     {{! Section: Kia NA Announcements }}
-    {{#is id 28749887992860}}
-    {{#each sections}}
-      {{#each articles}}
-        {{#if promoted}}
-          <div class="popup" id="popup-{{id}}">
-            <div class="popup-header">
-              <a href="{{url}}" target="_blank" title="Go to original article">
-              {{#each labels}}
-                {{#is identifier "notice_incident"}} 
-                  <span class="popup-badge popup-badge--incident">Incident</span>
-                {{/is}}
-                {{#is identifier "notice_update"}} 
-                  <span class="popup-badge popup-badge--update">Update</span>
-                {{/is}}
-                {{#is identifier "notice_event"}}
-                  <span class="popup-badge popup-badge--event">Event</span>
-                {{/is}}
-                {{#is identifier "notice_operation"}} 
-                  <span class="popup-badge popup-badge--operation">Issue</span>
-                {{/is}}
-                {{/each}}
-                <h2>{{title}}</h2>
-              </a>
-            </div>
-            <div class="popup-body">{{body}}</div>
-            <div class="popup-footer">
-              <label class="checkbox-container">
-                <input type="checkbox" class="popup-visible-checkbox" />
-                Don’t show again
-              </label>
-              <button type="button" class="btn-popup-check" data-popup-id="{{id}}">OK</button>
-            </div>
-          </div>
-        {{/if}}
-      {{/each}}
-      {{/each}}
-    {{/is}}
   {{/each}}
 {{/each}}
 <div class="popup-overlay"></div>
