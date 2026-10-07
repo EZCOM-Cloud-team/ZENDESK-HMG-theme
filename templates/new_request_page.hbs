@@ -56,6 +56,7 @@
 
         {{! New request form }}
         {{request_form wysiwyg=true}}
+        <script type="text/javascript" src="{{asset 'hidden-request-forms.js'}}" data-signed-in="{{signed_in}}"></script>
 
       </div>
     </div>
@@ -76,122 +77,7 @@
 <script type="text/javascript">document.documentElement.classList.add('new-request-page')</script>
 
 {{!-- Access Permission Request 관련 로직 --}}
-<script type="module">
-  const isLoggedIn = {{signed_in}};
-  const PERMISSION_REQUEST_FORM_ID = "26443122488476"; // Access Permission Request Form ID
-  const descriptionPlaceholderKo = `<p><strong>이름 및 신청 사유, 소속을 작성해주세요</strong></p><ul><li>이름: 김현대</li><li>신청 사유: CCI VOC 운영, 권역 담당자</li><li>소속: 고객센터</li></ul>`;
-  const descriptionPlaceholderEn = `<p><strong>Enter your name, reason for request, and department/affiliation</strong></p><ul><li>Name: Hyundai Kim</li><li>Purpose: Service Operation</li><li>Affiliation: Customer Contact Center</li></ul>`;
-
-  
-  const getCurrentUserInfo = async () => {
-    const req = await fetch('/api/v2/users/me');
-    const res = await req.json();
-    return res?.user || {}
-  }
-
-  const setEmailFieldValue = (value) => {
-    const targetId = 26522937033756;
-    const targetField = document.querySelector(`#request_custom_fields_${targetId}`);
-    const targetValue = targetField?.value || "";
-    if (targetField && !targetValue) {
-      targetField.value = value;
-    }
-  }
-
-  const setDescriptionDefault = (lang) => {
-    const defaultHtml = lang === 'ko' ? descriptionPlaceholderKo : descriptionPlaceholderEn;
-
-    const paste = (editable) => {
-      const ckInstance = editable.ckeditorInstance;
-      if (ckInstance) {
-        ckInstance.setData(defaultHtml);
-        return;
-      }
-      editable.focus();
-      const dt = new DataTransfer();
-      dt.setData('text/html', defaultHtml);
-      dt.setData('text/plain', '');
-      editable.dispatchEvent(new ClipboardEvent('paste', {
-        bubbles: true,
-        cancelable: true,
-        clipboardData: dt,
-      }));
-      editable.blur();
-    };
-
-    const trySet = () => {
-      const editable = document.querySelector(
-        '.request_description .ck-editor__editable_inline[contenteditable="true"]'
-      );
-      if (!editable || editable.textContent.trim() !== '') return true;
-
-      paste(editable);
-
-      // paste가 CKEditor에 실제로 반영됐는지 확인
-      return editable.textContent.trim() !== '';
-    };
-
-    let attempts = 0;
-    const retry = () => {
-      if (!trySet() && ++attempts < 10) setTimeout(retry, 200);
-    };
-    retry();
-  };
-
-  const initPermissionRequestForm = (user) => {
-      const language = window.location.href.includes('ko') ? 'ko' : 'en';
-      console.log(language);
-      setDescriptionDefault(language);
-      setEmailFieldValue(user?.email || "");
-  }
-  
-  // 제거 대상 옵션 제거
-  const removeTargetOption = () => {
-    const option = document.querySelector(`option[value="${PERMISSION_REQUEST_FORM_ID}"]`);
-    if (option) option.remove();
-  }
-
-  const formObserve = () => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach(mutation => {
-        mutation.addedNodes.forEach(node => {
-          if (node.nodeType !== 1) return;
-  
-          if (node.nodeName === "OPTION" && node.value === PERMISSION_REQUEST_FORM_ID) {
-            node.remove();
-            return;
-          }
-          if (node.nodeName === "LI" && node.id === PERMISSION_REQUEST_FORM_ID) {
-            node.remove();
-            return;
-          }
-  
-          const targetOption = node.querySelector(`option[value="${PERMISSION_REQUEST_FORM_ID}"]`);
-          if (targetOption) targetOption.remove();
-          const targetLi = node.querySelector(`li[id="${PERMISSION_REQUEST_FORM_ID}"]`);
-          if (targetLi) targetLi.remove();
-        });
-      });
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-  }
-  
-  document.addEventListener("DOMContentLoaded", async () => {
-    if (isLoggedIn) {
-      if (window.location.href.includes(`ticket_form_id=${PERMISSION_REQUEST_FORM_ID}`)) {
-        const user = await getCurrentUserInfo();
-        initPermissionRequestForm(user);
-      }
-    } else {
-      removeTargetOption();
-      formObserve();
-    }
-  });
-</script>
+<script defer src="{{asset 'access-permission-request.js'}}" data-signed-in="{{signed_in}}"></script>
 
 {{!---------------
    Micro-templates
@@ -242,10 +128,6 @@
   {{/is~}}
   {{~#is settings.form_list_style 'list'}}
     <script type="text/template" id="tmpl-form-list">
-      <% 
-        const isLoggedIn = {{signed_in}}; 
-      %>
-
       <% if (title) { %>
         <h2><%= title %></h2>
       <% } %>
@@ -254,18 +136,16 @@
         <% if (forms.length) { %>
           <div class="list-group list-group-flush">
             <% forms.forEach(function(form) { %>
-              <% if (!( !isLoggedIn && form.html_url.includes('ticket_form_id=26443122488476') )) { %>
-                <a class="list-group-item list-group-item-action p-4" href="<%= form.html_url %>">
-                  <div class="media align-items-center">
-                    <div class="media-body font-semibold">
-                      <%= form.title %>
-                    </div>
-                    <svg class="svg-icon fill-current text-primary ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 323" aria-hidden="true">
-                      <path d="M190,162 C190,168 187,174 183,178 L38,317 C34,321 28,323 23,323 C17,323 11,321 7,317 C-2,308 -2,294 7,285 L135,162 L7,39 C-2,31 -2,16 7,7 C15,-2 29,-2 38,7 L183,146 C187,150 190,156 190,162 Z"></path>
-                    </svg>
+              <a class="list-group-item list-group-item-action p-4" href="<%= form.html_url %>">
+                <div class="media align-items-center">
+                  <div class="media-body font-semibold">
+                    <%= form.title %>
                   </div>
-                </a>
-              <% } %>
+                  <svg class="svg-icon fill-current text-primary ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 323" aria-hidden="true">
+                    <path d="M190,162 C190,168 187,174 183,178 L38,317 C34,321 28,323 23,323 C17,323 11,321 7,317 C-2,308 -2,294 7,285 L135,162 L7,39 C-2,31 -2,16 7,7 C15,-2 29,-2 38,7 L183,146 C187,150 190,156 190,162 Z"></path>
+                  </svg>
+                </div>
+              </a>
             <% }); %>
           </div>
         <% } %>
