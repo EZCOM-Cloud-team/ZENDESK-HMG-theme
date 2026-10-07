@@ -1,0 +1,346 @@
+#kb-widget [x-cloak] {
+  display: none !important;
+}
+
+.kb-widget-trigger {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 99;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: background-color 0.15s ease-in-out;
+}
+
+.kb-widget-trigger:hover {
+  background-color: #1d4ed8;
+}
+
+.kb-widget-trigger-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.kb-widget-panel {
+  position: fixed;
+  right: 24px;
+  bottom: 88px;
+  z-index: 99;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+}
+
+.kb-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.kb-widget-header h2 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.kb-widget-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #718096;
+  cursor: pointer;
+}
+
+.kb-widget-close svg {
+  width: 12px;
+  height: 12px;
+}
+
+.kb-widget-context {
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #f7fafc;
+}
+
+.kb-widget-context-label {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #718096;
+}
+
+.kb-widget-context-title {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+.kb-widget-breadcrumb {
+  margin-top: 4px;
+  color: #a0aec0;
+}
+
+.kb-widget-form {
+  padding: 20px;
+}
+
+.kb-widget-quote {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 10px 32px 10px 14px;
+  border-left: 3px solid #2563eb;
+  border-radius: 6px;
+  background-color: #f7fafc;
+}
+
+.kb-widget-quote-label {
+  margin: 0 0 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.kb-widget-quote-text {
+  margin: 0;
+  max-height: 4.5em;
+  overflow-y: auto;
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: #2d3748;
+  white-space: pre-line;
+}
+
+.kb-widget-quote-clear {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.75rem;
+  color: #718096;
+  cursor: pointer;
+}
+
+.kb-widget-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 18px 12px;
+  border: 1px dashed #cbd5e0;
+  border-radius: 8px;
+  background-color: #f7fafc;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+}
+
+.kb-widget-dropzone:hover,
+.kb-widget-dropzone-active {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.kb-widget-dropzone-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #2d3748;
+  pointer-events: none;
+}
+
+.kb-widget-dropzone-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #a0aec0;
+  pointer-events: none;
+}
+
+.kb-widget-attachment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kb-widget-attachment-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  padding: 6px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 0.75rem;
+}
+
+.kb-widget-attachment-name {
+  flex: 1;
+  overflow: hidden;
+  color: #2d3748;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kb-widget-attachment-status {
+  white-space: nowrap;
+  color: #718096;
+}
+
+.kb-widget-attachment-error {
+  flex-basis: 100%;
+  color: #e53e3e !important;
+  white-space: normal;
+}
+
+.kb-widget-attachment-remove {
+  flex-shrink: 0;
+  padding: 0 2px;
+  border: none;
+  background: none;
+  font-size: 0.875rem;
+  line-height: 1;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.kb-widget-attachment-remove:hover {
+  color: #e53e3e;
+}
+
+.kb-widget-message {
+  margin: -8px 0 16px;
+  font-size: 0.8125rem;
+}
+
+.form-field > .kb-widget-message {
+  margin: 4px 0 0;
+}
+
+.kb-widget-message-error {
+  color: #e53e3e !important;
+}
+
+.kb-widget-message-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 8px 8px 12px;
+  border-radius: 6px;
+  background-color: #f0fdf4;
+  color: #38a169;
+}
+
+.kb-widget-message-close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: #38a169;
+  cursor: pointer;
+}
+
+.kb-widget-message-close svg {
+  width: 10px;
+  height: 10px;
+}
+
+.kb-widget-message-close:hover {
+  background-color: rgba(56, 161, 105, 0.15);
+}
+
+.kb-widget-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.kb-widget-submit:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+.kb-widget-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.kb-widget-submit-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* 드래그 선택 → 인용 문의 트리거 버튼. JS가 document.body에 직접 append한다. */
+.kb-quote-trigger[hidden] {
+  display: none !important;
+}
+
+.kb-quote-trigger {
+  position: fixed;
+  z-index: 100;
+  transform: translate(-50%, -100%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: background-color 0.15s ease-in-out;
+}
+
+.kb-quote-trigger:hover {
+  background-color: #1d4ed8;
+}
