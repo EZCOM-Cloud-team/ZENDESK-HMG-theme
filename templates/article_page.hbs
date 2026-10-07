@@ -732,7 +732,8 @@
   </script>
 {{/if}}
 
-{{! category 객체가 없어(검증 에러 확인됨) path_steps 첫 항목으로 카테고리명을 얻는다.
+{{! 카테고리/섹션은 path_steps가 아닌 API로 조회한다(kb-widget.js loadArticleContext 참고).
+   path_steps는 보이는 카테고리가 하나뿐이면 카테고리 단계를 생략해 위치가 밀린다.
    kb-widget.js는 dc 헬퍼를 못 써서 data-request-*로 값을 넘긴다. }}
 {{#if signed_in}}
   <div id="kb-widget"
@@ -740,8 +741,6 @@
     x-cloak
     data-article-id="{{article.id}}"
     data-article-title="{{article.title}}"
-    data-article-section="{{#each article.path_steps}}{{#if @first}}{{else}}{{#unless current_page}}{{name}} > {{/unless}}{{/if}}{{/each}}"
-    data-article-category="{{#each article.path_steps}}{{#if @first}}{{name}}{{/if}}{{/each}}"
     data-request-btn-label="{{dc 'kb_widget_request_btn'}}"
     data-request-alert="{{dc 'kb_request_alert'}}"
     data-error-title-required="{{dc 'kb_widget_title_required_error'}}"
