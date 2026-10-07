@@ -1,5 +1,5 @@
-// KB 문의 위젯 (Alpine 컴포넌트). article_page.hbs에서만 렌더링되며, 문서 컨텍스트는
-// #kb-widget의 data-article-* 속성에서 읽어온다(API 재조회 없음).
+// KB 문의 위젯 (Alpine 컴포넌트). article_page.hbs에서만 렌더링되며, 문서 ID/제목은
+// #kb-widget의 data-article-* 속성에서, 카테고리/섹션은 Help Center API로 읽어온다.
 
 // fieldIds가 null인 항목은 payload에서 자동 생략된다(코멘트 본문에만 정보 포함).
 const KB_TICKET_CONFIG = {
@@ -123,6 +123,7 @@ document.addEventListener("alpine:init", () => {
     contextTitle: "",
     contextSection: "",
     contextCategory: "",
+    _contextPromise: null, // loadArticleContext 진행 중 요청 공유용
     quotedText: "",
 
     requestAlertMessage: "", // data-request-alert로 넘어오는 제출 완료 토스트 문구
@@ -136,20 +137,7 @@ document.addEventListener("alpine:init", () => {
 
     init() {
       this.contextTitle = this.$root.dataset.articleTitle || ""
-      // 템플릿이 각 섹션 뒤에 " > "를 붙여 내보내므로 끝의 구분자를 제거한다.
-      this.contextSection = (this.$root.dataset.articleSection || "").replace(
-        /\s*>\s*$/,
-        "",
-      )
-      if (!this.contextSection) {
-        console.warn(
-          "[kb-widget] data-article-section이 비어있음(원본 값:",
-          JSON.stringify(this.$root.dataset.articleSection),
-          "). 페이지 로드 시점에 API로 재조회를 시도함.",
-        )
-        this.fetchSectionChain()
-      }
-      this.contextCategory = this.$root.dataset.articleCategory || ""
+      this.loadArticleContext()
       this.requestAlertMessage =
         this.$root.dataset.requestAlert || "문의가 접수되었습니다. 감사합니다."
 
@@ -276,70 +264,89 @@ document.addEventListener("alpine:init", () => {
       }
     },
 
-    // data-article-section이 비어있을 때(간헐적으로 발생)의 폴백. article.section_id →
-    // section.parent_section_id를 계속 거슬러 올라가며 "섹션 > 하위 섹션" 체인을 직접
-    // 조립한다. category는 아예 조회하지 않는 경로라 카테고리 포함 여부를 판단할 필요가
-    // 없어, path_steps 기반 방식보다 구조적으로 더 단순하고 확실하다.
-    async fetchSectionChain() {
-      const articleId = this.$root.dataset.articleId
-      if (!articleId) {
-        console.warn(
-          "[kb-widget] data-article-id가 비어있어 섹션 조회를 건너뜀",
-        )
-        return
+    // Help Center API GET. 인증은 세션 쿠키(same-origin)로 이뤄지고, CSRF 토큰은
+    // 쓰기 요청과 동일하게 X-CSRF-Token으로 함께 실어 보낸다.
+    // locale이 없으면 /api/v2/help_center/{path}로 호출하는데, sections/categories는
+    // 이 경로가 Agents 전용이라 반드시 locale을 넘겨야 한다(Show ... by locale만
+    // End users/Anonymous 허용). articles는 두 경로 모두 End users/Anonymous 허용.
+    async helpCenterGet(path, locale) {
+      const user = await this.fetchCurrentUser()
+      const headers = { Accept: "application/json" }
+      if (user && user.authenticity_token) {
+        headers["X-CSRF-Token"] = user.authenticity_token
       }
-      try {
-        const articleRes = await fetch(
-          `/api/v2/help_center/articles/${articleId}.json`,
-        )
-        if (!articleRes.ok) {
+      const base = locale
+        ? `/api/v2/help_center/${locale}`
+        : "/api/v2/help_center"
+      const res = await fetch(`${base}/${path}.json`, {
+        headers,
+        credentials: "same-origin",
+      })
+      if (!res.ok) {
+        throw new Error(`${path}.json 조회 실패 (status ${res.status})`)
+      }
+      return res.json()
+    },
+
+    // 카테고리/섹션은 path_steps(브레드크럼브)가 아니라 API로 채운다. path_steps는
+    // 보이는 카테고리가 하나뿐이면 카테고리 단계를 생략해서 순서 기반 파싱이 한 칸씩 밀린다.
+    // article.section_id → parent_section_id를 거슬러 "섹션 > 하위 섹션"을 만들고,
+    // 최상위 섹션의 category_id로 카테고리명(Region)을 얻는다.
+    // init과 제출 시점에 중복 호출되므로 진행 중인 요청은 공유하고, 실패 시 재시도할 수 있게 비운다.
+    loadArticleContext() {
+      if (this.contextSection && this.contextCategory) return Promise.resolve()
+      if (this._contextPromise) return this._contextPromise
+
+      this._contextPromise = (async () => {
+        const articleId = this.$root.dataset.articleId
+        if (!articleId) {
           console.warn(
-            `[kb-widget] articles/${articleId}.json 조회 실패 (status ${articleRes.status})`,
+            "[kb-widget] data-article-id가 비어있어 문서 위치 조회를 건너뜀",
           )
           return
         }
-        const articleData = await articleRes.json()
-        let sectionId = articleData?.article?.section_id
-        if (!sectionId) {
-          console.warn(
-            "[kb-widget] article 응답에 section_id가 없음",
-            articleData?.article,
+        try {
+          // 화면 locale을 모르면 locale 없이 조회한다(articles는 어느 쪽이든 허용).
+          const pageLocale = (document.documentElement.lang || "").toLowerCase()
+          const { article } = await this.helpCenterGet(
+            `articles/${articleId}`,
+            pageLocale,
           )
-          return
-        }
-        const names = []
-        let guard = 0
-        while (sectionId && guard < 5) {
-          guard += 1
-          const sectionRes = await fetch(
-            `/api/v2/help_center/sections/${sectionId}.json`,
-          )
-          if (!sectionRes.ok) {
-            console.warn(
-              `[kb-widget] sections/${sectionId}.json 조회 실패 (status ${sectionRes.status})`,
-            )
-            break
+          // 섹션/카테고리는 by-locale 엔드포인트만 End users에게 허용되므로
+          // 문서 응답의 locale(실제 표시 언어)을 그대로 넘긴다.
+          const locale = (article && article.locale) || pageLocale
+          if (!locale) throw new Error("문서 locale을 알 수 없음")
+
+          let sectionId = article && article.section_id
+          let section = null
+          const names = []
+          let guard = 0
+          while (sectionId && guard < 5) {
+            guard += 1
+            ;({ section } = await this.helpCenterGet(
+              `sections/${sectionId}`,
+              locale,
+            ))
+            if (!section) break
+            names.unshift(section.name)
+            sectionId = section.parent_section_id
           }
-          const sectionData = await sectionRes.json()
-          const section = sectionData?.section
-          if (!section) {
-            console.warn(
-              `[kb-widget] sections/${sectionId}.json 응답에 section이 없음`,
-              sectionData,
+          if (names.length) this.contextSection = names.join(" > ")
+
+          if (section && section.category_id) {
+            const { category } = await this.helpCenterGet(
+              `categories/${section.category_id}`,
+              locale,
             )
-            break
+            if (category) this.contextCategory = category.name
           }
-          names.unshift(section.name)
-          sectionId = section.parent_section_id
+        } catch (e) {
+          console.error("[kb-widget] 문서 위치(카테고리/섹션) 조회 실패", e)
+        } finally {
+          this._contextPromise = null
         }
-        if (names.length) {
-          this.contextSection = names.join(" > ")
-        } else {
-          console.warn("[kb-widget] 섹션 체인을 하나도 못 모음")
-        }
-      } catch (e) {
-        console.error("[kb-widget] fetchSectionChain 예외", e)
-      }
+      })()
+      return this._contextPromise
     },
 
     // POST/PUT/DELETE는 이 응답의 authenticity_token을 X-CSRF-Token 헤더로 실어
@@ -416,9 +423,9 @@ document.addEventListener("alpine:init", () => {
       this.submitting = true
 
       try {
-        // 섹션 정보는 모든 문서에 반드시 있어야 하는 값이라, 초기 로드 시 못 가져왔으면
-        // 제출 직전에 한 번 더 직접 조회해서 채운다. 그래도 없으면 제출 자체를 막는다.
-        if (!this.contextSection) await this.fetchSectionChain()
+        // 섹션 정보는 모든 문서에 반드시 있어야 하는 값이라, 초기 로드 조회가 진행 중이면
+        // 기다리고, 실패했으면 한 번 더 조회한다. 그래도 없으면 제출 자체를 막는다.
+        await this.loadArticleContext()
         if (!this.contextSection) {
           this.errorMessage = this.errorMessages.sectionRequired
           return
