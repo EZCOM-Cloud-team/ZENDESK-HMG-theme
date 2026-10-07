@@ -731,3 +731,130 @@
     Theme.contentTags = [{{~#each article.content_tags}}{ id: {{json_stringify id}}, name: {{json_stringify name}} }{{#unless @last}},{{/unless}}{{/each~}}];
   </script>
 {{/if}}
+
+{{! category 객체가 없어(검증 에러 확인됨) path_steps 첫 항목으로 카테고리명을 얻는다.
+   kb-widget.js는 dc 헬퍼를 못 써서 data-request-*로 값을 넘긴다. }}
+{{#if signed_in}}
+  <div id="kb-widget"
+    x-data="kbWidget()"
+    x-cloak
+    data-article-id="{{article.id}}"
+    data-article-title="{{article.title}}"
+    data-article-section="{{#each article.path_steps}}{{#if @first}}{{else}}{{#unless current_page}}{{name}} > {{/unless}}{{/if}}{{/each}}"
+    data-article-category="{{#each article.path_steps}}{{#if @first}}{{name}}{{/if}}{{/each}}"
+    data-request-btn-label="{{dc 'kb_widget_request_btn'}}"
+    data-request-alert="{{dc 'kb_request_alert'}}"
+    data-error-title-required="{{dc 'kb_widget_title_required_error'}}"
+    data-error-description-required="{{dc 'kb_widget_description_required_error'}}"
+    data-error-section-required="{{dc 'kb_widget_section_required_error'}}"
+    data-error-upload-pending="{{dc 'kb_widget_upload_pending_error'}}"
+    data-error-submit-failed="{{dc 'kb_widget_submit_failed_error'}}"
+    data-error-attachment-max-count="{{dc 'kb_widget_attachment_max_count_error'}}"
+    data-error-attachment-type="{{dc 'kb_widget_attachment_type_error'}}"
+    data-error-attachment-size="{{dc 'kb_widget_attachment_size_error'}}"
+    data-error-attachment-upload="{{dc 'kb_widget_attachment_upload_error'}}">
+
+    <button type="button" class="kb-widget-trigger" @click="toggleOpen" :aria-expanded="open.toString()" aria-controls="kb-widget-panel">
+      <svg class="kb-widget-trigger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 2C6.48 2 2 5.94 2 10.8c0 2.68 1.42 5.07 3.66 6.66-.16 1.24-.63 2.53-1.51 3.9a.5.5 0 00.58.75c2.02-.62 3.61-1.5 4.79-2.42.79.14 1.61.21 2.48.21 5.52 0 10-3.94 10-8.8S17.52 2 12 2z" />
+      </svg>
+      <span>{{dc 'kb_widget_request_btn'}}</span>
+    </button>
+
+    <div id="kb-widget-panel" class="kb-widget-panel" x-show="open" x-transition x-cloak role="dialog" aria-modal="true" aria-labelledby="kb-widget-title">
+
+      <div class="kb-widget-header">
+        <h2 id="kb-widget-title">{{dc 'kb_widget_request_btn'}}</h2>
+        <button type="button" class="kb-widget-close" @click="closePanel" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+            <path fill="currentColor" d="M6 5.293l4.146-4.147.708.708L6.707 6l4.147 4.146-.708.708L6 6.707l-4.146 4.147-.708-.708L5.293 6 1.146 1.854l.708-.708z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="kb-widget-context">
+        <p class="kb-widget-context-label">{{dc 'kb_widget_current_doc_label'}} <span class="kb-widget-context-title" x-text="contextTitle"></span></p>
+        <div class="kb-widget-breadcrumb font-size-sm" x-text="contextSection"></div>
+      </div>
+
+      <form class="kb-widget-form" @submit.prevent="submitRequest">
+        <div class="kb-widget-quote" x-show="quotedText" x-cloak>
+          <p class="kb-widget-quote-label">{{dc 'kb_widget_quote_label'}}</p>
+          <blockquote class="kb-widget-quote-text" x-text="quotedText"></blockquote>
+          <button type="button" class="kb-widget-quote-clear" @click="clearQuote">{{dc 'kb_widget_quote_clear'}}</button>
+        </div>
+
+        <div class="form-field">
+          <label for="kb-widget-type">{{dc 'kb_widget_inquiry_type_label'}}</label>
+          <select id="kb-widget-type" x-model="type">
+            <option value="Inquiry">{{dc 'kb_request_type_inquiry'}}</option>
+            <option value="Error Report">{{dc 'kb_request_type_correction'}}</option>
+            <option value="Content Update Request">{{dc 'kb_request_type_add'}}</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="kb-widget-subject">{{dc 'kb_widget_title'}}</label>
+          <input type="text" id="kb-widget-subject" x-model="title" placeholder="{{dc 'kb_widget_title_description'}}">
+          <p class="kb-widget-message kb-widget-message-error" x-show="titleError" x-text="titleError"></p>
+        </div>
+
+        <div class="form-field">
+          <textarea id="kb-widget-description" x-model="description" rows="5" placeholder="{{dc 'kb_request_desc_placeholder'}}" aria-label="{{dc 'kb_request_desc_placeholder'}}"></textarea>
+          <p class="kb-widget-message kb-widget-message-error" x-show="descriptionError" x-text="descriptionError"></p>
+        </div>
+
+        <div class="form-field">
+          <label>{{dc 'kb_widget_attachment_label'}}</label>
+          <div class="kb-widget-dropzone"
+            :class="{ 'kb-widget-dropzone-active': isDragging }"
+            @click="$refs.kbAttachmentInput.click()"
+            @dragover.prevent="isDragging = true"
+            @dragleave.prevent="isDragging = false"
+            @drop.prevent="isDragging = false; queueFiles($event.dataTransfer.files)">
+            <input type="file" id="kb-widget-attachments" x-ref="kbAttachmentInput" multiple hidden
+              accept=".har,.json,.3g2,.3gp,.7z,.aac,.amr,.avi,.bmp,.csv,.doc,.docx,.eml,.gif,.heic,.heif,.ics,.jfif,.jpeg,.jpg,.key,.log,.m4a,.m4v,.mov,.mp3,.mp4,.mp4a,.mpeg,.mpg,.mpga,.neon,.numbers,.odt,.oga,.ogg,.ogv,.opus,.pages,.pdf,.png,.pps,.ppsx,.ppt,.pptx,.qt,.svg,.tif,.tiff,.txt,.vcf,.wav,.webm,.webp,.wmv,.xls,.xlsx,.xml,.yaml,.yml,.zip"
+              @change="queueFiles($event.target.files); $event.target.value = ''">
+            <p class="kb-widget-dropzone-text">{{dc 'kb_widget_attachment_dropzone_text'}}</p>
+            <p class="kb-widget-dropzone-hint">{{dc 'kb_widget_attachment_dropzone_hint'}}</p>
+          </div>
+
+          <ul class="kb-widget-attachment-list" x-show="attachments.length" x-cloak>
+            <template x-for="(att, index) in attachments" :key="att.id">
+              <li class="kb-widget-attachment-item">
+                <span class="kb-widget-attachment-name" x-text="att.name"></span>
+                <span class="kb-widget-attachment-status" x-show="att.status === 'uploading'">Uploading...</span>
+                <span class="kb-widget-attachment-status kb-widget-attachment-error" x-show="att.status === 'error'" x-text="att.error"></span>
+                <button type="button" class="kb-widget-attachment-remove" @click="removeAttachment(index)" aria-label="Remove attachment">×</button>
+              </li>
+            </template>
+          </ul>
+        </div>
+
+        <p class="kb-widget-message kb-widget-message-error" x-show="errorMessage" x-text="errorMessage"></p>
+        <div class="kb-widget-message kb-widget-message-success" x-show="successMessage" x-cloak>
+          <span x-text="successMessage"></span>
+          <button type="button" class="kb-widget-message-close" @click="dismissSuccessMessage" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" aria-hidden="true">
+              <path fill="currentColor" d="M6 5.293l4.146-4.147.708.708L6.707 6l4.147 4.146-.708.708L6 6.707l-4.146 4.147-.708-.708L5.293 6 1.146 1.854l.708-.708z" />
+            </svg>
+          </button>
+        </div>
+
+        <button type="submit" class="kb-widget-submit" :disabled="submitting || isUploading()">
+          <span x-show="!submitting">{{dc 'kb_request_submit'}}</span>
+          <span x-show="submitting">Submitting...</span>
+          <svg class="kb-widget-submit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+          </svg>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="{{asset 'kb-widget.css'}}">
+
+  {{! alpine:init 리스너 등록이 Alpine 로드보다 먼저 끝나야 해서 defer 없이 동기 로드 }}
+  <script type="text/javascript" src="{{asset 'kb-widget.js'}}"></script>
+{{/if}}
