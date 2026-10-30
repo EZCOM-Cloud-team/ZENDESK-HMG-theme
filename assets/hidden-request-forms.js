@@ -1,5 +1,9 @@
 ;(function () {
-  const ALWAYS_HIDDEN_FORM_IDS = ["12270569681167"]
+  const ALWAYS_HIDDEN_FORM_IDS = [
+    "12270569681167",
+    "29974037292956",
+    "31375981033372",
+  ]
   const SIGNED_IN_ONLY_FORM_IDS = ["26443122488476"]
 
   const script = document.currentScript
